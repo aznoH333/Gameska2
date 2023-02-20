@@ -1,0 +1,77 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/main.o",
+      "src/main.cpp"
+    ],
+    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
+    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/main.cpp",
+    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/GameObject.o",
+      "src/gameObjects/GameObject.cpp"
+    ],
+    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
+    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/gameObjects/GameObject.cpp",
+    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/gameObjects/GameObject.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/GameObjectManager.o",
+      "src/gameObjects/GameObjectManager.cpp"
+    ],
+    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
+    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/gameObjects/GameObjectManager.cpp",
+    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/gameObjects/GameObjectManager.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/player/player.o",
+      "src/gameObjects/entities/player/player.cpp"
+    ],
+    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
+    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/gameObjects/entities/player/player.cpp",
+    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/gameObjects/entities/player/player.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/sprites/SpriteManager.o",
+      "src/sprites/SpriteManager.cpp"
+    ],
+    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
+    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/sprites/SpriteManager.cpp",
+    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/sprites/SpriteManager.o"
+  }
+]

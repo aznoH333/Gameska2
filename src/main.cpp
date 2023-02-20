@@ -1,4 +1,5 @@
 #include <raylib-cpp.hpp>
+#include "gameObjects/entities/player/player.h"
 #include "sprites/SpriteManager.h"
 #include "gameObjects/GameObjectManager.h"
 
@@ -8,14 +9,15 @@ int main() {
     const int screenWidth = 1280;
     const int screenHeight = 720;
 
-    raylib::Window w(screenWidth, screenHeight, "aznoH's RayLib 2D game template");
+    raylib::Window w(screenWidth, screenHeight, "Gameska");
     
+    GameObjectManager::getInstance()->addGameObject(new Player({40,40}));
     SetTargetFPS(60);
     while (!w.ShouldClose())
     {
         BeginDrawing();
         
-        ClearBackground({237, 147, 99, 255});
+        ClearBackground({40, 30, 30, 255});
         
         
         GameObjectManager::getInstance()->update();

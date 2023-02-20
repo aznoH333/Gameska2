@@ -1,7 +1,12 @@
 #include "SpriteManager.h"
+#include <string>
+#include <iostream>
 
 SpriteManager::SpriteManager(){
-    //loadTexture("resources/sprites/enemy.png");
+    loadTexture("src/assets/tiles/bricks.png");
+    loadTexture("src/assets/tiles/missing.png");
+
+    loadTextures("src/assets/entities/player/player_", ".png", 1, 9);
 }
 
 SpriteManager* SpriteManager::getInstance(){
@@ -19,6 +24,13 @@ void SpriteManager::loadTexture(std::string path){
     sprites[name] = LoadTexture(path.c_str());
 }
 
+
+void SpriteManager::loadTextures(std::string begin, std::string end, int beginN, int endN){
+    for (int i = beginN; i < endN; i++){
+        loadTexture(begin + std::to_string(i) + end);
+        std::cout << begin + std::to_string(i) + end + "\n";
+    }
+}
 
 void SpriteManager::dispose(){
     for (const auto& t : sprites){
