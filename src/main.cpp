@@ -1,7 +1,9 @@
 #include <raylib-cpp.hpp>
 #include "gameObjects/entities/player/player.h"
+#include "gameObjects/entities/enemies/enemy.h"
 #include "sprites/SpriteManager.h"
 #include "gameObjects/GameObjectManager.h"
+#include "gameObjects/world/world.h"
 
 int main() {
     
@@ -12,6 +14,9 @@ int main() {
     raylib::Window w(screenWidth, screenHeight, "Gameska");
     
     GameObjectManager::getInstance()->addGameObject(new Player({40,40}));
+    GameObjectManager::getInstance()->addGameObject(new Enemy({100,40}));
+    
+    
     SetTargetFPS(60);
     while (!w.ShouldClose())
     {
@@ -19,7 +24,7 @@ int main() {
         
         ClearBackground({40, 30, 30, 255});
         
-        
+        SpriteManager::getInstance()->update();
         GameObjectManager::getInstance()->update();
         
         EndDrawing();
@@ -27,6 +32,7 @@ int main() {
     
     GameObjectManager::getInstance()->dispose();
     SpriteManager::getInstance()->dispose();
+    World::getInstance()->dispose();
 
     return 0;
 }

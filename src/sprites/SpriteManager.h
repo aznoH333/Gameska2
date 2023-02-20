@@ -4,11 +4,14 @@
 #include <map>
 #include <string>
 #include <raylib-cpp.hpp>
+#include "../gameObjects/world/world.h"
 
 class SpriteManager{
     private:
         static SpriteManager* instance;
         std::map<std::string, Texture2D> sprites;
+        World* world;
+        Vector2 camerapos;
         SpriteManager();
 
     
@@ -19,6 +22,7 @@ class SpriteManager{
         Texture2D getTexture(std::string);
         void drawTexture(std::string, Vector2, float, raylib::Color);
         void dispose();
+        void update();
 };
 
 #endif

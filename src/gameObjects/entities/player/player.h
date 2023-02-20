@@ -5,18 +5,21 @@
 #include "../../GameObject.h"
 #include "../../../sprites/SpriteManager.h"
 #include <raylib-cpp.hpp>
+#include <cmath>
+#include "../../world/world.h"
 
 class Player : public GameObject{
     private:
         SpriteManager* spr;
         Vector2 velocity;
-        float maxSpeed = 10;
+        float maxSpeed = 7;
         float speed = 0.5;
-        float speedLoss = 1;
+        const float cameraDistanceMultiplier = 3;
         bool isMoving = false;
         bool movingAlongXAxis = false;
         bool movingAlongYAxis = false;
         bool flipSprite = false;
+        World* world;
 
 
         void handleMovement();

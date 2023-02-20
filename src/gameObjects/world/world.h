@@ -14,6 +14,7 @@ class World{
         void setCameraPos(Vector2 pos);
         Vector2 getCameraPos();
         static World* getInstance();
+        void dispose();
 };
 
 #endif

@@ -1,10 +1,8 @@
 #include "player.h"
-#include "raylib.h"
-#include <cmath>
 
-
-Player::Player(Vector2 pos) : GameObject(pos, {64,64}, ObjectIdentifier::PlayerFlag){
+Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag){
     spr = SpriteManager::getInstance();
+    world = World::getInstance();
     
 }
 
@@ -14,6 +12,8 @@ void Player::update(){
     // values
     pos.x += velocity.x;
     pos.y += velocity.y;
+    
+    world->setCameraPos({pos.x + (velocity.x * cameraDistanceMultiplier) - 633, pos.y + (velocity.y * cameraDistanceMultiplier) - 348});
 
     //draw
     draw();
@@ -44,15 +44,15 @@ void Player::handleMovement(){
     movementInDirection(KEY_S, 0, 1);
 
     if (!movingAlongXAxis && velocity.x != 0){
-        if (std::abs(velocity.x) > speedLoss)
-            velocity.x -= std::copysign( speedLoss, velocity.x);
+        if (std::abs(velocity.x) > speed)
+            velocity.x -= std::copysign( speed, velocity.x);
         else
             velocity.x = 0;
     }
 
     if (!movingAlongYAxis && velocity.y != 0){
-        if (std::abs(velocity.y) > speedLoss)
-            velocity.y -= std::copysign(speedLoss, velocity.y);
+        if (std::abs(velocity.y) > speed)
+            velocity.y -= std::copysign(speed, velocity.y);
         else
             velocity.y = 0;
     }

@@ -3,10 +3,15 @@
 #include <iostream>
 
 SpriteManager::SpriteManager(){
-    loadTexture("src/assets/tiles/bricks.png");
-    loadTexture("src/assets/tiles/missing.png");
+    loadTexture("assets/tiles/bricks.png");
+    loadTexture("assets/tiles/missing.png");
 
-    loadTextures("src/assets/entities/player/player_", ".png", 1, 9);
+    loadTextures("assets/entities/player/player_", ".png", 1, 9);
+    loadTextures("assets/entities/basic_enemy/Enemy_", ".png", 1, 9);
+
+
+
+    world = World::getInstance();
 }
 
 SpriteManager* SpriteManager::getInstance(){
@@ -40,7 +45,12 @@ void SpriteManager::dispose(){
 }
 
 void SpriteManager::drawTexture(std::string sprite, Vector2 pos, float scale, raylib::Color color){
-    DrawTextureEx(getTexture(sprite), pos, 0, scale, color);
+    DrawTextureEx(getTexture(sprite), {pos.x - camerapos.x, pos.y - camerapos.y}, 0, scale, color);
+}
+
+
+void SpriteManager::update(){
+    camerapos = world->getCameraPos();
 }
 
 SpriteManager* SpriteManager::instance = 0;
