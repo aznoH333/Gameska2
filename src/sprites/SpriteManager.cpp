@@ -1,4 +1,5 @@
 #include "SpriteManager.h"
+#include "raylib.h"
 #include <string>
 #include <iostream>
 
@@ -9,9 +10,11 @@ SpriteManager::SpriteManager(){
     loadTextures("assets/entities/player/player_", ".png", 1, 9);
     loadTextures("assets/entities/basic_enemy/Enemy_", ".png", 1, 9);
 
+    loadTexture("assets/tiles/floor_tile.png");
+    loadTexture("assets/tiles/brick_wall.png");
 
 
-    world = World::getInstance();
+    world = CameraObject::getInstance();
 }
 
 SpriteManager* SpriteManager::getInstance(){
@@ -44,13 +47,26 @@ void SpriteManager::dispose(){
     delete instance;
 }
 
-void SpriteManager::drawTexture(std::string sprite, Vector2 pos, float scale, raylib::Color color){
-    DrawTextureEx(getTexture(sprite), {pos.x - camerapos.x, pos.y - camerapos.y}, 0, scale, color);
+void SpriteManager::drawTexture(std::string sprite, Vector2 pos, float scale, raylib::Color color, bool flipSprite){
+    Texture2D texture = getTexture(sprite);
+    //DrawTextureEx(getTexture(sprite), {pos.x - camerapos.x, pos.y - camerapos.y}, 0, scale, color);
+    DrawTexturePro(texture, 
+        {(flipSprite ? texture.width : 0.0f),0.0f, (flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
+        {pos.x - camerapos.x, pos.y - camerapos.y, texture.width * scale, texture.height * scale}, 
+        {0,0}, 0, color);
 }
 
 
 void SpriteManager::update(){
     camerapos = world->getCameraPos();
+}
+
+void SpriteManager::beginDrawing(){
+    BeginDrawing();
+}
+
+void SpriteManager::endDrawing(){
+    EndDrawing();
 }
 
 SpriteManager* SpriteManager::instance = 0;

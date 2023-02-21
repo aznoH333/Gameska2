@@ -1,19 +1,44 @@
 #include "player.h"
+#include "raylib.h"
+#include <string>
 
 Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag){
     spr = SpriteManager::getInstance();
-    world = World::getInstance();
-    
+    camera = CameraObject::getInstance();
 }
 
 void Player::update(){
     // movement
     handleMovement();
     // values
+    
+    // wall collisions
+    if (pos.x + 28 + velocity.x > 1280.0f) {
+        velocity.x = 0;
+        pos.x = 1280 - 28;
+    }
+
+    if (pos.x + velocity.x < -1280.0f + 64.0f) {
+        velocity.x = 0;
+        pos.x = -1280 + 64;
+    }
+
+    if (pos.y + velocity.y < -720.0f - 46 + 64) {
+        velocity.y = 0;
+        pos.y = -720 - 46 + 64;
+    }
+
+    if (pos.y + velocity.y > 720){
+        velocity.y = 0;
+        pos.y = 720;
+    }
+    
     pos.x += velocity.x;
     pos.y += velocity.y;
+
     
-    world->setCameraPos({pos.x + (velocity.x * cameraDistanceMultiplier) - 633, pos.y + (velocity.y * cameraDistanceMultiplier) - 348});
+    
+    camera->setCameraPos({pos.x + (velocity.x * cameraDistanceMultiplier) - 633, pos.y + (velocity.y * cameraDistanceMultiplier) - 348});
 
     //draw
     draw();
@@ -29,8 +54,30 @@ void Player::onCollide(GameObject* other){
 
 }
 
+
+
+
 void Player::draw(){
-    spr->drawTexture("player_1", pos, 2, WHITE);
+    if (isMoving){
+        //moving
+        walkAnimationTimer--;
+        if (walkAnimationTimer == 0){
+            walkAnimationTimer = maxAnimationTimer;
+            animationIndex = (animationIndex+1 - minAnimationFrame) % (maxAnimationFrame - minAnimationFrame) + minAnimationFrame;
+        }
+
+        if      (velocity.x < -0.5f) flipSprite = true;
+        else if (velocity.x > 0.5f) flipSprite = false; 
+
+        spr->drawTexture("player_" + std::to_string(animationIndex), pos, 2, WHITE, flipSprite);
+
+
+    }else{
+        // idle
+        spr->drawTexture("player_1", pos, 2, WHITE, flipSprite);
+    }
+
+    
 }
 
 void Player::handleMovement(){

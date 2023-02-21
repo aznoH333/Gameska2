@@ -1,9 +1,10 @@
 #include <raylib-cpp.hpp>
 #include "gameObjects/entities/player/player.h"
 #include "gameObjects/entities/enemies/enemy.h"
+#include "gameObjects/world/world.h"
 #include "sprites/SpriteManager.h"
 #include "gameObjects/GameObjectManager.h"
-#include "gameObjects/world/world.h"
+#include "gameObjects/world/camera.h"
 
 int main() {
     
@@ -20,19 +21,23 @@ int main() {
     SetTargetFPS(60);
     while (!w.ShouldClose())
     {
-        BeginDrawing();
+        SpriteManager::getInstance()->beginDrawing();
         
         ClearBackground({40, 30, 30, 255});
         
+        World::getInstance()->update();
         SpriteManager::getInstance()->update();
         GameObjectManager::getInstance()->update();
-        
-        EndDrawing();
+        CameraObject::getInstance()->update();
+
+
+        SpriteManager::getInstance()->endDrawing();
     }
     
+    World::getInstance()->dispose();
     GameObjectManager::getInstance()->dispose();
     SpriteManager::getInstance()->dispose();
-    World::getInstance()->dispose();
+    CameraObject::getInstance()->dispose();
 
     return 0;
 }

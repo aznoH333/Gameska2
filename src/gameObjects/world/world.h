@@ -1,19 +1,22 @@
 #ifndef WORLD
 #define WORLD
 
+#include "../../sprites/SpriteManager.h"
+#include "camera.h"
+#include "raylib-cpp.hpp"
 #include "raylib.h"
-#include <raylib-cpp.hpp>
 
 class World{
     private:
-        Vector2 cameraPos = {};
+        SpriteManager* spr;
         static World* instance;
-
-
+        void drawRegion();
+        CameraObject* camera;
+        Vector2 cameraPos = {0,0};
     public:
-        void setCameraPos(Vector2 pos);
-        Vector2 getCameraPos();
+        World();
         static World* getInstance();
+        void update();
         void dispose();
 };
 
