@@ -34,7 +34,7 @@ void SpriteManager::loadTexture(std::string path){
 
 
 void SpriteManager::loadTextures(std::string begin, std::string end, int beginN, int endN){
-    for (int i = beginN; i < endN; i++){
+    for (int i = beginN; i <= endN; i++){
         loadTexture(begin + std::to_string(i) + end);
         std::cout << begin + std::to_string(i) + end + "\n";
     }

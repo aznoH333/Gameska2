@@ -27,6 +27,10 @@ class Player : public GameObject{
         CameraObject* camera;
         int animationIndex = 1;
         int walkAnimationTimer = 1;
+        const float knockBackMultiplier = 10.0f;
+
+        int damageStunTimer = 0;
+        const int damageStunDuration = 10;
 
 
         void handleMovement();
@@ -39,6 +43,8 @@ class Player : public GameObject{
         void update();
         void onDestroy();
         void onCollide(GameObject* other);
+        void onDamage(GameObject* damageDealer);
+
 };
 
 

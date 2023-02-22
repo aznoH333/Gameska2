@@ -2,15 +2,16 @@
 #include "raylib.h"
 #include <string>
 
-Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag){
+Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag, 100){
     spr = SpriteManager::getInstance();
     camera = CameraObject::getInstance();
 }
 
 void Player::update(){
     // movement
-    handleMovement();
-    // values
+    if (damageStunTimer == 0) handleMovement();
+    else damageStunTimer--;
+    
     
     // wall collisions
     if (pos.x + 28 + velocity.x > 1280.0f) {
@@ -32,7 +33,7 @@ void Player::update(){
         velocity.y = 0;
         pos.y = 720;
     }
-    
+    // values
     pos.x += velocity.x;
     pos.y += velocity.y;
 
@@ -51,14 +52,24 @@ void Player::onDestroy(){
 }
 
 void Player::onCollide(GameObject* other){
-
+    if (other->getObjectIdentifier() == ObjectIdentifier::EnemyFlag){
+        takeDamage(1, other);
+    }
 }
 
 
 
 
 void Player::draw(){
-    if (isMoving){
+    
+    
+    if (damageStunTimer > 0){
+        spr->drawTexture("player_9", pos, 2, WHITE, flipSprite);
+
+        if      (velocity.x < -0.5f) flipSprite = false;
+        else if (velocity.x > 0.5f) flipSprite = true;
+        
+    }else if (isMoving){
         //moving
         walkAnimationTimer--;
         if (walkAnimationTimer == 0){
@@ -118,4 +129,12 @@ void Player::movementInDirection(int key, float xMultiplier, float yMultiplier){
         if (xMultiplier != 0) movingAlongXAxis = true;
         if (yMultiplier != 0) movingAlongYAxis = true;
     }
+}
+
+
+void Player::onDamage(GameObject* damageDealer){
+    damageStunTimer = damageStunDuration;
+    float direction = (std::atan2(damageDealer->getPos().x + 32 - (pos.x + 32), -(damageDealer->getPos().y  + 32 - (pos.y + 32)))) + (90 * DEG2RAD);
+    velocity.x = cos(direction) * knockBackMultiplier;
+    velocity.y = sin(direction) * knockBackMultiplier;
 }

@@ -1,9 +1,10 @@
 #include "GameObject.h"
 
-GameObject::GameObject(Vector2 pos, Vector2 size, ObjectIdentifier identifier){
+GameObject::GameObject(Vector2 pos, Vector2 size, ObjectIdentifier identifier, int health){
     this->pos = pos;
     this->size = size;
     this->identifier = identifier;
+    this->health = health;
 }
 
 
@@ -11,6 +12,7 @@ GameObject::GameObject(Vector2 pos, Vector2 size, ObjectIdentifier identifier){
 void GameObject::update(){}
 void GameObject::onDestroy(){}
 void GameObject::onCollide(GameObject* other){}
+void GameObject::onDamage(GameObject *damageDealer){}
 
 
 bool GameObject::shouldDestroy(){
@@ -31,4 +33,13 @@ Vector2 GameObject::getSize(){
 
 ObjectIdentifier GameObject::getObjectIdentifier(){
     return identifier;
+}
+
+float GameObject::distanceToPosition(Vector2 position){
+    return std::sqrt(std::abs(pos.x - position.x) + std::abs(pos.y - position.y));
+}
+
+void GameObject::takeDamage(int damage, GameObject* damageDealer){
+    health -= damage;
+    onDamage(damageDealer);
 }

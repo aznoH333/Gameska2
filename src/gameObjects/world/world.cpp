@@ -11,13 +11,12 @@ World* World::getInstance(){
 World::World(){
     spr = SpriteManager::getInstance();
     camera = CameraObject::getInstance();
-}
-
-void World::drawRegion(){
-    
+    objMan = GameObjectManager::getInstance();
 }
 
 void World::update(){
+    
+    // draw world
     cameraPos = camera->getCameraPos();
     for (float x = cameraPos.x - 64; x < cameraPos.x + 1280 + 64; x += 64){
         for (float y = cameraPos.y - 64; y < cameraPos.y + 720 + 64; y += 64){
@@ -28,6 +27,9 @@ void World::update(){
 
         }
     }
+
+    //spawn enemies
+    // TODO
 }
 
 void World::dispose(){

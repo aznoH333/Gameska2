@@ -1,4 +1,7 @@
 #include "GameObjectManager.h"
+#include "GameObject.h"
+#include "raylib.h"
+#include <cmath>
 
 
 GameObjectManager* GameObjectManager::getInstance(){
@@ -48,6 +51,26 @@ void GameObjectManager::dispose(){
 
 void GameObjectManager::addGameObject(GameObject* object){
     objects.push_back(object);
+}
+
+
+GameObject* GameObjectManager::findClosestEntityWithTag(ObjectIdentifier tag, float maxSearchDistance, GameObject* searchingObject){
+    GameObject* output = nullptr;
+    float distanceToOutput = maxSearchDistance + 1;
+
+    for (GameObject* g : objects){
+        if (g != searchingObject && g->getObjectIdentifier() == tag){
+            float distance = searchingObject->distanceToPosition(g->getPos());
+
+            if (distance < distanceToOutput){
+                output = g;
+                distanceToOutput = distance;
+            }
+        }
+    }
+
+    if (distanceToOutput > maxSearchDistance) return nullptr;
+    return output;
 }
 
 GameObjectManager* GameObjectManager::instance = 0;
