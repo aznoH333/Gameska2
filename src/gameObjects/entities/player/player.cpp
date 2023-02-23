@@ -1,6 +1,7 @@
 #include "player.h"
 #include "raylib.h"
 #include <string>
+#include "../../world/world.h"
 
 Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag, 100){
     spr = SpriteManager::getInstance();
@@ -14,24 +15,24 @@ void Player::update(){
     
     
     // wall collisions
-    if (pos.x + 28 + velocity.x > 1280.0f) {
+    if (pos.x + 28 + velocity.x > WORLD::worldWidth) {
         velocity.x = 0;
-        pos.x = 1280 - 28;
+        pos.x = WORLD::worldWidth - 28;
     }
 
-    if (pos.x + velocity.x < -1280.0f + 64.0f) {
+    if (pos.x + velocity.x < -WORLD::worldWidth + 64.0f) {
         velocity.x = 0;
-        pos.x = -1280 + 64;
+        pos.x = -WORLD::worldWidth + 64;
     }
 
-    if (pos.y + velocity.y < -720.0f - 46 + 64) {
+    if (pos.y + velocity.y < -WORLD::worldHeight - 46 + 64) {
         velocity.y = 0;
-        pos.y = -720 - 46 + 64;
+        pos.y = -WORLD::worldHeight - 46 + 64;
     }
 
-    if (pos.y + velocity.y > 720){
+    if (pos.y + velocity.y > WORLD::worldHeight){
         velocity.y = 0;
-        pos.y = 720;
+        pos.y = WORLD::worldHeight;
     }
     // values
     pos.x += velocity.x;

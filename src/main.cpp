@@ -15,7 +15,7 @@ int main() {
     raylib::Window w(screenWidth, screenHeight, "Gameska");
     
     GameObjectManager::getInstance()->addGameObject(new Player({40,40}));
-    GameObjectManager::getInstance()->addGameObject(new Enemy({100,40}));
+    //GameObjectManager::getInstance()->addGameObject(new Enemy({100,40}));
     
     
     SetTargetFPS(60);

@@ -73,4 +73,14 @@ GameObject* GameObjectManager::findClosestEntityWithTag(ObjectIdentifier tag, fl
     return output;
 }
 
+
+int GameObjectManager::getObjectCountWithTag(ObjectIdentifier tag){
+    int output = 0;
+    for (GameObject* g : objects){
+        if (g->getObjectIdentifier() == tag)
+            output++;
+    }
+    return output;
+}
+
 GameObjectManager* GameObjectManager::instance = 0;
