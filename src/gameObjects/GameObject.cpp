@@ -12,7 +12,7 @@ GameObject::GameObject(Vector2 pos, Vector2 size, ObjectIdentifier identifier, i
 void GameObject::update(){}
 void GameObject::onDestroy(){}
 void GameObject::onCollide(GameObject* other){}
-void GameObject::onDamage(GameObject *damageDealer){}
+void GameObject::onDamage(int damage, GameObject *damageDealer, float direction){}
 
 
 bool GameObject::shouldDestroy(){
@@ -39,7 +39,7 @@ float GameObject::distanceToPosition(Vector2 position){
     return std::sqrt(std::abs(pos.x - position.x) + std::abs(pos.y - position.y));
 }
 
-void GameObject::takeDamage(int damage, GameObject* damageDealer){
+void GameObject::takeDamage(int damage, GameObject* damageDealer, float direction){
     health -= damage;
-    onDamage(damageDealer);
+    onDamage(damage, damageDealer, direction);
 }

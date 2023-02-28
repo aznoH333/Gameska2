@@ -32,14 +32,14 @@ class GameObject{
         virtual void update();
         virtual void onDestroy();
         virtual void onCollide(GameObject* other);
-        virtual void onDamage(GameObject* damageDealer);
+        virtual void onDamage(int damage, GameObject* damageDealer, float direction);
         bool shouldDestroy();
         void destroy();
         Vector2 getPos();
         Vector2 getSize();
         float distanceToPosition(Vector2 position);
         ObjectIdentifier getObjectIdentifier();
-        void takeDamage(int damage, GameObject* damageDealer);
+        void takeDamage(int damage, GameObject* damageDealer, float direction);
 
 };
 

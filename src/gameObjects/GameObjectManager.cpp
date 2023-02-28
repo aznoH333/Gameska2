@@ -43,6 +43,7 @@ void GameObjectManager::update(){
 
 void GameObjectManager::dispose(){
     for (GameObject* g : objects){
+        g->onDestroy();
         delete g;
     }
     delete instance;
@@ -61,6 +62,25 @@ GameObject* GameObjectManager::findClosestEntityWithTag(ObjectIdentifier tag, fl
     for (GameObject* g : objects){
         if (g != searchingObject && g->getObjectIdentifier() == tag){
             float distance = searchingObject->distanceToPosition(g->getPos());
+
+            if (distance < distanceToOutput){
+                output = g;
+                distanceToOutput = distance;
+            }
+        }
+    }
+
+    if (distanceToOutput > maxSearchDistance) return nullptr;
+    return output;
+}
+
+GameObject* GameObjectManager::findClosestEntityWithTag(ObjectIdentifier tag, float maxSearchDistance, Vector2 startingPos){
+    GameObject* output = nullptr;
+    float distanceToOutput = maxSearchDistance + 1;
+
+    for (GameObject* g : objects){
+        if (g->getObjectIdentifier() == tag){
+            float distance = std::sqrt(std::abs(g->getPos().x - startingPos.x) + std::abs(g->getPos().y - startingPos.y));
 
             if (distance < distanceToOutput){
                 output = g;

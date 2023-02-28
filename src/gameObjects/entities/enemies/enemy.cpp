@@ -1,5 +1,7 @@
 #include "enemy.h"
 #include "../../GameObjectManager.h"
+#include <cmath>
+#include <string>
 
 
 Enemy::Enemy(Vector2 pos): GameObject(pos, {28, 46}, ObjectIdentifier::EnemyFlag, 50){
@@ -8,7 +10,20 @@ Enemy::Enemy(Vector2 pos): GameObject(pos, {28, 46}, ObjectIdentifier::EnemyFlag
 
 void Enemy::update(){
     // move
-    if (target == nullptr){
+    if (knockBackTimer > 0){
+        // todo collisions with map
+        knockBackTimer--;
+        if (knockBackSpeed > 0){
+            knockBackSpeed -= knockBackRecovery;
+            
+        }
+
+        //printf(std::to_string(knockBackSpeed).c_str());
+        pos.x += std::cos(knockBackDirection) * knockBackSpeed;
+        pos.y += std::sin(knockBackDirection) * knockBackSpeed;
+
+
+    }else if (target == nullptr){
         target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::PlayerFlag, 3000.0f, this);
     }else {
         engageTarget(target);
@@ -17,7 +32,9 @@ void Enemy::update(){
     
 
     // draw
-    if (speed < 0.2f){
+    if (knockBackTimer >0){
+        spr->drawTexture("Enemy_9", {pos.x, pos.y - 4}, 2, WHITE, flipSprite);
+    }else if (speed < 0.2f){
         spr->drawTexture("Enemy_1", {pos.x, pos.y - 4}, 2, WHITE, flipSprite);
     }
     else {
@@ -35,7 +52,7 @@ void Enemy::update(){
 
 void Enemy::engageTarget(GameObject* target){
     float distance = distanceToPosition(target->getPos());
-    float direction = (std::atan2(target->getPos().x + 32 - (pos.x + 32), -(target->getPos().y  + 32 - (pos.y + 32)))) + (-90 * DEG2RAD);
+    direction = (std::atan2(target->getPos().x + 32 - (pos.x + 32), -(target->getPos().y  + 32 - (pos.y + 32)))) + (-90 * DEG2RAD);
     
     if (speed < 1.0f && distance > 4) speed += 0.1f;
     else if (speed > 0.1f && distance <= 4) speed -= 0.1f;
@@ -47,13 +64,19 @@ void Enemy::engageTarget(GameObject* target){
 }
 
 void Enemy::onCollide(GameObject* other){
-    
+    if (other->getObjectIdentifier() == ObjectIdentifier::PlayerFlag){
+        other->takeDamage(1, this, direction);
+    }
 }
 
 void Enemy::onDestroy(){
 
 }
 
-void Enemy::onDamage(GameObject* damageDealer){
-
+void Enemy::onDamage(int damage, GameObject* damageDealer, float direction){
+    
+    if (health <= 0) destroy();
+    knockBackDirection = direction;
+    knockBackTimer = damage * knockBackStunMultiplier;
+    knockBackSpeed = damage * knockBackMultiplier;
 }

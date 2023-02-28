@@ -6,8 +6,10 @@
 #include "../../../sprites/SpriteManager.h"
 #include <raylib-cpp.hpp>
 #include <cmath>
+#include <vector>
 #include "../../world/camera.h"
 #include "raylib.h"
+#include "../drones/drone.h"
 
 class Player : public GameObject{
     private:
@@ -32,10 +34,17 @@ class Player : public GameObject{
         int damageStunTimer = 0;
         const int damageStunDuration = 10;
 
+        float droneRotation = 0;
+        const float droneRotationSpeed = 0.03f;
+        const float droneDistance = 48.52f;
+
+        std::vector<Drone*> drones;
+
 
         void handleMovement();
         void movementInDirection(int key, float xMultiplier, float yMultiplier);
         void draw();
+        void droneUpdate();
     
     public:
         Player(Vector2 pos);
@@ -43,7 +52,7 @@ class Player : public GameObject{
         void update();
         void onDestroy();
         void onCollide(GameObject* other);
-        void onDamage(GameObject* damageDealer);
+        void onDamage(int damage, GameObject* damageDealer, float direction);
 
 };
 

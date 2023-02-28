@@ -33,7 +33,7 @@ void World::update(){
     gameTimer++;
     //spawn enemies
     spawnTimer--;
-    if (spawnTimer == 0 && objMan->getObjectCountWithTag(ObjectIdentifier::EnemyFlag) < desiredEnemyCount){
+    if (spawnTimer <= 0 && objMan->getObjectCountWithTag(ObjectIdentifier::EnemyFlag) < desiredEnemyCount){
         spawnTimer = nextEnemySpawn;
         
         float tempX;

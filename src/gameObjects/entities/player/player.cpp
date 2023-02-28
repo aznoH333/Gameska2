@@ -1,11 +1,17 @@
 #include "player.h"
 #include "raylib.h"
 #include <string>
+#include <vector>
 #include "../../world/world.h"
+#include "../drones/gunDrone.h"
 
 Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag, 100){
     spr = SpriteManager::getInstance();
     camera = CameraObject::getInstance();
+    drones = std::vector<Drone*>();// TODO : upgrade system
+    drones.push_back(new GunDrone());
+    //drones.push_back(new GunDrone());
+
 }
 
 void Player::update(){
@@ -38,7 +44,9 @@ void Player::update(){
     pos.x += velocity.x;
     pos.y += velocity.y;
 
-    
+    // update drones
+    droneUpdate();
+
     
     camera->setCameraPos({pos.x + (velocity.x * cameraDistanceMultiplier) - 633, pos.y + (velocity.y * cameraDistanceMultiplier) - 348});
 
@@ -49,13 +57,13 @@ void Player::update(){
 }
 
 void Player::onDestroy(){
-
+    for (Drone* d : drones){
+        delete d;
+    }
 }
 
 void Player::onCollide(GameObject* other){
-    if (other->getObjectIdentifier() == ObjectIdentifier::EnemyFlag){
-        takeDamage(1, other);
-    }
+    
 }
 
 
@@ -133,9 +141,30 @@ void Player::movementInDirection(int key, float xMultiplier, float yMultiplier){
 }
 
 
-void Player::onDamage(GameObject* damageDealer){
+void Player::onDamage(int damage, GameObject* damageDealer, float knockBackDirection){
     damageStunTimer = damageStunDuration;
     float direction = (std::atan2(damageDealer->getPos().x + 32 - (pos.x + 32), -(damageDealer->getPos().y  + 32 - (pos.y + 32)))) + (90 * DEG2RAD);
     velocity.x = cos(direction) * knockBackMultiplier;
     velocity.y = sin(direction) * knockBackMultiplier;
+}
+
+void Player::droneUpdate(){
+
+    droneRotation += droneRotationSpeed;
+    if (droneRotation > 2 * PI) droneRotation -= 2 * PI;
+
+
+    for (int i = 0; i < drones.size(); i++){
+        Drone* d = drones[i];
+
+        float rotationAdder = (float)i/(float)drones.size() * 2 * PI;
+
+        Vector2 dronePos = {
+            pos.x + (std::sin(droneRotation + rotationAdder) * droneDistance),
+            pos.y + (std::cos(droneRotation + rotationAdder) * droneDistance)
+        };
+
+        d->update(dronePos);
+        spr->drawTexture(d->getSprite(), dronePos, 2, WHITE, d->getFlipSprite());
+    }
 }
