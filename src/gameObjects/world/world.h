@@ -27,7 +27,15 @@ class World{
         int gameTimer = 0;
         int desiredEnemyCount = 5;
 
+        // level color
+        Color worldColor = {0, 0, 0, 255};
+        Color desiredColor = worldColor;
+        const char colorChangeSpeed = 1;
 
+
+        void updateColor();
+        void changeColor(Color color);
+        void updateColorValue(unsigned char* currentColorValue, unsigned char*  desiredColorValue);
 
     public:
         World();
