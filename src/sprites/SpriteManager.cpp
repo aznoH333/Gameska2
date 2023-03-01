@@ -14,6 +14,9 @@ SpriteManager::SpriteManager(){
     loadTexture("assets/tiles/floor_tile.png");
     loadTexture("assets/tiles/brick_wall.png");
 
+    loadTexture("assets/entities/projectiles/bullet.png");
+    loadTexture("assets/entities/projectiles/rocket.png");
+
 
     world = CameraObject::getInstance();
 }
@@ -48,13 +51,18 @@ void SpriteManager::dispose(){
     delete instance;
 }
 
-void SpriteManager::drawTexture(std::string sprite, Vector2 pos, float scale, raylib::Color color, bool flipSprite){
+void SpriteManager::drawTexture(std::string sprite, Vector2 pos, float scale, float rotation, raylib::Color color, bool flipSprite){
     Texture2D texture = getTexture(sprite);
     //DrawTextureEx(getTexture(sprite), {pos.x - camerapos.x, pos.y - camerapos.y}, 0, scale, color);
+    
+    Vector2 calculatedWidth = {
+        texture.width * scale, texture.height * scale
+    };
+    
     DrawTexturePro(texture, 
-        {(flipSprite ? texture.width : 0.0f),0.0f, (flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
-        {pos.x - camerapos.x, pos.y - camerapos.y, texture.width * scale, texture.height * scale}, 
-        {0,0}, 0, color);
+        {(flipSprite ? texture.width : 0.0f) ,0.0f, (flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
+        {pos.x - camerapos.x + (calculatedWidth.x / 2), pos.y - camerapos.y + (calculatedWidth.y / 2), calculatedWidth.x, calculatedWidth.y}, 
+        {calculatedWidth.x / 2,calculatedWidth.y /2}, rotation, color);
 }
 
 

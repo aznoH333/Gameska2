@@ -13,7 +13,7 @@ void Bullet::update(){
     pos.x += std::cos(rotation) * speed;
     pos.y += std::sin(rotation) * speed;
 
-    SpriteManager::getInstance()->drawTexture("missing", pos, 2, WHITE, false);
+    SpriteManager::getInstance()->drawTexture("bullet", pos, 2, rotation * RAD2DEG, WHITE, false);
 }
 
 void Bullet::onCollide(GameObject* other){

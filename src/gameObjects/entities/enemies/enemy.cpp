@@ -2,7 +2,7 @@
 #include "../../GameObjectManager.h"
 #include <cmath>
 #include <string>
-
+#include "../../world/world.h"
 
 Enemy::Enemy(Vector2 pos): GameObject(pos, {28, 46}, ObjectIdentifier::EnemyFlag, 50){
     spr = SpriteManager::getInstance();
@@ -11,18 +11,7 @@ Enemy::Enemy(Vector2 pos): GameObject(pos, {28, 46}, ObjectIdentifier::EnemyFlag
 void Enemy::update(){
     // move
     if (knockBackTimer > 0){
-        // todo collisions with map
-        knockBackTimer--;
-        if (knockBackSpeed > 0){
-            knockBackSpeed -= knockBackRecovery;
-            
-        }
-
-        //printf(std::to_string(knockBackSpeed).c_str());
-        pos.x += std::cos(knockBackDirection) * knockBackSpeed;
-        pos.y += std::sin(knockBackDirection) * knockBackSpeed;
-
-
+        handleKnockBack();
     }else if (target == nullptr){
         target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::PlayerFlag, 3000.0f, this);
     }else {
@@ -33,9 +22,9 @@ void Enemy::update(){
 
     // draw
     if (knockBackTimer >0){
-        spr->drawTexture("Enemy_9", {pos.x, pos.y - 4}, 2, WHITE, flipSprite);
+        spr->drawTexture("Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
     }else if (speed < 0.2f){
-        spr->drawTexture("Enemy_1", {pos.x, pos.y - 4}, 2, WHITE, flipSprite);
+        spr->drawTexture("Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
     }
     else {
         walkAnimationTimer--;
@@ -44,7 +33,7 @@ void Enemy::update(){
             animationIndex = (animationIndex+1 - minAnimationFrame) % (maxAnimationFrame - minAnimationFrame) + minAnimationFrame;
         }
 
-        spr->drawTexture("Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, WHITE, flipSprite);
+        spr->drawTexture("Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
 
     }
 }
@@ -79,4 +68,26 @@ void Enemy::onDamage(int damage, GameObject* damageDealer, float direction){
     knockBackDirection = direction;
     knockBackTimer = damage * knockBackStunMultiplier;
     knockBackSpeed = damage * knockBackMultiplier;
+}
+
+
+void Enemy::handleKnockBack(){
+    // todo collisions with map
+    knockBackTimer--;
+    if (knockBackSpeed > 0){
+        knockBackSpeed -= knockBackRecovery;
+    }
+
+    if (std::abs(pos.x + (size.x * sigmaReLU(std::cos(knockBackDirection))) + std::cos(knockBackDirection) * knockBackSpeed) < WORLD::worldWidth){
+        pos.x += std::cos(knockBackDirection) * knockBackSpeed;
+    }
+
+    if (std::abs(pos.y + (size.y * sigmaReLU(std::sin(knockBackDirection))) + std::sin(knockBackDirection) * knockBackSpeed) < WORLD::worldHeight){
+        pos.y += std::sin(knockBackDirection) * knockBackSpeed;
+    }
+}
+
+float Enemy::sigmaReLU(float number){
+    if (number <= 0) return 0;
+    return 1;
 }

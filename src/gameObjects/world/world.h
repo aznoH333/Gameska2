@@ -28,12 +28,12 @@ class World{
         int desiredEnemyCount = 5;
 
 
+
     public:
         World();
         static World* getInstance();
         void update();
-        void dispose();
-        
+        void dispose();        
 };
 
 #endif

@@ -21,14 +21,16 @@ class Enemy : public GameObject{
 
         int knockBackTimer = 0;
         const float knockBackMultiplier = 0.6;
-        const float knockBackStunMultiplier = 1.3f;
-        const float knockBackRecovery = 0.1f;
+        const float knockBackStunMultiplier = 1.2f;
+        const float knockBackRecovery = 1.5f;
         float knockBackDirection = 0;
         float knockBackSpeed = 0;
 
 
 
         void engageTarget(GameObject* target);
+        void handleKnockBack();
+        float sigmaReLU(float number);
 
     public:
         Enemy(Vector2);
