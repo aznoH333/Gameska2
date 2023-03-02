@@ -21,7 +21,7 @@ class Enemy : public GameObject{
 
         int knockBackTimer = 0;
         const float knockBackMultiplier = 0.6;
-        const float knockBackStunMultiplier = 1.2f;
+        const float knockBackStunMultiplier = 1.1f;
         const float knockBackRecovery = 1.5f;
         float knockBackDirection = 0;
         float knockBackSpeed = 0;

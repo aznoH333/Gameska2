@@ -47,3 +47,7 @@ void GameObject::takeDamage(int damage, GameObject* damageDealer, float directio
 int GameObject::getHealth(){
     return health;
 }
+
+void GameObject::setPos(Vector2 pos){
+    this->pos = pos;
+}

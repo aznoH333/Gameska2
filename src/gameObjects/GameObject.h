@@ -36,6 +36,9 @@ class GameObject{
         bool shouldDestroy();
         void destroy();
         Vector2 getPos();
+        void setPos(Vector2 pos);
+
+
         Vector2 getSize();
         float distanceToPosition(Vector2 position);
         ObjectIdentifier getObjectIdentifier();

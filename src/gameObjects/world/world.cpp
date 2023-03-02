@@ -5,6 +5,12 @@
 #include <cmath>
 
 
+
+
+
+
+
+
 World* World::getInstance(){
     if (!instance) instance = new World();
     return instance;
@@ -15,7 +21,25 @@ World::World(){
     camera = CameraObject::getInstance();
     objMan = GameObjectManager::getInstance();
 
-    changeColor({99, 40, 37});
+    //changeColor({60, 40, 99});
+
+
+
+    // set world events
+
+    events.push(WorldUpdateEvent{1, {40, 40, 40}, 4, 360});
+    events.push(WorldUpdateEvent{7, {40, 65, 40}, 10, 80});
+    events.push(WorldUpdateEvent{30, {40, 100, 40}, 15, 45});
+    events.push(WorldUpdateEvent{45, {40, 30, 80}, 20, 60});
+    events.push(WorldUpdateEvent{60, {100, 30, 40}, 40, 10}); // huge enemy wave
+    events.push(WorldUpdateEvent{65, {60, 40, 40}, 20, 80});
+    events.push(WorldUpdateEvent{90, {60, 60, 80}, 20, 40});
+
+
+
+
+
+
 }
 
 void World::update(){
@@ -34,35 +58,14 @@ void World::update(){
 
 
     gameTimer++;
-    //spawn enemies
-    spawnTimer--;
-    if (spawnTimer <= 0 && objMan->getObjectCountWithTag(ObjectIdentifier::EnemyFlag) < desiredEnemyCount){
-        spawnTimer = nextEnemySpawn;
-        
-        float tempX;
-        float tempY;
-        
-        do {
-            if (GetRandomValue(0, 1) >= 1){
-                
-                tempX = GetRandomValue(0, 1) * 1344 - 64 + cameraPos.x;
-                tempY = GetRandomValue(0, 720) + cameraPos.y;
-            }else{
-                tempX = GetRandomValue(0, 1280) + cameraPos.x;
-                tempY = GetRandomValue(0, 1) * 784 - 64 + cameraPos.y;
-            }
-            
-
-        }while(std::abs(tempX) > worldWidth || std::abs(tempY) > worldHeight);
-
-
-        objMan->addGameObject(new Enemy({tempX, tempY})); // TODO : enemy variety
-    }
-
-    if (gameTimer % 3 == 0){
+    
+    if (gameTimer % colorUpdateDelay == 0){
         updateColor();
-
     }
+
+    handleWorldEvents();
+    handleEnemySpawning();
+
     
 }
 
@@ -91,5 +94,52 @@ void World::updateColorValue(unsigned char* currentColorValue, unsigned char* de
         *(currentColorValue) -= std::copysign( colorChangeSpeed, *(currentColorValue) - *(desiredColorValue));
 }
 
+
+const float framesPerSecond = 60;
+void World::handleWorldEvents(){
+    if (!events.empty() && gameTimer >= events.front().activationTimeStampInSeconds * framesPerSecond){
+        // activate event
+        WorldUpdateEvent event = events.front();
+
+        changeColor(event.color);
+
+        desiredEnemyCount = event.maxEnemyCount;
+        nextEnemySpawn = event.enemySpawnTime;
+
+        if (spawnTimer > nextEnemySpawn) spawnTimer = nextEnemySpawn;
+
+        events.pop();
+    }
+}
+
+
+void World::handleEnemySpawning(){
+    //spawn enemies
+    spawnTimer--;
+    if (spawnTimer <= 0){
+        spawnTimer = nextEnemySpawn;
+        if (objMan->getObjectCountWithTag(ObjectIdentifier::EnemyFlag) > desiredEnemyCount) spawnTimer *= overpopulationTimerIncrease;
+        
+        float tempX;
+        float tempY;
+        
+        do {
+            if (GetRandomValue(0, 1) >= 1){
+                
+                tempX = GetRandomValue(0, 1) * 1344 - 64 + cameraPos.x;
+                tempY = GetRandomValue(0, 720) + cameraPos.y;
+            }else{
+                tempX = GetRandomValue(0, 1280) + cameraPos.x;
+                tempY = GetRandomValue(0, 1) * 784 - 64 + cameraPos.y;
+            }
+            
+
+        }while(std::abs(tempX) > worldWidth || std::abs(tempY) > worldHeight);
+
+
+        objMan->addGameObject(new Enemy({tempX, tempY})); // TODO : enemy variety
+    }
+
+}
 
 World* World::instance = 0;

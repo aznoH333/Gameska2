@@ -55,6 +55,21 @@ void Enemy::engageTarget(GameObject* target){
 void Enemy::onCollide(GameObject* other){
     if (other->getObjectIdentifier() == ObjectIdentifier::PlayerFlag){
         other->takeDamage(1, this, direction);
+    }else if (other->getObjectIdentifier() == ObjectIdentifier::EnemyFlag){
+        // push away other enemies
+
+        Vector2 tempooraryPushForce {
+            (pos.x - other->getPos().x)*0.025f,
+            (pos.y - other->getPos().y)*0.025f
+        };
+
+        pos.x += tempooraryPushForce.x;
+        pos.y += tempooraryPushForce.y;
+
+        other->setPos({
+            other->getPos().x - tempooraryPushForce.x,
+            other->getPos().y - tempooraryPushForce.y
+        });
     }
 }
 
