@@ -21,6 +21,9 @@ class SpriteManager{
         void loadTextures(std::string begin, std::string end, int beginN, int endN);
         Texture2D getTexture(std::string);
         void drawTexture(std::string sprite, Vector2 position, float scale, float rotation, raylib::Color color, bool flipSprite);
+        void drawTextureAbsolute(std::string sprite, Vector2 position, float scale, float rotation, raylib::Color color, bool flipSprite);
+
+
 
         void dispose();
         void update();

@@ -31,12 +31,17 @@ class Player : public GameObject{
         int walkAnimationTimer = 1;
         const float knockBackMultiplier = 10.0f;
 
+        // damage stuff
         int damageStunTimer = 0;
         const int damageStunDuration = 10;
+        int invulnarabilityTimer = 0;
 
         float droneRotation = 0;
         const float droneRotationSpeed = 0.03f;
         const float droneDistance = 48.52f;
+
+
+        
 
         std::vector<Drone*> drones;
 

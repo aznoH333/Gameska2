@@ -43,3 +43,7 @@ void GameObject::takeDamage(int damage, GameObject* damageDealer, float directio
     health -= damage;
     onDamage(damage, damageDealer, direction);
 }
+
+int GameObject::getHealth(){
+    return health;
+}

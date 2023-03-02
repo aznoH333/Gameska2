@@ -5,6 +5,7 @@
 #include "sprites/SpriteManager.h"
 #include "gameObjects/GameObjectManager.h"
 #include "gameObjects/world/camera.h"
+#include "gameObjects/entities/player/playerManager.h"
 
 int main() {
     
@@ -29,6 +30,7 @@ int main() {
         SpriteManager::getInstance()->update();
         GameObjectManager::getInstance()->update();
         CameraObject::getInstance()->update();
+        PlayerManager::getInstance()->update();
 
 
         SpriteManager::getInstance()->endDrawing();
@@ -38,6 +40,7 @@ int main() {
     GameObjectManager::getInstance()->dispose();
     SpriteManager::getInstance()->dispose();
     CameraObject::getInstance()->dispose();
+    PlayerManager::getInstance()->dispose();
 
     return 0;
 }

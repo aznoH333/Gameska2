@@ -17,6 +17,10 @@ SpriteManager::SpriteManager(){
     loadTexture("assets/entities/projectiles/bullet.png");
     loadTexture("assets/entities/projectiles/rocket.png");
 
+    loadTexture("assets/ui/Hud.png");
+    loadTexture("assets/ui/Heart.png");
+    loadTexture("assets/ui/Empty_Heart.png");
+
 
     world = CameraObject::getInstance();
 }
@@ -62,6 +66,20 @@ void SpriteManager::drawTexture(std::string sprite, Vector2 pos, float scale, fl
     DrawTexturePro(texture, 
         {(flipSprite ? texture.width : 0.0f) ,0.0f, (flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
         {pos.x - camerapos.x + (calculatedWidth.x / 2), pos.y - camerapos.y + (calculatedWidth.y / 2), calculatedWidth.x, calculatedWidth.y}, 
+        {calculatedWidth.x / 2,calculatedWidth.y /2}, rotation, color);
+}
+
+void SpriteManager::drawTextureAbsolute(std::string sprite, Vector2 pos, float scale, float rotation, raylib::Color color, bool flipSprite){
+    Texture2D texture = getTexture(sprite);
+    //DrawTextureEx(getTexture(sprite), {pos.x - camerapos.x, pos.y - camerapos.y}, 0, scale, color);
+    
+    Vector2 calculatedWidth = {
+        texture.width * scale, texture.height * scale
+    };
+    
+    DrawTexturePro(texture, 
+        {(flipSprite ? texture.width : 0.0f) ,0.0f, (flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
+        {pos.x - (calculatedWidth.x/2), pos.y - (calculatedWidth.y/2), calculatedWidth.x, calculatedWidth.y}, 
         {calculatedWidth.x / 2,calculatedWidth.y /2}, rotation, color);
 }
 

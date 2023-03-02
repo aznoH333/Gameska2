@@ -4,12 +4,14 @@
 #include <vector>
 #include "../../world/world.h"
 #include "../drones/gunDrone.h"
+#include "playerManager.h"
 
-Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag, 100){
+Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag, 5){
     spr = SpriteManager::getInstance();
     camera = CameraObject::getInstance();
     drones = std::vector<Drone*>();// TODO : upgrade system
     drones.push_back(new GunDrone());
+    PlayerManager::getInstance()->registerPlayerObject(this);
     //drones.push_back(new GunDrone());
 
 }
@@ -60,6 +62,7 @@ void Player::onDestroy(){
     for (Drone* d : drones){
         delete d;
     }
+    PlayerManager::getInstance()->removePlayer();
 }
 
 void Player::onCollide(GameObject* other){

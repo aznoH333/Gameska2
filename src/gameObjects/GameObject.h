@@ -40,6 +40,7 @@ class GameObject{
         float distanceToPosition(Vector2 position);
         ObjectIdentifier getObjectIdentifier();
         void takeDamage(int damage, GameObject* damageDealer, float direction);
+        int getHealth();
 
 };
 
