@@ -7,9 +7,11 @@ SpriteManager::SpriteManager(){
     loadTexture("assets/tiles/bricks.png");
     loadTexture("assets/tiles/missing.png");
 
+
+    // player
     loadTextures("assets/entities/player/player_", ".png", 1, 9);
     
-    
+    // enemies
     loadTextures("assets/entities/basic_enemy/Enemy_", ".png", 1, 9);
     loadTextures("assets/entities/fire_enemy/Fire_Enemy_", ".png", 1, 9);
 
@@ -18,10 +20,21 @@ SpriteManager::SpriteManager(){
 
     loadTexture("assets/tiles/floor_tile.png");
     loadTexture("assets/tiles/brick_wall.png");
-
+    // projectiles
     loadTexture("assets/entities/projectiles/bullet.png");
     loadTexture("assets/entities/projectiles/rocket.png");
 
+
+    loadTexture("assets/entities/fireFX/Fire_ball.png");
+
+
+
+    // fx
+    loadTexture("assets/entities/fireFX/FireBallExplosion_1.png");
+    loadTextures("assets/entities/fireFX/Muzzle_flash_", ".png", 1, 8);
+
+
+    // hud
     loadTexture("assets/ui/Hud.png");
     loadTexture("assets/ui/Heart.png");
     loadTexture("assets/ui/Empty_Heart.png");

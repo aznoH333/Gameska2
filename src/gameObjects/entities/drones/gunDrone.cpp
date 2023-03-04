@@ -2,7 +2,7 @@
 #include "drone.h"
 #include "../../GameObjectManager.h"
 #include "../projectiles/bulletProjectile.h"
-#include "raylib.h"
+#include "../animationObject/animationObject.h"
 
 GunDrone::GunDrone() : Drone("Rifle drone", "Amogus_1", 60, 20, 3){}
 
@@ -14,5 +14,12 @@ void GunDrone::fire(Vector2 pos){
         damage,
         26.0f
         ));
+
+
+        int temp = GetRandomValue(1, 3);
+        GameObjectManager::getInstance()->addGameObject(new AnimationObject(
+        {pos.x + (flipSprite ? -16 : 32), pos.y + 8}
+        , "Muzzle_flash_", temp, temp+1, 1, flipSprite));
+        
     }    
 }

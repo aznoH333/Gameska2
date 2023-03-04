@@ -18,7 +18,6 @@ class Drone{
 
         //values
         int coolDown = 0;
-        bool flipSprite = false;
 
         // constants
         const float damageUpgradeBonus = 0.07f;
@@ -30,6 +29,8 @@ class Drone{
     protected:
         float damage;
         int level = 1;
+        bool flipSprite = false;
+
 
     public:
         Drone(std::string name, std::string sprite, int fireCooldown, float damage, int maxLevel);

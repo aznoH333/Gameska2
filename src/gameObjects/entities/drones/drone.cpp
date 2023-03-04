@@ -22,10 +22,10 @@ void Drone::update(Vector2 position){
     if (coolDown > 0) coolDown--;
     else{
         coolDown = fireCooldown * fireRateUpgrade;
-        fire(position);
 
         GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, 200, position);
         if (target) flipSprite = target->getPos().x < position.x;
+        fire(position);
     }
     
     

@@ -9,7 +9,8 @@ enum ObjectIdentifier {
     EnemyFlag,
     PlayerFlag,
     PlayerProjectileFlag,
-    EnemyProjectileFlag
+    EnemyProjectileFlag,
+    Other,
 };
 
 

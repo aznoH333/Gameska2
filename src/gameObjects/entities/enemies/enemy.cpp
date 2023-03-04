@@ -68,6 +68,7 @@ void Enemy::onDamage(int damage, GameObject* damageDealer, float direction){
     knockBackDirection = direction;
     knockBackTimer = damage * knockBackStunMultiplier;
     knockBackSpeed = damage * knockBackMultiplier;
+    speed = 0;
 }
 
 
