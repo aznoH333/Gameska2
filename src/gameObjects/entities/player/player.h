@@ -58,6 +58,7 @@ class Player : public GameObject{
         void onDestroy();
         void onCollide(GameObject* other);
         void onDamage(int damage, GameObject* damageDealer, float direction);
+        void takeDamage(int damage, GameObject* damageDealer, float direction);
 
 };
 

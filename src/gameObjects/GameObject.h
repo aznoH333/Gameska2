@@ -42,7 +42,7 @@ class GameObject{
         Vector2 getSize();
         float distanceToPosition(Vector2 position);
         ObjectIdentifier getObjectIdentifier();
-        void takeDamage(int damage, GameObject* damageDealer, float direction);
+        virtual void takeDamage(int damage, GameObject* damageDealer, float direction);
         int getHealth();
 
 };

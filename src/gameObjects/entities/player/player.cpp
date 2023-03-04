@@ -53,9 +53,10 @@ void Player::update(){
     camera->setCameraPos({pos.x + (velocity.x * cameraDistanceMultiplier) - 633, pos.y + (velocity.y * cameraDistanceMultiplier) - 348});
 
     //draw
-    draw();
+    if (invulnarabilityTimer % (10) < 7)
+        draw();
 
-    
+    if (invulnarabilityTimer > 0) invulnarabilityTimer--;
 }
 
 void Player::onDestroy(){
@@ -149,6 +150,7 @@ void Player::onDamage(int damage, GameObject* damageDealer, float knockBackDirec
     float direction = (std::atan2(damageDealer->getPos().x + 32 - (pos.x + 32), -(damageDealer->getPos().y  + 32 - (pos.y + 32)))) + (90 * DEG2RAD);
     velocity.x = cos(direction) * knockBackMultiplier;
     velocity.y = sin(direction) * knockBackMultiplier;
+    invulnarabilityTimer = 30;
 }
 
 void Player::droneUpdate(){
@@ -169,5 +171,12 @@ void Player::droneUpdate(){
 
         d->update(dronePos);
         spr->drawTexture(d->getSprite(), dronePos, 2, 0, WHITE, d->getFlipSprite());
+    }
+}
+
+void Player::takeDamage(int damage, GameObject *damageDealer, float direction){
+    if (invulnarabilityTimer <= 0){
+        health -= damage;
+        onDamage(damage, damageDealer, direction);
     }
 }

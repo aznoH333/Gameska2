@@ -39,7 +39,7 @@ class World{
         float nextEnemySpawn = 120;
         int gameTimer = 0;
         int desiredEnemyCount = 0;
-        const float overpopulationTimerIncrease = 3;
+        const float overpopulationTimerIncrease = 1.3f;
 
 
         // level color
