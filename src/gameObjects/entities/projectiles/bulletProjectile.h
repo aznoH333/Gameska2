@@ -11,6 +11,7 @@ class Bullet : public GameObject{
         float rotation;
         float damage;
         float speed;
+        int spawnTimer = 30;
     
     public:
         Bullet(Vector2 pos, float rotation, float damage, float speed);

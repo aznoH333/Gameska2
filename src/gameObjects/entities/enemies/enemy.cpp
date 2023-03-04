@@ -18,7 +18,7 @@ void Enemy::update(){
         engageTarget(target);
     }
 
-    
+    worldCollisions();
 
     // draw
     if (knockBackTimer >0){
@@ -105,4 +105,24 @@ void Enemy::handleKnockBack(){
 float Enemy::sigmaReLU(float number){
     if (number <= 0) return 0;
     return 1;
+}
+
+
+void Enemy::worldCollisions(){
+    // wall collisions
+    if (pos.x + size.x > WORLD::worldWidth) {
+        pos.x = WORLD::worldWidth - 28;
+    }
+
+    if (pos.x < -WORLD::worldWidth + 64.0f) {
+        pos.x = -WORLD::worldWidth + 64;
+    }
+
+    if (pos.y < -WORLD::worldHeight - size.y + 64) {
+        pos.y = -WORLD::worldHeight - size.y + 64;
+    }
+
+    if (pos.y > WORLD::worldHeight){
+        pos.y = WORLD::worldHeight;
+    }
 }

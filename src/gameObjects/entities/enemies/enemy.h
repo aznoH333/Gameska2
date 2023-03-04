@@ -31,6 +31,7 @@ class Enemy : public GameObject{
         void engageTarget(GameObject* target);
         void handleKnockBack();
         float sigmaReLU(float number);
+        void worldCollisions();
 
     public:
         Enemy(Vector2);
