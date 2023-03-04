@@ -16,6 +16,8 @@ struct WorldUpdateEvent{
     Color color;
     int maxEnemyCount;
     int enemySpawnTime;
+    float healthMultiplier;
+    int enemyTier;
     // TODO enemy variety
 };
 
@@ -40,6 +42,8 @@ class World{
         int gameTimer = 0;
         int desiredEnemyCount = 0;
         const float overpopulationTimerIncrease = 1.3f;
+        float healthMultiplier = 1;
+        int enemyTier = 1;
 
 
         // level color

@@ -2,6 +2,8 @@
 #include "camera.h"
 #include "raylib.h"
 #include "../entities/enemies/enemy.h"
+#include "../entities/enemies/fireEnemy.h"
+
 #include <cmath>
 
 
@@ -27,13 +29,13 @@ World::World(){
 
     // set world events
 
-    events.push(WorldUpdateEvent{1, {40, 40, 40}, 4, 360});
-    events.push(WorldUpdateEvent{7, {40, 65, 40}, 10, 80});
-    events.push(WorldUpdateEvent{30, {40, 100, 40}, 15, 45});
-    events.push(WorldUpdateEvent{45, {40, 30, 80}, 20, 60});
-    events.push(WorldUpdateEvent{60, {100, 30, 40}, 40, 10}); // huge enemy wave
-    events.push(WorldUpdateEvent{65, {60, 40, 40}, 20, 80});
-    events.push(WorldUpdateEvent{90, {60, 60, 80}, 20, 40});
+    events.push(WorldUpdateEvent{1, {40, 40, 40}, 4, 360, 1, 1});
+    events.push(WorldUpdateEvent{7, {40, 65, 40}, 10, 80, 1, 1});
+    events.push(WorldUpdateEvent{30, {40, 100, 40}, 15, 45, 1, 2});
+    events.push(WorldUpdateEvent{45, {40, 30, 80}, 20, 60, 1, 2});
+    events.push(WorldUpdateEvent{60, {100, 30, 40}, 40, 10, 1, 1}); // huge enemy wave
+    events.push(WorldUpdateEvent{65, {60, 40, 40}, 20, 80, 1, 2});
+    events.push(WorldUpdateEvent{90, {60, 60, 80}, 20, 40, 1, 2});
 
 
 
@@ -105,6 +107,9 @@ void World::handleWorldEvents(){
 
         desiredEnemyCount = event.maxEnemyCount;
         nextEnemySpawn = event.enemySpawnTime;
+        enemyTier = event.enemyTier;
+        healthMultiplier = event.healthMultiplier;
+
 
         if (spawnTimer > nextEnemySpawn) spawnTimer = nextEnemySpawn;
 
@@ -137,7 +142,19 @@ void World::handleEnemySpawning(){
         }while(std::abs(tempX) > worldWidth || std::abs(tempY) > worldHeight);
 
 
-        objMan->addGameObject(new Enemy({tempX, tempY})); // TODO : enemy variety
+        GameObject* enemy;
+        // choose enemy type
+        switch (GetRandomValue(1, enemyTier)) {
+            case 1:
+                enemy = new Enemy({tempX, tempY}, healthMultiplier);
+                break;
+            case 2:
+                enemy = new FireEnemy({tempX, tempY}, healthMultiplier);
+                break;
+        
+        }
+        // add enemy
+        objMan->addGameObject(enemy);
     }
 
 }

@@ -8,7 +8,12 @@ SpriteManager::SpriteManager(){
     loadTexture("assets/tiles/missing.png");
 
     loadTextures("assets/entities/player/player_", ".png", 1, 9);
+    
+    
     loadTextures("assets/entities/basic_enemy/Enemy_", ".png", 1, 9);
+    loadTextures("assets/entities/fire_enemy/Fire_Enemy_", ".png", 1, 9);
+
+
     loadTextures("assets/entities/drones/Amogus_", ".png",1, 6);
 
     loadTexture("assets/tiles/floor_tile.png");

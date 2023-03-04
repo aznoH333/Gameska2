@@ -4,7 +4,7 @@
 #include <string>
 #include "../../world/world.h"
 
-Enemy::Enemy(Vector2 pos): GameObject(pos, {28, 46}, ObjectIdentifier::EnemyFlag, 50){
+Enemy::Enemy(Vector2 pos, float healthMultiplier): GameObject(pos, {28, 46}, ObjectIdentifier::EnemyFlag, 50 * healthMultiplier){
     spr = SpriteManager::getInstance();
 }
 
@@ -20,22 +20,7 @@ void Enemy::update(){
 
     worldCollisions();
 
-    // draw
-    if (knockBackTimer >0){
-        spr->drawTexture("Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
-    }else if (speed < 0.2f){
-        spr->drawTexture("Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
-    }
-    else {
-        walkAnimationTimer--;
-        if (walkAnimationTimer == 0){
-            walkAnimationTimer = maxAnimationTimer;
-            animationIndex = (animationIndex+1 - minAnimationFrame) % (maxAnimationFrame - minAnimationFrame) + minAnimationFrame;
-        }
-
-        spr->drawTexture("Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
-
-    }
+    draw();
 }
 
 
@@ -124,5 +109,24 @@ void Enemy::worldCollisions(){
 
     if (pos.y > WORLD::worldHeight){
         pos.y = WORLD::worldHeight;
+    }
+}
+
+
+void Enemy::draw(){
+    if (knockBackTimer >0){
+        spr->drawTexture("Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
+    }else if (speed < 0.2f){
+        spr->drawTexture("Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
+    }
+    else {
+        walkAnimationTimer--;
+        if (walkAnimationTimer == 0){
+            walkAnimationTimer = maxAnimationTimer;
+            animationIndex = (animationIndex+1 - minAnimationFrame) % (maxAnimationFrame - minAnimationFrame) + minAnimationFrame;
+        }
+
+        spr->drawTexture("Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
+
     }
 }
