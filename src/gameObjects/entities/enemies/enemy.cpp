@@ -3,6 +3,7 @@
 #include <cmath>
 #include <string>
 #include "../../world/world.h"
+#include "../animationObject/animationObject.h"
 
 Enemy::Enemy(Vector2 pos, float healthMultiplier): GameObject(pos, {28, 46}, ObjectIdentifier::EnemyFlag, 50 * healthMultiplier){
     spr = SpriteManager::getInstance();
@@ -59,6 +60,12 @@ void Enemy::onCollide(GameObject* other){
 }
 
 void Enemy::onDestroy(){
+
+    // gore
+    int temp = GetRandomValue(0, 1) * 5 + 1;
+    GameObjectManager::getInstance()->addGameObject(new AnimationObject(
+    {pos.x + goreOffsetX, pos.y + goreOffsetY}
+    , "Gore_", temp, temp+4, 4, flipSprite));
 
 }
 

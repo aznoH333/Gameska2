@@ -25,7 +25,9 @@ class Enemy : public GameObject{
         float knockBackDirection = 0;
         float knockBackSpeed = 0;
 
-        
+        // gore
+        const int goreOffsetX = -16;
+        const int goreOffsetY = -8;
 
 
         void handleKnockBack();

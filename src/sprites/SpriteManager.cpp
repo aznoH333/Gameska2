@@ -32,6 +32,8 @@ SpriteManager::SpriteManager(){
     // fx
     loadTexture("assets/entities/fireFX/FireBallExplosion_1.png");
     loadTextures("assets/entities/fireFX/Muzzle_flash_", ".png", 1, 8);
+    loadTextures("assets/entities/gore/Gore_", ".png", 1, 10);
+
 
 
     // hud
