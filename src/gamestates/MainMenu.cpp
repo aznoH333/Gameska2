@@ -8,7 +8,7 @@ void MainMenu::init(){
 
 void MainMenu::update(){
     for (int i = 0; i < buttons.size(); i++){
-        DrawText(buttons[i].text, 200, 400 + i * 64, 4, WHITE);
+        DrawText(buttons[i].text.c_str(), 200, 400 + i * 64, 4, WHITE);
     }
 }
 
