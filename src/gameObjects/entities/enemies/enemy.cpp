@@ -123,9 +123,9 @@ void Enemy::worldCollisions(){
 
 void Enemy::draw(){
     if (knockBackTimer >0){
-        spr->drawTexture("Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
+        spr->drawTexture({"Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
     }else if (speed < 0.2f){
-        spr->drawTexture("Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
+        spr->drawTexture({"Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
     }
     else {
         walkAnimationTimer--;
@@ -134,7 +134,7 @@ void Enemy::draw(){
             animationIndex = (animationIndex+1 - minAnimationFrame) % (maxAnimationFrame - minAnimationFrame) + minAnimationFrame;
         }
 
-        spr->drawTexture("Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite);
+        spr->drawTexture({"Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
 
     }
 }

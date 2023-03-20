@@ -24,10 +24,10 @@ void Fireball::update(){
 
 
     //draw
-    SpriteManager::getInstance()->drawTexture("Fire_ball", pos, 
+    SpriteManager::getInstance()->drawTexture({"Fire_ball", pos, 
         2
         , rotation * RAD2DEG * (flipSprite? -1: 1) / 4
-        , WHITE, flipSprite);
+        , WHITE, flipSprite, 2});
 }
 
 void Fireball::onDestroy(){

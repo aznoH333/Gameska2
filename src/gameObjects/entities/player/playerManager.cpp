@@ -25,14 +25,14 @@ void PlayerManager::handleUI(){
     if (std::abs(hudPosition.y - desiredHudY) < hudSpeed) hudPosition.y = desiredHudY;
     else hudPosition.y -= std::copysign(hudSpeed, hudPosition.y - desiredHudY);
     // draw hud
-    spr->drawTextureAbsolute("Hud", hudPosition, 2, 0, WHITE, false);
+    spr->drawTexture({"Hud", hudPosition, 2, 0, WHITE, false, 3, true});
 
     // draw health
     for (int i = 0; i < maxPlayerHP; i++){
         if (playerObject != nullptr && playerObject->getHealth() > i){
-            spr->drawTextureAbsolute("Heart", {hudPosition.x - hudWidth + healthOffsetX + (i * gapBetweenHearts), hudPosition.y - healthOffsetY}, 2, 0, WHITE, false);
+            spr->drawTexture({"Heart", {hudPosition.x - hudWidth + healthOffsetX + (i * gapBetweenHearts), hudPosition.y - healthOffsetY}, 2, 0, WHITE, false, 3, true});
         }else{
-            spr->drawTextureAbsolute("Empty_Heart", {hudPosition.x - hudWidth + healthOffsetX + (i * gapBetweenHearts), hudPosition.y - healthOffsetY}, 2, 0, WHITE, false);
+            spr->drawTexture({"Empty_Heart", {hudPosition.x - hudWidth + healthOffsetX + (i * gapBetweenHearts), hudPosition.y - healthOffsetY}, 2, 0, WHITE, false, 3, true});
 
         }
     }

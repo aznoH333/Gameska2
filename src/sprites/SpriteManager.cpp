@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
 SpriteManager::SpriteManager(){
     loadTexture("assets/tiles/bricks.png");
@@ -72,37 +73,55 @@ void SpriteManager::dispose(){
     for (const auto& t : sprites){
         UnloadTexture(t.second);
     }
+
+    for (const auto& t : renderLayers){
+        t.second->clear();
+        delete t.second;
+    }
     delete instance;
 }
 
-void SpriteManager::drawTexture(std::string sprite, Vector2 pos, float scale, float rotation, raylib::Color color, bool flipSprite){
-    Texture2D texture = getTexture(sprite);
-    //DrawTextureEx(getTexture(sprite), {pos.x - camerapos.x, pos.y - camerapos.y}, 0, scale, color);
-    
-    Vector2 calculatedWidth = {
-        texture.width * scale, texture.height * scale
-    };
-    
-    DrawTexturePro(texture, 
-        {(flipSprite ? texture.width : 0.0f) ,0.0f, (flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
-        {pos.x - camerapos.x + (calculatedWidth.x / 2), pos.y - camerapos.y + (calculatedWidth.y / 2), calculatedWidth.x, calculatedWidth.y}, 
-        {calculatedWidth.x / 2,calculatedWidth.y /2}, rotation, color);
+void SpriteManager::drawTexture(RenderData data){
+    if (renderLayers.find(data.zIndex) == renderLayers.end()) 
+        renderLayers.emplace(data.zIndex, new std::vector<RenderData>());
+
+    renderLayers[data.zIndex]->push_back(data);
 }
 
-void SpriteManager::drawTextureAbsolute(std::string sprite, Vector2 pos, float scale, float rotation, raylib::Color color, bool flipSprite){
-    Texture2D texture = getTexture(sprite);
-    //DrawTextureEx(getTexture(sprite), {pos.x - camerapos.x, pos.y - camerapos.y}, 0, scale, color);
+
+void SpriteManager::render(){
+
+    beginDrawing();
+
+    for (const auto& layer : renderLayers){
+        for (RenderData data : *layer.second){
+            renderTexture(data);
+        }
+        layer.second->clear();
+    }
     
-    Vector2 calculatedWidth = {
-        texture.width * scale, texture.height * scale
-    };
-    
-    DrawTexturePro(texture, 
-        {(flipSprite ? texture.width : 0.0f) ,0.0f, (flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
-        {pos.x - (calculatedWidth.x/2), pos.y - (calculatedWidth.y/2), calculatedWidth.x, calculatedWidth.y}, 
-        {calculatedWidth.x / 2,calculatedWidth.y /2}, rotation, color);
+    endDrawing();
 }
 
+void SpriteManager::renderTexture(RenderData data){
+    Texture2D texture = getTexture(data.texture);
+    
+    Vector2 calculatedWidth = {
+        texture.width * data.scale, texture.height * data.scale
+    };
+    
+    Vector2 pos = data.pos;
+
+    if (!data.isAbsolute){
+        pos.x -= camerapos.x;
+        pos.y -= camerapos.y;
+    }
+
+    DrawTexturePro(texture, 
+        {(data.flipSprite ? texture.width : 0.0f) ,0.0f, (data.flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
+        {pos.x + (calculatedWidth.x / 2), pos.y + (calculatedWidth.y / 2), calculatedWidth.x, calculatedWidth.y}, 
+        {calculatedWidth.x / 2,calculatedWidth.y /2}, data.rotation, data.color);
+}
 
 void SpriteManager::update(){
     camerapos = world->getCameraPos();

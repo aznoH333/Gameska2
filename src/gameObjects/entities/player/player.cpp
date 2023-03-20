@@ -77,7 +77,7 @@ void Player::draw(){
     
     
     if (damageStunTimer > 0){
-        spr->drawTexture("player_9", pos, 2, 0, WHITE, flipSprite);
+        spr->drawTexture({"player_9", pos, 2, 0, WHITE, flipSprite, 2});
 
         if      (velocity.x < -0.5f) flipSprite = false;
         else if (velocity.x > 0.5f) flipSprite = true;
@@ -93,12 +93,12 @@ void Player::draw(){
         if      (velocity.x < -0.5f) flipSprite = true;
         else if (velocity.x > 0.5f) flipSprite = false; 
 
-        spr->drawTexture("player_" + std::to_string(animationIndex), pos, 2, 0, WHITE, flipSprite);
+        spr->drawTexture({"player_" + std::to_string(animationIndex), pos, 2, 0, WHITE, flipSprite, 2});
 
 
     }else{
         // idle
-        spr->drawTexture("player_1", pos, 2, 0, WHITE, flipSprite);
+        spr->drawTexture({"player_1", pos, 2, 0, WHITE, flipSprite, 2});
     }
 
     
@@ -170,7 +170,7 @@ void Player::droneUpdate(){
         };
 
         d->update(dronePos);
-        spr->drawTexture(d->getSprite(), dronePos, 2, 0, WHITE, d->getFlipSprite());
+        spr->drawTexture({d->getSprite(), dronePos, 2, 0, WHITE, d->getFlipSprite(), 1});
     }
 }
 

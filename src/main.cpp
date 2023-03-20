@@ -22,7 +22,6 @@ int main() {
     SetTargetFPS(60);
     while (!w.ShouldClose())
     {
-        SpriteManager::getInstance()->beginDrawing();
         
         ClearBackground({40, 30, 30, 255});
         
@@ -32,8 +31,7 @@ int main() {
         CameraObject::getInstance()->update();
         PlayerManager::getInstance()->update();
 
-
-        SpriteManager::getInstance()->endDrawing();
+        SpriteManager::getInstance()->render();
     }
     
     World::getInstance()->dispose();
