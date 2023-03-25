@@ -24,12 +24,15 @@ class Drone{
         const float fireRateUpgradeBonus = 0.07f;
         const float maxDamageBonus = 3;
         const float maxFireRateBonus = 0.5f;
+        const float screenShakeMultiplier = 0.6f;
 
     
     protected:
         float damage;
         int level = 1;
         bool flipSprite = false;
+
+        float getScreenSHake();
 
 
     public:

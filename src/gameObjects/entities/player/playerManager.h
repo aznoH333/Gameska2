@@ -3,6 +3,9 @@
 
 #include <raylib-cpp.hpp>
 #include "player.h"
+#include "../../GameObjectManager.h"
+#include "pickups.h"
+#include "../drones/drones.h"
 
 class PlayerManager{
     private:
@@ -22,6 +25,10 @@ class PlayerManager{
         Player* playerObject = nullptr;
         const int maxPlayerHP = 5;
         
+        // weapon progression stuff
+        int upgradeCount = 0;
+        int nextUpgradeCount = 5;
+        int killCounter = 0;
 
         
         
@@ -36,6 +43,9 @@ class PlayerManager{
         void dispose();
         void registerPlayerObject(Player* player);
         void removePlayer();
+        void touchedUpgradeBox();
+        void reset();
+        void confirmKill(Vector2 pos);
 };
 
 

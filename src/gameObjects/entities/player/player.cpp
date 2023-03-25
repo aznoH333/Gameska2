@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "../../world/world.h"
-#include "../drones/gunDrone.h"
+#include "../drones/drones.h"
 #include "playerManager.h"
 
 Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag, 5){
@@ -77,7 +77,7 @@ void Player::draw(){
     
     
     if (damageStunTimer > 0){
-        spr->drawTexture({"player_9", pos, 2, 0, WHITE, flipSprite, 2});
+        spr->drawTexture({"player_9", pos, 2, 0, WHITE, flipSprite, layer_priority});
 
         if      (velocity.x < -0.5f) flipSprite = false;
         else if (velocity.x > 0.5f) flipSprite = true;
@@ -93,12 +93,12 @@ void Player::draw(){
         if      (velocity.x < -0.5f) flipSprite = true;
         else if (velocity.x > 0.5f) flipSprite = false; 
 
-        spr->drawTexture({"player_" + std::to_string(animationIndex), pos, 2, 0, WHITE, flipSprite, 2});
+        spr->drawTexture({"player_" + std::to_string(animationIndex), pos, 2, 0, WHITE, flipSprite, layer_priority});
 
 
     }else{
         // idle
-        spr->drawTexture({"player_1", pos, 2, 0, WHITE, flipSprite, 2});
+        spr->drawTexture({"player_1", pos, 2, 0, WHITE, flipSprite, layer_priority});
     }
 
     
@@ -170,7 +170,15 @@ void Player::droneUpdate(){
         };
 
         d->update(dronePos);
-        spr->drawTexture({d->getSprite(), dronePos, 2, 0, WHITE, d->getFlipSprite(), 1});
+        
+        spr->drawTexture({d->getSprite(), dronePos, 2 * lastDroneScale, 0, WHITE, d->getFlipSprite(), layer_projectiles});
+
+    }
+
+    // drone scaling animation
+    if (lastDroneScale < 1){
+        lastDroneScale += droneScaleSpeed;
+        if (lastDroneScale > 1) lastDroneScale = 1;
     }
 }
 
@@ -179,4 +187,9 @@ void Player::takeDamage(int damage, GameObject *damageDealer, float direction){
         health -= damage;
         onDamage(damage, damageDealer, direction);
     }
+}
+
+void Player::addDrone(Drone* drone){
+    drones.push_back(drone);
+    lastDroneScale = 0;
 }

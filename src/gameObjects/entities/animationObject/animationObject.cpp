@@ -15,7 +15,7 @@ AnimationObject::AnimationObject(Vector2 pos, std::string sprite, int animationS
 
 void AnimationObject::update(){
 
-    SpriteManager::getInstance()->drawTexture({sprite + std::to_string(animationFrame), pos, 2, 0, WHITE, flipSprite, 2});
+    SpriteManager::getInstance()->drawTexture({sprite + std::to_string(animationFrame), pos, 2, 0, WHITE, flipSprite, layer_priority});
 
     currentFrameDuration--;
     if (currentFrameDuration == 0){

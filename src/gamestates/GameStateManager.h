@@ -2,12 +2,14 @@
 #define GAME_STATE_MANAGER
 
 #include "Gamestate.h"
+#include "Game.h"
 #include <map>
 
 enum StateName{
-    MainMenu = 0,
-    Game = 1,
-    GameOver = 2,
+    state_main_menu = 0,
+    state_game = 1,
+    state_game_over = 2,
+    state_intro = 3,
 };
 
 
@@ -15,14 +17,24 @@ class GameStateManager{
     private:
         static GameStateManager* instance;
         std::map<StateName, GameState*> states;
-        StateName currentState = MainMenu;
+        StateName currentState = state_intro;
+        bool exit = false;
+        
+        // transition stuff
+        float transitionValue = 0;
+        const float transitionSpeed = 0.05f;
+        StateName nextState = currentState;
+        
 
     public:
         GameStateManager();
         static GameStateManager* getInstance();
         void update();
         void switchState(StateName state);
+        void transitionToState(StateName state);
         void dispose();
+        bool shouldGameEnd();
+        void exitGame();
 
 };
 

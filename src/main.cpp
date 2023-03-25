@@ -1,11 +1,6 @@
 #include <raylib-cpp.hpp>
-#include "gameObjects/entities/player/player.h"
-#include "gameObjects/entities/enemies/enemy.h"
-#include "gameObjects/world/world.h"
-#include "sprites/SpriteManager.h"
-#include "gameObjects/GameObjectManager.h"
-#include "gameObjects/world/camera.h"
-#include "gameObjects/entities/player/playerManager.h"
+#include "raylib.h"
+#include "gamestates/GameStateManager.h"
 
 int main() {
     
@@ -15,22 +10,17 @@ int main() {
 
     raylib::Window w(screenWidth, screenHeight, "Gameska");
     
-    GameObjectManager::getInstance()->addGameObject(new Player({40,40}));
-    //GameObjectManager::getInstance()->addGameObject(new Enemy({100,40}));
     
     
     SetTargetFPS(60);
-    while (!w.ShouldClose())
-    {
-        
-        ClearBackground({40, 30, 30, 255});
-        
-        World::getInstance()->update();
-        SpriteManager::getInstance()->update();
-        GameObjectManager::getInstance()->update();
-        CameraObject::getInstance()->update();
-        PlayerManager::getInstance()->update();
+    ToggleFullscreen();
 
+    GameStateManager* gameStateManager = GameStateManager::getInstance();
+    while (!w.ShouldClose() && !gameStateManager->shouldGameEnd())
+    {
+        ClearBackground({0, 0, 0, 255});
+        gameStateManager->update();
+        
         SpriteManager::getInstance()->render();
     }
     
@@ -39,6 +29,9 @@ int main() {
     SpriteManager::getInstance()->dispose();
     CameraObject::getInstance()->dispose();
     PlayerManager::getInstance()->dispose();
+    gameStateManager->dispose();
+    delete gameStateManager;
+
 
     return 0;
 }

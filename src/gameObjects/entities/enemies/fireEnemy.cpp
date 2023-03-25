@@ -6,9 +6,9 @@
 
 void FireEnemy::draw(){
     if (knockBackTimer >0){
-        spr->drawTexture({"Fire_Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
+        spr->drawTexture({"Fire_Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, layer_enemy});
     }else if (speed < 0.2f){
-        spr->drawTexture({"Fire_Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
+        spr->drawTexture({"Fire_Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, layer_enemy});
     }
     else {
         walkAnimationTimer--;
@@ -17,7 +17,7 @@ void FireEnemy::draw(){
             animationIndex = (animationIndex+1 - minAnimationFrame) % (maxAnimationFrame - minAnimationFrame) + minAnimationFrame;
         }
 
-        spr->drawTexture({"Fire_Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
+        spr->drawTexture({"Fire_Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, layer_enemy});
 
     }
 
@@ -26,7 +26,7 @@ void FireEnemy::draw(){
         spr->drawTexture({"Fire_ball", {pos.x + fireBallOffsetX, pos.y - fireBallOffsetY}, 
         (float)(maxSummoningProgress - summoningProgress) / maxSummoningProgress * 2
         , summoningProgress * RAD2DEG * (flipSprite? 1: -1) / 4
-        , WHITE, flipSprite, 2});
+        , WHITE, flipSprite, layer_projectiles});
     }
 }
 

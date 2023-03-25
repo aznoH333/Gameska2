@@ -3,15 +3,13 @@
 
 #include "Gamestate.h"
 #include <raylib-cpp.hpp>
-#include <vector>
-
-
+#include "raylib.h"
+#include "GameStateManager.h"
 
 
 class MainMenu : public GameState{
-    private:
-        std::vector<Button> buttons;
     public:
+        MainMenu();
         void update();
         void clear();
         void init();

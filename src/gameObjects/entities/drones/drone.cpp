@@ -60,3 +60,7 @@ bool Drone::canUpgradeLevel(){
 bool Drone::getFlipSprite(){
     return flipSprite;
 }
+
+float Drone::getScreenSHake(){
+    return damage * level * screenShakeMultiplier;
+}

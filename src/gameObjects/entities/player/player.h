@@ -36,10 +36,12 @@ class Player : public GameObject{
         const int damageStunDuration = 10;
         int invulnarabilityTimer = 0;
 
+        // drone stuff
         float droneRotation = 0;
         const float droneRotationSpeed = 0.03f;
         const float droneDistance = 48.52f;
-
+        float lastDroneScale = 0.1;
+        const float droneScaleSpeed = 0.05;
 
         
 
@@ -59,6 +61,7 @@ class Player : public GameObject{
         void onCollide(GameObject* other);
         void onDamage(int damage, GameObject* damageDealer, float direction);
         void takeDamage(int damage, GameObject* damageDealer, float direction);
+        void addDrone(Drone* d);
 
 };
 

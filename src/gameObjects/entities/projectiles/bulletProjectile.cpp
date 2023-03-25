@@ -14,7 +14,7 @@ void Bullet::update(){
     pos.x += std::cos(rotation) * speed;
     pos.y += std::sin(rotation) * speed;
 
-    SpriteManager::getInstance()->drawTexture({"bullet", pos, 2, rotation * RAD2DEG, WHITE, false, 2});
+    SpriteManager::getInstance()->drawTexture({"bullet", pos, 2, rotation * RAD2DEG, WHITE, false, layer_projectiles});
 
 
     // projectiles wont be deleted by walls for the first 30 frames

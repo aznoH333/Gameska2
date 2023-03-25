@@ -67,6 +67,9 @@ void Enemy::onDestroy(){
     {pos.x + goreOffsetX, pos.y + goreOffsetY}
     , "Gore_", temp, temp+4, 4, flipSprite));
 
+
+    // progress related stuff
+    PlayerManager::getInstance()->confirmKill(pos);
 }
 
 void Enemy::onDamage(int damage, GameObject* damageDealer, float direction){
@@ -123,9 +126,9 @@ void Enemy::worldCollisions(){
 
 void Enemy::draw(){
     if (knockBackTimer >0){
-        spr->drawTexture({"Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
+        spr->drawTexture({"Enemy_9", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, layer_enemy});
     }else if (speed < 0.2f){
-        spr->drawTexture({"Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
+        spr->drawTexture({"Enemy_1", {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, layer_enemy});
     }
     else {
         walkAnimationTimer--;
@@ -134,7 +137,7 @@ void Enemy::draw(){
             animationIndex = (animationIndex+1 - minAnimationFrame) % (maxAnimationFrame - minAnimationFrame) + minAnimationFrame;
         }
 
-        spr->drawTexture({"Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, 1});
+        spr->drawTexture({"Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, layer_enemy});
 
     }
 }

@@ -1,5 +1,6 @@
 #include "SpriteManager.h"
 #include "raylib.h"
+#include <cmath>
 #include <string>
 #include <iostream>
 #include <vector>
@@ -28,6 +29,9 @@ SpriteManager::SpriteManager(){
 
     loadTexture("assets/entities/fireFX/Fire_ball.png");
 
+    // pick ups
+    loadTexture("assets/entities/upgrade/Upgrade_box.png");
+    loadTexture("assets/entities/upgrade/Grab_text.png");
 
 
     // fx
@@ -37,10 +41,15 @@ SpriteManager::SpriteManager(){
 
 
 
-    // hud
+    // ui
     loadTexture("assets/ui/Hud.png");
     loadTexture("assets/ui/Heart.png");
     loadTexture("assets/ui/Empty_Heart.png");
+    loadTexture("assets/ui/menu_select.png");
+
+    // logo
+    loadTexture("assets/ui/Among.png");
+
 
 
     world = CameraObject::getInstance();
@@ -109,22 +118,36 @@ void SpriteManager::renderTexture(RenderData data){
     Vector2 calculatedWidth = {
         texture.width * data.scale, texture.height * data.scale
     };
+
+    Vector2 origin = {0,0};
     
     Vector2 pos = data.pos;
 
     if (!data.isAbsolute){
-        pos.x -= camerapos.x;
-        pos.y -= camerapos.y;
+        pos.x -= camerapos.x + shakeCameraAdder.x;
+        pos.y -= camerapos.y + shakeCameraAdder.y;
+        pos.x += (calculatedWidth.x / 2);
+        pos.y += (calculatedWidth.y / 2);
+
+    }else{
+        // width offset
+        pos.x -= (calculatedWidth.x / 2);
+        pos.y -= (calculatedWidth.y / 2);
     }
+    Color c = data.color;
+    c.r *= currentColorFade;
+    c.g *= currentColorFade;
+    c.b *= currentColorFade;
 
     DrawTexturePro(texture, 
         {(data.flipSprite ? texture.width : 0.0f) ,0.0f, (data.flipSprite ? -texture.width + 0.1f : (float)texture.width), (float)texture.height}, 
-        {pos.x + (calculatedWidth.x / 2), pos.y + (calculatedWidth.y / 2), calculatedWidth.x, calculatedWidth.y}, 
-        {calculatedWidth.x / 2,calculatedWidth.y /2}, data.rotation, data.color);
+        {pos.x, pos.y , calculatedWidth.x, calculatedWidth.y}, 
+        {calculatedWidth.x / 2,calculatedWidth.y /2}, data.rotation, c);
 }
 
 void SpriteManager::update(){
     camerapos = world->getCameraPos();
+    handleScreenShake();
 }
 
 void SpriteManager::beginDrawing(){
@@ -134,5 +157,38 @@ void SpriteManager::beginDrawing(){
 void SpriteManager::endDrawing(){
     EndDrawing();
 }
+
+
+float SpriteManager::getColorFade(){
+    return currentColorFade;
+}
+
+void SpriteManager::setColorFade(float value){
+    currentColorFade = value;
+}
+
+void SpriteManager::handleScreenShake(){
+    
+
+    if (screenShakeAmmount > 0){
+        screenShakeTimer++;
+        
+        shakeCameraAdder.x = std::cos(screenShakeTimer) * screenShakeAmmount;
+        shakeCameraAdder.y = std::sin(screenShakeTimer) * screenShakeAmmount;
+        
+        screenShakeAmmount -= screenShakeFallof;
+        if (screenShakeAmmount < 0) {
+            screenShakeAmmount = 0;
+            shakeCameraAdder = {0,0};
+
+        }
+    }
+
+}
+
+void SpriteManager::addScreenShake(float ammount){
+    screenShakeAmmount += ammount;
+}
+
 
 SpriteManager* SpriteManager::instance = 0;

@@ -1,17 +1,19 @@
 #include "MainMenu.h"
-#include "Gamestate.h"
+#include "GameStateManager.h"
+
+
+MainMenu::MainMenu(){}
 
 void MainMenu::init(){
-    buttons.push_back(Button{"Play", [](){}});
-    buttons.push_back(Button{"Exit", [](){}});
+    UIManager::getInstance()->addButton({"Play", [](){GameStateManager::getInstance()->transitionToState(state_game);}});
+    UIManager::getInstance()->addButton({"Exit", [](){GameStateManager::getInstance()->exitGame();}});
+
 }
 
 void MainMenu::update(){
-    for (int i = 0; i < buttons.size(); i++){
-        DrawText(buttons[i].text.c_str(), 200, 400 + i * 64, 4, WHITE);
-    }
+    UIManager::getInstance()->update();
 }
 
 void MainMenu::clear(){
-    buttons.clear();
+    UIManager::getInstance()->clear();
 }

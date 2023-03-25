@@ -27,7 +27,7 @@ void Fireball::update(){
     SpriteManager::getInstance()->drawTexture({"Fire_ball", pos, 
         2
         , rotation * RAD2DEG * (flipSprite? -1: 1) / 4
-        , WHITE, flipSprite, 2});
+        , WHITE, flipSprite, layer_projectiles});
 }
 
 void Fireball::onDestroy(){

@@ -4,6 +4,7 @@
 #include "../../GameObject.h"
 #include "../../../sprites/SpriteManager.h"
 #include "raylib.h"
+#include "../player/playerManager.h"
 
 class Enemy : public GameObject{
     protected:
