@@ -18,7 +18,7 @@ class GameObjectManager{
         void dispose();
         GameObject* findClosestEntityWithTag(ObjectIdentifier tag, float maxSearchDistance, GameObject* searchingObject);
         GameObject* findClosestEntityWithTag(ObjectIdentifier tag, float maxSearchDistance, Vector2 startingPos);
-
+        float getRotationTowarsObject(Vector2 origin, Vector2 target);
         int getObjectCountWithTag(ObjectIdentifier tag);
 };
 

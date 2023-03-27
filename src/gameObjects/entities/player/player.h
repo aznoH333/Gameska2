@@ -52,6 +52,7 @@ class Player : public GameObject{
         void movementInDirection(int key, float xMultiplier, float yMultiplier);
         void draw();
         void droneUpdate();
+        float getDroneRotation(Drone* drone, Vector2 pos);
     
     public:
         Player(Vector2 pos);

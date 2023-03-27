@@ -12,7 +12,6 @@ Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerF
     drones = std::vector<Drone*>();// TODO : upgrade system
     drones.push_back(new GunDrone());
     PlayerManager::getInstance()->registerPlayerObject(this);
-    //drones.push_back(new GunDrone());
 
 }
 
@@ -170,8 +169,13 @@ void Player::droneUpdate(){
         };
 
         d->update(dronePos);
+        // drone rotation
+        float rotation = getDroneRotation(d, dronePos);
         
-        spr->drawTexture({d->getSprite(), dronePos, 2 * lastDroneScale, 0, WHITE, d->getFlipSprite(), layer_projectiles});
+
+        // drawing
+        spr->drawTexture({d->getSprite(), dronePos, 2 * lastDroneScale, rotation, WHITE, d->getFlipSprite(), layer_projectiles});
+
 
     }
 
@@ -181,6 +185,24 @@ void Player::droneUpdate(){
         if (lastDroneScale > 1) lastDroneScale = 1;
     }
 }
+
+
+float Player::getDroneRotation(Drone* drone, Vector2 pos){
+    float rotation = 0;
+    if (drone->doesRotate()){
+        GameObject* possibleTarget = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, drone->getRange(), pos);
+        if (possibleTarget != nullptr){
+            rotation = GameObjectManager::getInstance()->getRotationTowarsObject(pos, possibleTarget->getPos()) * RAD2DEG;             
+        
+            
+            drone->setFlipSprite(possibleTarget->getPos().x < pos.x);
+            if (drone->getFlipSprite()) rotation -= 180;
+        }
+    }
+
+    return rotation;
+}
+
 
 void Player::takeDamage(int damage, GameObject *damageDealer, float direction){
     if (invulnarabilityTimer <= 0){

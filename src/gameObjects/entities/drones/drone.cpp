@@ -2,12 +2,14 @@
 #include <string>
 #include "../../GameObjectManager.h"
 
-Drone::Drone(std::string name, std::string sprite, int fireCooldown, float damage, int maxLevel){
+Drone::Drone(std::string name, std::string sprite, int fireCooldown, float damage, int maxLevel, bool rotates, float range){
     this->name = name;
     this->sprite = sprite;
     this->fireCooldown = fireCooldown;
     this->damage = damage;
     this->maxLevel = maxLevel;
+    this->rotates = rotates;
+    this->range = range;
 }
 
 std::string Drone::getName(){
@@ -24,7 +26,7 @@ void Drone::update(Vector2 position){
         coolDown = fireCooldown * fireRateUpgrade;
 
         GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, 200, position);
-        if (target) flipSprite = target->getPos().x < position.x;
+        if (!rotates && target) flipSprite = target->getPos().x < position.x;
         fire(position);
     }
     
@@ -63,4 +65,16 @@ bool Drone::getFlipSprite(){
 
 float Drone::getScreenSHake(){
     return damage * level * screenShakeMultiplier;
+}
+
+bool Drone::doesRotate(){
+    return rotates;
+}
+
+float Drone::getRange(){
+    return range;
+}
+
+void Drone::setFlipSprite(bool flip){
+    flipSprite = flip;
 }

@@ -80,7 +80,7 @@ GameObject* GameObjectManager::findClosestEntityWithTag(ObjectIdentifier tag, fl
 
     for (GameObject* g : objects){
         if (g->getObjectIdentifier() == tag){
-            float distance = std::sqrt(std::abs(g->getPos().x - startingPos.x) + std::abs(g->getPos().y - startingPos.y));
+            float distance = std::sqrt(std::abs(powf(g->getPos().x - startingPos.x, 2 )) + std::abs(powf(g->getPos().y - startingPos.y, 2.0f)));
 
             if (distance < distanceToOutput){
                 output = g;
@@ -101,6 +101,10 @@ int GameObjectManager::getObjectCountWithTag(ObjectIdentifier tag){
             output++;
     }
     return output;
+}
+
+float GameObjectManager::getRotationTowarsObject(Vector2 origin, Vector2 target){
+    return (std::atan2(target.x + 32 - (origin.x + 16), -(target.y  + 32 - (origin.y + 16)))) + (-90 * DEG2RAD);
 }
 
 GameObjectManager* GameObjectManager::instance = 0;
