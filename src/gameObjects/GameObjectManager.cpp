@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "raylib.h"
 #include <cmath>
+#include <iostream>
 
 
 GameObjectManager* GameObjectManager::getInstance(){
@@ -17,6 +18,7 @@ void GameObjectManager::update(){
         g->update();
         if (g->shouldDestroy()){
             g->onDestroy();
+            delete g;
             return true;
         }
         return false;
@@ -42,10 +44,7 @@ void GameObjectManager::update(){
 }
 
 void GameObjectManager::dispose(){
-    for (GameObject* g : objects){
-        g->onDestroy();
-        delete g;
-    }
+    clear();
     delete instance;
 }
 
@@ -106,5 +105,16 @@ int GameObjectManager::getObjectCountWithTag(ObjectIdentifier tag){
 float GameObjectManager::getRotationTowarsObject(Vector2 origin, Vector2 target){
     return (std::atan2(target.x + 32 - (origin.x + 16), -(target.y  + 32 - (origin.y + 16)))) + (-90 * DEG2RAD);
 }
+
+void GameObjectManager::clear(){
+    // destroy
+    objects.remove_if([](GameObject* g){
+        g->onDestroy();
+        delete g;
+        return true;
+    });
+    
+}
+
 
 GameObjectManager* GameObjectManager::instance = 0;

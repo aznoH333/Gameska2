@@ -8,6 +8,10 @@
 
 
 class MainMenu : public GameState{
+    private:
+        float backdrop_offset = 0;
+        const float backdrop_speed = 0.2f;
+
     public:
         MainMenu();
         void update();

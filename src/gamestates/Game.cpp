@@ -14,5 +14,6 @@ void Game::update(){
 }
 
 void Game::clear(){
-    // TODO reset
+    GameObjectManager::getInstance()->clear();
+    PlayerManager::getInstance()->removePlayer();
 }

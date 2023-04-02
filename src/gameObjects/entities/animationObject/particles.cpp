@@ -15,7 +15,7 @@ void Bubble::update(){
         if (scale < 1) scale += 0.1;
         
         pos.y -= speed;
-        pos.x += std::sin(t) * waveMultiplier;
+        pos.x += std::sin(t * wave_time_multiplier) * waveMultiplier;
         SpriteManager::getInstance()->drawTexture({"portal_particle_1", pos, scale * 2, rotation, WHITE, false, layer_priority});
 
     }else if (t < lifeTime + 20) {

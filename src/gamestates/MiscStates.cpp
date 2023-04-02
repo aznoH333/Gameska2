@@ -14,6 +14,11 @@ void Intro::update(){
     SpriteManager::getInstance()->drawTexture(RenderData{"Among", {logoX, logoY}, 4, 0, WHITE, false, layer_priority});
 }
 
+
+void Intro::clear(){
+    
+}
+
 void GameOver::init(){
     UIManager::getInstance()->addButton({"Retry", [](){GameStateManager::getInstance()->transitionToState(state_game);}});
     UIManager::getInstance()->addButton({"Menu", [](){GameStateManager::getInstance()->transitionToState(state_main_menu);}});

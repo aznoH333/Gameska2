@@ -22,6 +22,13 @@ enum DrawingLayers {
 };
 
 
+struct TextData{
+    std::string text;
+    float x;
+    float y;
+};
+
+
 struct RenderData{
     std::string texture;
     Vector2 pos;
@@ -39,12 +46,14 @@ class SpriteManager{
         static SpriteManager* instance;
         std::map<std::string, Texture2D> sprites;
         std::map<int, std::vector<RenderData>*> renderLayers;
+        std::vector<TextData> texts;
         CameraObject* world;
         
         Vector2 camerapos;
         Vector2 shakeCameraAdder = {0,0};
 
         float currentColorFade = 0;
+        Camera2D camera_object = {};
 
 
         // sreenshake stuff
@@ -57,6 +66,15 @@ class SpriteManager{
 
         void renderTexture(RenderData data);
         void handleScreenShake();
+
+
+        // text constants
+        const float fontsize = 60;
+        const float shadow_offset = 4.66;
+        
+
+
+
 
     
     public:
@@ -76,6 +94,12 @@ class SpriteManager{
 
         float getColorFade();
         void setColorFade(float value);
+
+        void drawText(std::string text, float x, float y);
+        void renderText();
+
+
+        void initCamera();
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "GameStateManager.h"
+#include "raylib.h"
 
 
 MainMenu::MainMenu(){}
@@ -11,6 +12,20 @@ void MainMenu::init(){
 }
 
 void MainMenu::update(){
+    // backdrop
+    backdrop_offset += backdrop_speed;
+
+    if (backdrop_offset > 128) backdrop_offset -= 128;
+    
+    
+    for (float x = 0; x <= 1280; x += 128){
+        for (float y = 0; y < 720; y += 128){
+            SpriteManager::getInstance()->drawTexture({"menu_backdrop", {x - backdrop_offset, y}, 2, 0, WHITE, false, layer_world, false});
+        }
+    }
+
+
+    // update
     UIManager::getInstance()->update();
 }
 

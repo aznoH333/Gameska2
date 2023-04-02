@@ -10,9 +10,9 @@
       "bin/main.o",
       "src/main.cpp"
     ],
-    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
-    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/main.cpp",
-    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/main.o"
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/main.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/main.o"
   },
   {
     "arguments": [
@@ -25,9 +25,9 @@
       "bin/gameObjects/GameObject.o",
       "src/gameObjects/GameObject.cpp"
     ],
-    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
-    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/gameObjects/GameObject.cpp",
-    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/gameObjects/GameObject.o"
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/GameObject.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/GameObject.o"
   },
   {
     "arguments": [
@@ -40,9 +40,129 @@
       "bin/gameObjects/GameObjectManager.o",
       "src/gameObjects/GameObjectManager.cpp"
     ],
-    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
-    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/gameObjects/GameObjectManager.cpp",
-    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/gameObjects/GameObjectManager.o"
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/GameObjectManager.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/GameObjectManager.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/animationObject/animationObject.o",
+      "src/gameObjects/entities/animationObject/animationObject.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/animationObject/animationObject.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/animationObject/animationObject.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/animationObject/particles.o",
+      "src/gameObjects/entities/animationObject/particles.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/animationObject/particles.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/animationObject/particles.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/drones/drone.o",
+      "src/gameObjects/entities/drones/drone.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/drones/drone.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/drones/drone.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/drones/drones.o",
+      "src/gameObjects/entities/drones/drones.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/drones/drones.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/drones/drones.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/enemies/enemy.o",
+      "src/gameObjects/entities/enemies/enemy.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/enemies/enemy.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/enemies/enemy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/enemies/fireBall.o",
+      "src/gameObjects/entities/enemies/fireBall.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/enemies/fireBall.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/enemies/fireBall.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/enemies/fireEnemy.o",
+      "src/gameObjects/entities/enemies/fireEnemy.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/enemies/fireEnemy.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/enemies/fireEnemy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/player/pickups.o",
+      "src/gameObjects/entities/player/pickups.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/player/pickups.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/player/pickups.o"
   },
   {
     "arguments": [
@@ -55,9 +175,144 @@
       "bin/gameObjects/entities/player/player.o",
       "src/gameObjects/entities/player/player.cpp"
     ],
-    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
-    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/gameObjects/entities/player/player.cpp",
-    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/gameObjects/entities/player/player.o"
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/player/player.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/player/player.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/player/playerManager.o",
+      "src/gameObjects/entities/player/playerManager.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/player/playerManager.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/player/playerManager.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/entities/projectiles/bulletProjectile.o",
+      "src/gameObjects/entities/projectiles/bulletProjectile.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/entities/projectiles/bulletProjectile.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/entities/projectiles/bulletProjectile.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/world/camera.o",
+      "src/gameObjects/world/camera.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/world/camera.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/world/camera.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gameObjects/world/world.o",
+      "src/gameObjects/world/world.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gameObjects/world/world.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gameObjects/world/world.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gamestates/Game.o",
+      "src/gamestates/Game.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gamestates/Game.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gamestates/Game.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gamestates/GameState.o",
+      "src/gamestates/GameState.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gamestates/GameState.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gamestates/GameState.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gamestates/GameStateManager.o",
+      "src/gamestates/GameStateManager.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gamestates/GameStateManager.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gamestates/GameStateManager.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gamestates/MainMenu.o",
+      "src/gamestates/MainMenu.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gamestates/MainMenu.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gamestates/MainMenu.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-I",
+      "include",
+      "-o",
+      "bin/gamestates/MiscStates.o",
+      "src/gamestates/MiscStates.cpp"
+    ],
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/gamestates/MiscStates.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/gamestates/MiscStates.o"
   },
   {
     "arguments": [
@@ -70,8 +325,8 @@
       "bin/sprites/SpriteManager.o",
       "src/sprites/SpriteManager.cpp"
     ],
-    "directory": "/home/aznoh/Documents/dev/cpp/Gameska2",
-    "file": "/home/aznoh/Documents/dev/cpp/Gameska2/src/sprites/SpriteManager.cpp",
-    "output": "/home/aznoh/Documents/dev/cpp/Gameska2/bin/sprites/SpriteManager.o"
+    "directory": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2",
+    "file": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/src/sprites/SpriteManager.cpp",
+    "output": "/mnt/sdb1/Dev/cpp/Gameska2/Gameska2/bin/sprites/SpriteManager.o"
   }
 ]

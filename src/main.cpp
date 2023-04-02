@@ -1,6 +1,8 @@
 #include <raylib-cpp.hpp>
+#include "gamestates/Gamestate.h"
 #include "raylib.h"
 #include "gamestates/GameStateManager.h"
+#include "sprites/SpriteManager.h"
 
 int main() {
     
@@ -15,6 +17,7 @@ int main() {
     SetTargetFPS(60);
     ToggleFullscreen();
 
+    SpriteManager::getInstance()->initCamera();
     GameStateManager* gameStateManager = GameStateManager::getInstance();
     while (!w.ShouldClose() && !gameStateManager->shouldGameEnd())
     {
@@ -24,13 +27,16 @@ int main() {
         SpriteManager::getInstance()->render();
     }
     
+    gameStateManager->dispose();
+    
     World::getInstance()->dispose();
     GameObjectManager::getInstance()->dispose();
     SpriteManager::getInstance()->dispose();
     CameraObject::getInstance()->dispose();
     PlayerManager::getInstance()->dispose();
-    gameStateManager->dispose();
-    delete gameStateManager;
+    UIManager::getInstance()->dispose();
+
+
 
 
     return 0;

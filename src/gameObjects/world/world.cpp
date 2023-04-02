@@ -29,13 +29,23 @@ World::World(){
 
     // set world events
 
-    events.push(WorldUpdateEvent{1, {40, 40, 40}, 4, 360, 1, 1});
-    events.push(WorldUpdateEvent{7, {40, 65, 40}, 10, 80, 1, 1});
-    events.push(WorldUpdateEvent{30, {40, 100, 40}, 15, 45, 1, 2});
-    events.push(WorldUpdateEvent{45, {40, 30, 80}, 20, 60, 1, 2});
-    events.push(WorldUpdateEvent{60, {100, 30, 40}, 40, 10, 1, 1}); // huge enemy wave
-    events.push(WorldUpdateEvent{65, {60, 40, 40}, 20, 80, 1, 2});
-    events.push(WorldUpdateEvent{90, {60, 60, 80}, 20, 40, 1, 2});
+    events.push({1, {40, 40, 40}, 4, 360, 1, 1});
+    events.push({7, {40, 65, 40}, 10, 80, 1, 1});
+    events.push({30, {40, 100, 40}, 15, 45, 1, 2});
+    events.push({45, {40, 30, 80}, 20, 60, 1, 2});
+    
+    // huge enemy wave
+    events.push({60, {100, 30, 40}, 40, 10, 1, 1}); 
+    events.push({65, {60, 40, 40}, 20, 80, 1, 2});
+    events.push({90, {60, 60, 80}, 20, 40, 1, 2});
+    
+    // stronger enemies
+    events.push({115, {80,20 , 20}, 30, 40, 1.2f, 1});
+    events.push({140, {255,20 , 20}, 30, 40, 1.2f, 2});
+    
+    // skull emoji
+    events.push({180, {0,0 , 0}, 30, 10, 6, 2});
+
 
 
 

@@ -13,6 +13,7 @@ class Intro : public GameState{
 
     public:
         void update();
+        void clear();
 };
 
 class GameOver : public GameState{

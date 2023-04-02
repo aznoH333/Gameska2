@@ -47,6 +47,8 @@ SpriteManager::SpriteManager(){
     loadTexture("assets/ui/Heart.png");
     loadTexture("assets/ui/Empty_Heart.png");
     loadTexture("assets/ui/menu_select.png");
+    loadTexture("assets/ui/menu_backdrop.png");
+
 
     // logo
     loadTexture("assets/ui/Among.png");
@@ -57,6 +59,15 @@ SpriteManager::SpriteManager(){
 
 
     world = CameraObject::getInstance();
+ 
+}
+
+void SpriteManager::initCamera(){
+    // camera 
+    camera_object.target = {0,0};
+    camera_object.offset = {0,0};
+    camera_object.zoom = GetMonitorWidth(GetCurrentMonitor()) / 1280.0;
+    camera_object.rotation = 0;
 }
 
 SpriteManager* SpriteManager::getInstance(){
@@ -113,6 +124,8 @@ void SpriteManager::render(){
         layer.second->clear();
     }
     
+    renderText();
+
     endDrawing();
 }
 
@@ -156,9 +169,11 @@ void SpriteManager::update(){
 
 void SpriteManager::beginDrawing(){
     BeginDrawing();
+    BeginMode2D(camera_object);
 }
 
 void SpriteManager::endDrawing(){
+    EndMode2D();
     EndDrawing();
 }
 
@@ -192,6 +207,36 @@ void SpriteManager::handleScreenShake(){
 
 void SpriteManager::addScreenShake(float ammount){
     screenShakeAmmount += ammount;
+}
+
+
+void SpriteManager::drawText(std::string text, float x, float y){
+    
+    texts.push_back(TextData{text, x, y});
+    
+    
+}
+
+
+void SpriteManager::renderText(){
+    for (TextData text: texts){
+    
+        Color primary = WHITE;
+        Color secondary = DARKGRAY;
+
+        primary.r *= currentColorFade;
+        primary.g *= currentColorFade;
+        primary.b *= currentColorFade;
+        
+        secondary.r *= currentColorFade;
+        secondary.g *= currentColorFade;
+        secondary.b *= currentColorFade;
+
+        DrawText(text.text.c_str(), text.x + shadow_offset, text.y + shadow_offset, fontsize, secondary);
+        DrawText(text.text.c_str(), text.x, text.y, fontsize, primary);
+    }
+
+    texts.clear();
 }
 
 

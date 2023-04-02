@@ -42,6 +42,7 @@ class Player : public GameObject{
         const float droneDistance = 48.52f;
         float lastDroneScale = 0.1;
         const float droneScaleSpeed = 0.05;
+        const float drone_rotation_finder_bonus = 75;
 
         // death related stuff
         int deathTimer = 20;

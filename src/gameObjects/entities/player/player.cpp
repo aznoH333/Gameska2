@@ -165,7 +165,7 @@ void Player::droneUpdate(){
 float Player::getDroneRotation(Drone* drone, Vector2 pos){
     float rotation = 0;
     if (drone->doesRotate()){
-        GameObject* possibleTarget = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, drone->getRange(), pos);
+        GameObject* possibleTarget = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, drone->getRange() + drone_rotation_finder_bonus, pos);
         if (possibleTarget != nullptr){
             rotation = GameObjectManager::getInstance()->getRotationTowarsObject(pos, possibleTarget->getPos()) * RAD2DEG;             
         

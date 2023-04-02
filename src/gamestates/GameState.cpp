@@ -8,7 +8,7 @@ void GameState::clear(){}
 
 void UIManager::update(){
     for (int i = 0; i < buttons.size(); i++){
-        drawText(buttons[i].text, button_x_pos, button_y_pos + i * button_offset);
+        SpriteManager::getInstance()->drawText(buttons[i].text, button_x_pos, button_y_pos + i * button_offset);
 
         if (currentlySelectedButton == i){
             SpriteManager::getInstance()->drawTexture(RenderData{"menu_select", {button_x_pos + menu_select_icon_offset, button_y_pos + i * button_offset + menu_select_icon_offset_y}, 4, 0, WHITE, false, layer_priority, true});
@@ -52,20 +52,3 @@ void UIManager::dispose(){
     delete instance;
 }
 
-void UIManager::drawText(std::string text, float x, float y){
-    float colorValue = SpriteManager::getInstance()->getColorFade();
-    
-    Color primary = WHITE;
-    Color secondary = DARKGRAY;
-
-    primary.r *= colorValue;
-    primary.g *= colorValue;
-    primary.b *= colorValue;
-    
-    secondary.r *= colorValue;
-    secondary.g *= colorValue;
-    secondary.b *= colorValue;
-
-    DrawText(text.c_str(), x + shadow_offset, y + shadow_offset, fontsize, secondary);
-    DrawText(text.c_str(), x, y, fontsize, primary);
-}
