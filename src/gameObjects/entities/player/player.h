@@ -1,7 +1,6 @@
 #ifndef PLAYER 
 #define PLAYER
 
-
 #include "../../GameObject.h"
 #include "../../../sprites/SpriteManager.h"
 #include <raylib-cpp.hpp>
@@ -10,6 +9,7 @@
 #include "../../world/camera.h"
 #include "raylib.h"
 #include "../drones/drone.h"
+#include "../animationObject/particles.h"
 
 class Player : public GameObject{
     private:
@@ -43,6 +43,13 @@ class Player : public GameObject{
         float lastDroneScale = 0.1;
         const float droneScaleSpeed = 0.05;
 
+        // death related stuff
+        int deathTimer = 20;
+        const int deathFrameLength = 8;
+        const int lastDeathFrame = 10;
+        int currentDeathFrame = 1;
+        int deathFrameTimer = deathFrameLength;
+
         
 
         std::vector<Drone*> drones;
@@ -53,6 +60,8 @@ class Player : public GameObject{
         void draw();
         void droneUpdate();
         float getDroneRotation(Drone* drone, Vector2 pos);
+        void life();
+        void death();
     
     public:
         Player(Vector2 pos);

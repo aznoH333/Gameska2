@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 
+
 SpriteManager::SpriteManager(){
     loadTexture("assets/tiles/bricks.png");
     loadTexture("assets/tiles/missing.png");
@@ -50,6 +51,9 @@ SpriteManager::SpriteManager(){
     // logo
     loadTexture("assets/ui/Among.png");
 
+    // portal effects
+    loadTextures("assets/entities/portal/portal_", ".png" , 1, 10);
+    loadTextures("assets/entities/portal/portal_particle_", ".png", 1, 2);
 
 
     world = CameraObject::getInstance();

@@ -5,6 +5,8 @@
 #include "../../world/world.h"
 #include "../drones/drones.h"
 #include "playerManager.h"
+#include "../../../gamestates/GameStateManager.h"
+
 
 Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag, 5){
     spr = SpriteManager::getInstance();
@@ -16,46 +18,19 @@ Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerF
 }
 
 void Player::update(){
-    // movement
-    if (damageStunTimer == 0) handleMovement();
-    else damageStunTimer--;
     
-    
-    // wall collisions
-    if (pos.x + 28 + velocity.x > WORLD::worldWidth) {
-        velocity.x = 0;
-        pos.x = WORLD::worldWidth - 28;
+    if (health > 0){
+        life();
+    }else {
+        death();
     }
 
-    if (pos.x + velocity.x < -WORLD::worldWidth + 64.0f) {
-        velocity.x = 0;
-        pos.x = -WORLD::worldWidth + 64;
-    }
+    camera->setCameraPos({pos.x + (velocity.x * cameraDistanceMultiplier) - 633, pos.y + (velocity.y * cameraDistanceMultiplier) - 348});
 
-    if (pos.y + velocity.y < -WORLD::worldHeight - 46 + 64) {
-        velocity.y = 0;
-        pos.y = -WORLD::worldHeight - 46 + 64;
-    }
 
-    if (pos.y + velocity.y > WORLD::worldHeight){
-        velocity.y = 0;
-        pos.y = WORLD::worldHeight;
-    }
     // values
     pos.x += velocity.x;
     pos.y += velocity.y;
-
-    // update drones
-    droneUpdate();
-
-    
-    camera->setCameraPos({pos.x + (velocity.x * cameraDistanceMultiplier) - 633, pos.y + (velocity.y * cameraDistanceMultiplier) - 348});
-
-    //draw
-    if (invulnarabilityTimer % (10) < 7)
-        draw();
-
-    if (invulnarabilityTimer > 0) invulnarabilityTimer--;
 }
 
 void Player::onDestroy(){
@@ -214,4 +189,86 @@ void Player::takeDamage(int damage, GameObject *damageDealer, float direction){
 void Player::addDrone(Drone* drone){
     drones.push_back(drone);
     lastDroneScale = 0;
+}
+
+
+void Player::life(){
+    // movement
+    if (damageStunTimer == 0) handleMovement();
+    else damageStunTimer--;
+    
+    
+    // wall collisions
+    if (pos.x + 28 + velocity.x > WORLD::worldWidth) {
+        velocity.x = 0;
+        pos.x = WORLD::worldWidth - 28;
+    }
+
+    if (pos.x + velocity.x < -WORLD::worldWidth + 64.0f) {
+        velocity.x = 0;
+        pos.x = -WORLD::worldWidth + 64;
+    }
+
+    if (pos.y + velocity.y < -WORLD::worldHeight - 46 + 64) {
+        velocity.y = 0;
+        pos.y = -WORLD::worldHeight - 46 + 64;
+    }
+
+    if (pos.y + velocity.y > WORLD::worldHeight){
+        velocity.y = 0;
+        pos.y = WORLD::worldHeight;
+    }
+    
+
+    // update drones
+    droneUpdate();
+
+    
+
+    //draw
+    if (invulnarabilityTimer % (10) < 7)
+        draw();
+
+    if (invulnarabilityTimer > 0) invulnarabilityTimer--;
+}
+
+void Player::death(){
+    
+    // slow down
+    if (std::abs(velocity.x) > speed)
+        velocity.x -= std::copysign( speed, velocity.x);
+    else
+        velocity.x = 0;
+
+    if (std::abs(velocity.y) > speed)
+        velocity.y -= std::copysign( speed, velocity.y);
+    else
+        velocity.y = 0;
+
+
+    // death animation
+    if (deathTimer > 0){
+        deathTimer--;
+        spr->drawTexture({"player_1", pos, 2, 0, WHITE, flipSprite, layer_priority});
+    }else if (currentDeathFrame <= lastDeathFrame){
+        deathFrameTimer--;
+
+        if (deathFrameTimer == 0){
+            deathFrameTimer = deathFrameLength;
+            currentDeathFrame++;
+
+
+        }
+        //particles
+        if (deathFrameTimer % 3 == 0){
+            GameObjectManager::getInstance()->addGameObject(new Bubble(
+                {pos.x + GetRandomValue(0, size.x), pos.y + size.y + GetRandomValue(-8, 8)}));
+        }
+
+
+        spr->drawTexture({"portal_" + std::to_string(currentDeathFrame), pos, 2, 0, WHITE, flipSprite, layer_priority});
+
+    }else {
+        GameStateManager::getInstance()->transitionToState(state_game_over);
+    }
 }
