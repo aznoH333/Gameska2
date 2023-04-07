@@ -8,14 +8,19 @@ int main() {
     
     // Initialization
     const int screenWidth = 1280;
-    const int screenHeight = 720;
+    const int screenHeight = 768;
 
     raylib::Window w(screenWidth, screenHeight, "Gameska");
+    
+    
+    Image window_icon = LoadImage("assets/ui/menu_select.png");
+    SetWindowIcon(window_icon);
     
     
     
     SetTargetFPS(60);
     ToggleFullscreen();
+    SetExitKey(KEY_NULL);
 
     SpriteManager::getInstance()->initCamera();
     GameStateManager* gameStateManager = GameStateManager::getInstance();

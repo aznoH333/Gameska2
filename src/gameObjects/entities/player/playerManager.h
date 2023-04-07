@@ -5,7 +5,20 @@
 #include "player.h"
 #include "../../GameObjectManager.h"
 #include "pickups.h"
-#include "../drones/drones.h"
+
+
+
+enum Upgrade_action{
+
+};
+
+
+class Possible_upgrade{
+    private:
+        std::string name;
+
+};
+
 
 class PlayerManager{
     private:
@@ -29,12 +42,14 @@ class PlayerManager{
         int upgradeCount = 0;
         int nextUpgradeCount = 5;
         int killCounter = 0;
+        int unselected_upgrade_count = 0;
 
         
         
         PlayerManager();
 
         void handleUI();
+        void handle_upgrade_selection();
 
 
     public:

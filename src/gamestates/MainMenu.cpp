@@ -24,6 +24,10 @@ void MainMenu::update(){
         }
     }
 
+    // exit window
+    if (IsKeyPressed(KEY_ESCAPE)){
+        GameStateManager::getInstance()->exitGame();
+    }
 
     // update
     UIManager::getInstance()->update();

@@ -8,6 +8,8 @@
 #include "../gameObjects/world/camera.h"
 #include "../gameObjects/entities/player/playerManager.h"
 #include "../gameObjects/world/world.h"
+#include "../gameObjects/world/camera.h"
+
 
 
 class Game : public GameState{

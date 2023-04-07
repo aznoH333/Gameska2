@@ -11,6 +11,13 @@
 #include "../drones/drone.h"
 #include "../animationObject/particles.h"
 
+
+enum Drone_type{
+    type_gun = 0,
+    type_shotgun = 1
+};
+
+
 class Player : public GameObject{
     private:
         const int maxAnimationFrame = 9;
@@ -72,9 +79,12 @@ class Player : public GameObject{
         void onCollide(GameObject* other);
         void onDamage(int damage, GameObject* damageDealer, float direction);
         void takeDamage(int damage, GameObject* damageDealer, float direction);
-        void addDrone(Drone* d);
+        void addDrone(Drone_type drone_type);
 
 };
+
+
+
 
 
 #endif

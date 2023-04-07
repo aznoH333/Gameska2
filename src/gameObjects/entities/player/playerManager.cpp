@@ -15,6 +15,7 @@ PlayerManager::PlayerManager(){};
 
 void PlayerManager::update(){
     handleUI();
+    handle_upgrade_selection();
 }
 
 
@@ -79,10 +80,20 @@ void PlayerManager::confirmKill(Vector2 pos){
 
 
 void PlayerManager::touchedUpgradeBox(){
-    if (GetRandomValue(0, 1) > 0)
-        playerObject->addDrone(new GunDrone()); // TODO choose drones or upgrades
-    else
-        playerObject->addDrone(new ShotGunDrone());
+    unselected_upgrade_count++;
+}
+
+
+void PlayerManager::handle_upgrade_selection(){
+    if (unselected_upgrade_count > 0){
+        
+        if (IsKeyPressed(KEY_KP_1) || IsKeyPressed(KEY_ONE)){
+            playerObject->addDrone(type_gun);
+        }else if (IsKeyPressed(KEY_TWO)) {
+            playerObject->addDrone(type_shotgun);
+        }
+        unselected_upgrade_count--;
+    }
 }
 
 PlayerManager* PlayerManager::instance = 0;

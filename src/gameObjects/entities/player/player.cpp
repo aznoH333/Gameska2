@@ -186,7 +186,19 @@ void Player::takeDamage(int damage, GameObject *damageDealer, float direction){
     }
 }
 
-void Player::addDrone(Drone* drone){
+void Player::addDrone(Drone_type drone_type){
+    Drone* drone;
+
+    switch (drone_type) {
+        default:
+        case type_gun:
+            drone = new GunDrone();
+            break;
+        case type_shotgun:
+            drone = new ShotGunDrone();
+            break;
+    }
+    
     drones.push_back(drone);
     lastDroneScale = 0;
 }
