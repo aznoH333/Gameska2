@@ -16,6 +16,7 @@ class CameraObject{
 
     public:
         void setCameraPos(Vector2 pos);
+        void teleportCamera(Vector2 pos);
         Vector2 getCameraPos();
         void update();
         static CameraObject* getInstance();

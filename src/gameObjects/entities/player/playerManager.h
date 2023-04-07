@@ -5,19 +5,25 @@
 #include "player.h"
 #include "../../GameObjectManager.h"
 #include "pickups.h"
+#include "raylib.h"
 
 
 
 enum Upgrade_action{
+    action_replace,
+    action_upgrade_damage,
+    action_upgrade_fire_rate,
+    action_upgrade_level,
+    action_add_drone
+};
 
+struct Drone_upgrade{
+    Upgrade_action action;
+    int action_index;
+    Drone_type type;
 };
 
 
-class Possible_upgrade{
-    private:
-        std::string name;
-
-};
 
 
 class PlayerManager{
@@ -42,14 +48,20 @@ class PlayerManager{
         int upgradeCount = 0;
         int nextUpgradeCount = 5;
         int killCounter = 0;
-        int unselected_upgrade_count = 0;
+        int unselected_upgrade_count = 100;
+        int drone_count = 1;
+
+        // upgrade choice stuff
+        std::vector<Drone_upgrade> upgrades;
 
         
         
         PlayerManager();
-
+        void generate_upgrades();
         void handleUI();
         void handle_upgrade_selection();
+        Upgrade_action choose_random_upgrade(Drone* drone);
+        void handle_upgrade_action(KeyboardKey key, int upgrade_slot);
 
 
     public:

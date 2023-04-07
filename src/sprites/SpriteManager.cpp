@@ -1,4 +1,5 @@
 #include "SpriteManager.h"
+#include "Window.hpp"
 #include "raylib.h"
 #include <cmath>
 #include <string>
@@ -66,10 +67,8 @@ void SpriteManager::initCamera(){
     // camera 
     camera_object.target = {0,0};
     camera_object.offset = {0,0};
-    camera_object.zoom = GetMonitorWidth(GetCurrentMonitor()) / 1366.0f;
-    std::cout << GetMonitorWidth(GetCurrentMonitor()) << std::endl;
-    std::cout << camera_object.zoom << std::endl;
-
+    SetWindowSize(1280, 720);
+    camera_object.zoom = GetMonitorWidth(GetCurrentMonitor()) / (float) GetScreenWidth();
     camera_object.rotation = 0;
 }
 

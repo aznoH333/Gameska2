@@ -24,11 +24,13 @@ World::World(){
     objMan = GameObjectManager::getInstance();
 
     //changeColor({60, 40, 99});
+    loadEvents();
+}
 
-
+void World::loadEvents(){
+    events = {};
 
     // set world events
-
     events.push({1, {40, 40, 40}, 4, 360, 1, 1});
     events.push({7, {40, 65, 40}, 10, 80, 1, 1});
     events.push({30, {40, 100, 40}, 15, 45, 1, 2});
@@ -45,13 +47,6 @@ World::World(){
     
     // skull emoji
     events.push({180, {0,0 , 0}, 30, 10, 6, 2});
-
-
-
-
-
-
-
 }
 
 void World::update(){
@@ -167,6 +162,18 @@ void World::handleEnemySpawning(){
         objMan->addGameObject(enemy);
     }
 
+}
+
+void World::reset(){
+    spawnTimer = 120;
+    nextEnemySpawn = 120;
+    gameTimer = 0;
+    desiredEnemyCount = 0;
+    healthMultiplier = 1;
+    enemyTier = 1;
+    worldColor = {0, 0, 0 ,255};
+    desiredColor = worldColor;
+    loadEvents();
 }
 
 World* World::instance = 0;

@@ -19,7 +19,9 @@ void Game::update(){
 }
 
 void Game::clear(){
+    CameraObject::getInstance()->teleportCamera({0,0});
+    World::getInstance()->reset();
+    PlayerManager::getInstance()->reset();
     GameObjectManager::getInstance()->clear();
     PlayerManager::getInstance()->removePlayer();
-    CameraObject::getInstance()->setCameraPos({0,0});
 }

@@ -28,4 +28,9 @@ void CameraObject::update(){
     
 }
 
+void CameraObject::teleportCamera(Vector2 pos){
+    desiredCameraPos = pos;
+    CameraObjectPos = pos;
+}
+
 CameraObject* CameraObject::instance = 0;

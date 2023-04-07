@@ -284,3 +284,7 @@ void Player::death(){
         GameStateManager::getInstance()->transitionToState(state_game_over);
     }
 }
+
+std::vector<Drone*>* Player::get_drones(){
+    return &drones;
+}

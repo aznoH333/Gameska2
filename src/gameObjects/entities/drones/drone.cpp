@@ -2,7 +2,7 @@
 #include <string>
 #include "../../GameObjectManager.h"
 
-Drone::Drone(std::string name, std::string sprite, int fireCooldown, float damage, int maxLevel, bool rotates, float range){
+Drone::Drone(std::string name, std::string sprite, float fireCooldown, float damage, int maxLevel, bool rotates, float range){
     this->name = name;
     this->sprite = sprite;
     this->fireCooldown = fireCooldown;
@@ -64,7 +64,7 @@ bool Drone::getFlipSprite(){
 }
 
 float Drone::getScreenSHake(){
-    return damage * level * screenShakeMultiplier;
+    return damage * screenShakeMultiplier;
 }
 
 bool Drone::doesRotate(){
@@ -77,4 +77,8 @@ float Drone::getRange(){
 
 void Drone::setFlipSprite(bool flip){
     flipSprite = flip;
+}
+
+bool Drone::can_be_upgraded(){
+    return canUpgradeDamage() || canUpgradeFireRate() || canUpgradeLevel();
 }

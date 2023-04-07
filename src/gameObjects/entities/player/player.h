@@ -80,6 +80,7 @@ class Player : public GameObject{
         void onDamage(int damage, GameObject* damageDealer, float direction);
         void takeDamage(int damage, GameObject* damageDealer, float direction);
         void addDrone(Drone_type drone_type);
+        std::vector<Drone*>* get_drones(); 
 
 };
 

@@ -8,7 +8,7 @@ class Drone{
     private:
         std::string name;
         std::string sprite;
-        int fireCooldown;
+        float fireCooldown;
         int maxLevel;
         
         // upgrades
@@ -16,11 +16,11 @@ class Drone{
         float damageUpgrade = 1;
 
         //values
-        int coolDown = 0;
+        float coolDown = 0;
 
         // constants
-        const float damageUpgradeBonus = 0.07f;
-        const float fireRateUpgradeBonus = 0.07f;
+        const float damageUpgradeBonus = 0.1f;
+        const float fireRateUpgradeBonus = 0.1f;//0.07f;
         const float maxDamageBonus = 3;
         const float maxFireRateBonus = 0.5f;
         const float screenShakeMultiplier = 0.5f;
@@ -38,7 +38,7 @@ class Drone{
 
 
     public:
-        Drone(std::string name, std::string sprite, int fireCooldown, float damage, int maxLevel, bool rotates, float range);
+        Drone(std::string name, std::string sprite, float fireCooldown, float damage, int maxLevel, bool rotates, float range);
 
         std::string getName();
         std::string getSprite();
@@ -56,6 +56,8 @@ class Drone{
         bool getFlipSprite();
         bool doesRotate();
         void setFlipSprite(bool flip);
+
+        bool can_be_upgraded();
 
         float getRange();
 };

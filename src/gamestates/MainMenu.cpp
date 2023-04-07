@@ -15,12 +15,14 @@ void MainMenu::update(){
     // backdrop
     backdrop_offset += backdrop_speed;
 
+    CameraObject::getInstance()->update();
+
     if (backdrop_offset > 128) backdrop_offset -= 128;
     
     
     for (float x = 0; x <= 1280; x += 128){
         for (float y = 0; y < 720; y += 128){
-            SpriteManager::getInstance()->drawTexture({"menu_backdrop", {x - backdrop_offset, y}, 2, 0, WHITE, false, layer_world, false});
+            SpriteManager::getInstance()->drawTexture({"menu_backdrop", {x - backdrop_offset + 128, y + 128}, 2, 0, WHITE, false, layer_world, true});
         }
     }
 

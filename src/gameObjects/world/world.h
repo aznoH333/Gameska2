@@ -58,11 +58,13 @@ class World{
         void updateColorValue(unsigned char* currentColorValue, unsigned char*  desiredColorValue);
         void handleWorldEvents();
         void handleEnemySpawning();
+        void loadEvents();
 
     public:
         World();
         static World* getInstance();
         void update();
+        void reset();
         void dispose();        
 };
 
