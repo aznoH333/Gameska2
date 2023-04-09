@@ -4,17 +4,22 @@
 #include "../../world/world.h"
 
 
-Bullet::Bullet(Vector2 pos, float rotation, float damage, float speed) : GameObject(pos, {16,16}, ObjectIdentifier::PlayerProjectileFlag, 1){
+Bullet::Bullet(Vector2 pos, float rotation, float damage, float speed, projectile_look appearance) : GameObject(pos, {16,16}, ObjectIdentifier::PlayerProjectileFlag, 1){
     this->rotation = rotation;
     this->damage = damage;
     this->speed = speed;
+    this->look = appearance;
 }
 
 void Bullet::update(){
     pos.x += std::cos(rotation) * speed;
     pos.y += std::sin(rotation) * speed;
 
-    SpriteManager::getInstance()->drawTexture({"bullet", pos, 2, rotation * RAD2DEG, WHITE, false, layer_projectiles});
+    std::string sprite = "bullet";
+    if (look == projectile_laser) sprite = "laser";
+
+
+    SpriteManager::getInstance()->drawTexture({sprite, pos, 2, rotation * RAD2DEG, WHITE, false, layer_projectiles});
 
 
     // projectiles wont be deleted by walls for the first 30 frames

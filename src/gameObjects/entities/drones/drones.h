@@ -5,16 +5,29 @@
 #include "raylib.h"
 #include "../../../sprites/SpriteManager.h"
 
-class GunDrone : public Drone{
+class Gun_drone : public Drone{
     public:
-        GunDrone();
+        Gun_drone();
         void fire(Vector2 pos);
 };
 
 
-class ShotGunDrone : public Drone{
+class Shotgun_drone : public Drone{
     public:
-        ShotGunDrone();
+        Shotgun_drone();
+        void fire(Vector2 pos);
+};
+
+
+class Machinegun_drone: public Drone{
+    public:
+        Machinegun_drone();
+        void fire(Vector2 pos);
+};
+
+class Laser_drone: public Drone{
+    public:
+        Laser_drone();
         void fire(Vector2 pos);
 };
 

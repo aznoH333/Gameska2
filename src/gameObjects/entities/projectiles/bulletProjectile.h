@@ -5,6 +5,12 @@
 #include "raylib.h"
 
 
+enum projectile_look{
+    projectile_bullet,
+    projectile_laser,
+};
+
+
 class Bullet : public GameObject{
     
     private:
@@ -12,9 +18,10 @@ class Bullet : public GameObject{
         float damage;
         float speed;
         int spawnTimer = 30;
+        projectile_look look;
     
     public:
-        Bullet(Vector2 pos, float rotation, float damage, float speed);
+        Bullet(Vector2 pos, float rotation, float damage, float speed, projectile_look appearance);
         void update();
         void onCollide(GameObject* other);
         void onDestroy();

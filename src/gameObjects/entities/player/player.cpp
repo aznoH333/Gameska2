@@ -11,8 +11,15 @@
 Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerFlag, 5){
     spr = SpriteManager::getInstance();
     camera = CameraObject::getInstance();
-    drones = std::vector<Drone*>();// TODO : upgrade system
-    drones.push_back(new GunDrone());
+    drones = std::vector<Drone*>();
+    
+    
+    // add initial drone
+    drones.push_back(new Gun_drone());
+    //drones.push_back(new Machinegun_drone());
+    //drones.push_back(new Laser_drone());
+    
+    
     PlayerManager::getInstance()->registerPlayerObject(this);
 
 }
@@ -192,10 +199,16 @@ void Player::addDrone(Drone_type drone_type){
     switch (drone_type) {
         default:
         case type_gun:
-            drone = new GunDrone();
+            drone = new Gun_drone();
             break;
         case type_shotgun:
-            drone = new ShotGunDrone();
+            drone = new Shotgun_drone();
+            break;
+        case type_machinegun:
+            drone = new Machinegun_drone();
+            break;
+        case type_laser:
+            drone = new Laser_drone();
             break;
     }
     

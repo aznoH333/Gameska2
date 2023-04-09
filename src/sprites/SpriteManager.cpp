@@ -24,8 +24,10 @@ SpriteManager::SpriteManager(){
 
     loadTexture("assets/tiles/floor_tile.png");
     loadTexture("assets/tiles/brick_wall.png");
+    
     // projectiles
     loadTexture("assets/entities/projectiles/bullet.png");
+    loadTexture("assets/entities/projectiles/laser.png");
     loadTexture("assets/entities/projectiles/rocket.png");
 
 

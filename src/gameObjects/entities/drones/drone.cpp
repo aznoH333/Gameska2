@@ -23,7 +23,7 @@ std::string Drone::getSprite(){
 void Drone::update(Vector2 position){
     if (coolDown > 0) coolDown--;
     else{
-        coolDown = fireCooldown * fireRateUpgrade;
+        coolDown = fireCooldown * firerate_upgrade;
 
         GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, 200, position);
         if (!rotates && target) flipSprite = target->getPos().x < position.x;
@@ -36,11 +36,11 @@ void Drone::update(Vector2 position){
 void Drone::fire(Vector2 position){}
 
 void Drone::upgradeDamage(){
-    damageUpgrade += damageUpgradeBonus;
+    damage_upgrade += damageUpgradeBonus;
 }
 
 void Drone::upgradeFireRate(){
-    fireRateUpgrade -= fireRateUpgradeBonus;
+    firerate_upgrade -= fireRateUpgradeBonus;
 }
 
 void Drone::upgradeLevel(){
@@ -48,11 +48,11 @@ void Drone::upgradeLevel(){
 }
 
 bool Drone::canUpgradeDamage(){
-    return damageUpgrade < maxDamageBonus;
+    return damage_upgrade < maxDamageBonus;
 }
 
 bool Drone::canUpgradeFireRate(){
-    return fireRateUpgrade > maxFireRateBonus;
+    return firerate_upgrade > maxFireRateBonus;
 }
 
 bool Drone::canUpgradeLevel(){
@@ -81,4 +81,8 @@ void Drone::setFlipSprite(bool flip){
 
 bool Drone::can_be_upgraded(){
     return canUpgradeDamage() || canUpgradeFireRate() || canUpgradeLevel();
+}
+
+float Drone::get_damage(){
+    return damage * damage_upgrade;
 }
