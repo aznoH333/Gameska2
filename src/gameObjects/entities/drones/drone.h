@@ -4,9 +4,22 @@
 #include "raylib.h"
 #include <string>
 #include <raylib-cpp.hpp>
+
+
+
+enum Drone_type{ 
+    type_gun = 1,
+    type_laser = 2,
+    type_beam = 3,
+    type_shotgun = 4,
+    type_rocket = 5,
+    type_machinegun = 6
+};
+
+
 class Drone{
     private:
-        std::string name;
+        Drone_type type;
         std::string sprite;
         float fireCooldown;
         int maxLevel;
@@ -38,9 +51,9 @@ class Drone{
 
 
     public:
-        Drone(std::string name, std::string sprite, float fireCooldown, float damage, int maxLevel, bool rotates, float range);
+        Drone(Drone_type type, std::string sprite, float fireCooldown, float damage, int maxLevel, bool rotates, float range);
 
-        std::string getName();
+        Drone_type get_type();
         std::string getSprite();
         void update(Vector2 position);
         virtual void fire(Vector2 position);

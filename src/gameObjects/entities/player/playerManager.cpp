@@ -19,6 +19,9 @@ PlayerManager::PlayerManager(){
 void PlayerManager::update(){
     handleUI();
     handle_upgrade_selection();
+
+    display_upgrade_selection();
+    
 }
 
 
@@ -86,7 +89,7 @@ void PlayerManager::confirmKill(Vector2 pos){
 
 
 void PlayerManager::handle_upgrade_action(KeyboardKey key, int upgrade_slot){
-    Drone_upgrade upgrade = upgrades[upgrade_slot];
+    Upgrade upgrade = upgrades[upgrade_slot];
     
     if (IsKeyPressed(key) && upgradeCount > 0){
 
@@ -134,7 +137,6 @@ void PlayerManager::touchedUpgradeBox(){
 
 void PlayerManager::handle_upgrade_selection(){
     if (unselected_upgrade_count > 0){
-        SpriteManager::getInstance()->drawText("Among " + std::to_string(unselected_upgrade_count), 20, 20);
 
         handle_upgrade_action(KEY_KP_1, 0);
         handle_upgrade_action(KEY_KP_2, 1);
@@ -154,17 +156,17 @@ void PlayerManager::generate_upgrades(){
         
         if (i >= drone_count){
             // add drone action
-            upgrades.push_back({action_add_drone, i, type_gun}); // TODO randomize type selection
+            upgrades.push_back({action_add_drone, i, static_cast<Drone_type>(GetRandomValue(1, 6))}); // jdu se hodit ze schodu
         
         }else if (current_drone != nullptr && GetRandomValue(0, 2) >= 1 && current_drone->can_be_upgraded()){
             
             // upgrade drone
-            upgrades.push_back({choose_random_upgrade(current_drone), i, type_gun});
+            upgrades.push_back({choose_random_upgrade(current_drone), i, (*playerObject->get_drones())[i]->get_type()});
         
         } else {
             
             // replace drone
-            upgrades.push_back({action_replace, i, type_gun}); // TODO randomize type selection
+            upgrades.push_back({action_replace, i, static_cast<Drone_type>(GetRandomValue(1, 6))}); // TODO randomize type selection
             
 
         }
@@ -182,6 +184,50 @@ Upgrade_action PlayerManager::choose_random_upgrade(Drone* drone){
     if (drone->canUpgradeLevel())       temp.push_back(action_upgrade_level);
 
     return temp[GetRandomValue(0, temp.size()-1)];
+}
+
+
+void PlayerManager::display_upgrade_selection(){
+    
+    // handle hud movement
+    if (unselected_upgrade_count > 0 && selection_y < selection_visible){
+        selection_y += selection_speed;
+        if (selection_y > selection_visible) selection_y = selection_visible;
+    
+    }else if (unselected_upgrade_count == 0 && selection_y > selection_hidden){
+        selection_y -= selection_speed;
+        if (selection_y < selection_hidden) selection_y = selection_hidden;
+
+    }
+
+
+    if (selection_y > selection_hidden){
+        for (int i = 0; i < upgrades.size(); i++){
+            Upgrade upgrade = upgrades[i];
+
+
+            // draw background box
+            SpriteManager::getInstance()->drawTexture({"drone_upgrade_icons_1", 
+            {selection_x + (i * selection_gap), selection_y}, 
+            2, 0, WHITE, false, layer_hud, true});
+                
+
+            if (unselected_upgrade_count > 0){
+                // draw upgrade icon
+                SpriteManager::getInstance()->drawTexture({"drone_upgrade_icons_" + std::to_string(upgrade.action), 
+                {selection_x + (i * selection_gap) - upgrade_icon_offset, selection_y - upgrade_icon_offset}, 
+                2, 0, WHITE, false, layer_hud, true});
+                
+                
+                // draw drone icon
+                SpriteManager::getInstance()->drawTexture({"Amogus_" + std::to_string(upgrade.type), 
+                {selection_x + (i * selection_gap) - drone_icon_offset, selection_y - drone_icon_offset}, 
+                2, 0, WHITE, false, layer_hud, true});
+            }
+            
+        }
+    }
+    
 }
 
 

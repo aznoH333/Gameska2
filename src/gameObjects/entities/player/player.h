@@ -12,10 +12,9 @@
 #include "../animationObject/particles.h"
 
 
-enum Drone_type{
-    type_gun = 0,
-    type_shotgun = 1
-};
+// stored number corresponds to drone texture
+// example : type_gun = 1 | Amongus_1.png
+
 
 
 class Player : public GameObject{

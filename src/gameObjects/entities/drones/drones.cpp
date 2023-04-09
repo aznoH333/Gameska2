@@ -5,7 +5,7 @@
 #include "../animationObject/animationObject.h"
 #include "raylib.h"
 
-GunDrone::GunDrone() : Drone("Rifle drone", "Amogus_1", 60, 20, 3, true, 400){}
+GunDrone::GunDrone() : Drone(type_gun, "Amogus_1", 60, 20, 3, true, 400){}
 
 void GunDrone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
@@ -30,7 +30,7 @@ void GunDrone::fire(Vector2 pos){
     }    
 }
 
-ShotGunDrone::ShotGunDrone() : Drone("Shotgun drone", "Amogus_4", 90, 10, 3, true, 250){}
+ShotGunDrone::ShotGunDrone() : Drone(type_shotgun, "Amogus_4", 90, 10, 3, true, 250){}
 
 void ShotGunDrone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);

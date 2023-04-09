@@ -2,8 +2,8 @@
 #include <string>
 #include "../../GameObjectManager.h"
 
-Drone::Drone(std::string name, std::string sprite, float fireCooldown, float damage, int maxLevel, bool rotates, float range){
-    this->name = name;
+Drone::Drone(Drone_type type, std::string sprite, float fireCooldown, float damage, int maxLevel, bool rotates, float range){
+    this->type = type;
     this->sprite = sprite;
     this->fireCooldown = fireCooldown;
     this->damage = damage;
@@ -12,8 +12,8 @@ Drone::Drone(std::string name, std::string sprite, float fireCooldown, float dam
     this->range = range;
 }
 
-std::string Drone::getName(){
-    return name;
+Drone_type Drone::get_type(){
+    return type;
 }
 
 std::string Drone::getSprite(){

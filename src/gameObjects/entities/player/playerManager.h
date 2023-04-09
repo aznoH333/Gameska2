@@ -10,14 +10,14 @@
 
 
 enum Upgrade_action{
-    action_replace,
-    action_upgrade_damage,
-    action_upgrade_fire_rate,
-    action_upgrade_level,
-    action_add_drone
+    action_replace = 6,
+    action_upgrade_damage = 3,
+    action_upgrade_fire_rate = 5,
+    action_upgrade_level = 4,
+    action_add_drone = 2
 };
 
-struct Drone_upgrade{
+struct Upgrade{
     Upgrade_action action;
     int action_index;
     Drone_type type;
@@ -48,17 +48,32 @@ class PlayerManager{
         int upgradeCount = 0;
         int nextUpgradeCount = 5;
         int killCounter = 0;
-        int unselected_upgrade_count = 100;
+        int unselected_upgrade_count = 0;
         int drone_count = 1;
 
         // upgrade choice stuff
-        std::vector<Drone_upgrade> upgrades;
+        std::vector<Upgrade> upgrades;
+
+
+        // upgrade selection visual stuff
+        const float selection_hidden = 0;
+        const float selection_visible = 96;
+        const float selection_gap = 124;
+        const float selection_speed = 6.5f;
+        
+        const float drone_icon_offset = 32;
+        const float upgrade_icon_offset = 0;
+        
+        const float selection_x = 496;
+        float selection_y = selection_hidden;
+
 
         
         
         PlayerManager();
         void generate_upgrades();
         void handleUI();
+        void display_upgrade_selection();
         void handle_upgrade_selection();
         Upgrade_action choose_random_upgrade(Drone* drone);
         void handle_upgrade_action(KeyboardKey key, int upgrade_slot);

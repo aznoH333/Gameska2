@@ -49,6 +49,9 @@ SpriteManager::SpriteManager(){
     loadTexture("assets/ui/Empty_Heart.png");
     loadTexture("assets/ui/menu_select.png");
     loadTexture("assets/ui/menu_backdrop.png");
+    // drone upgrade icons
+    loadTextures("assets/ui/drone_upgrade_icons_", ".png", 1, 6);
+    
 
 
     // logo
