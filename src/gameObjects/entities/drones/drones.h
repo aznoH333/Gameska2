@@ -37,4 +37,11 @@ class Rocket_drone: public Drone{
         void fire(Vector2 pos);
 };
 
+
+class Sniper_drone: public Drone{
+    public:
+        Sniper_drone();
+        void fire(Vector2 pos);
+};
+
 #endif

@@ -10,7 +10,7 @@
 enum Drone_type{ 
     type_gun = 1,
     type_laser = 2,
-    type_beam = 3,
+    type_sniper = 3,
     type_shotgun = 4,
     type_rocket = 5,
     type_machinegun = 6

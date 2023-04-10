@@ -24,7 +24,7 @@ class Player : public GameObject{
         const int maxAnimationTimer = 3;
 
         SpriteManager* spr;
-        Vector2 velocity;
+        Vector2 velocity = {0,0};
         float maxSpeed = 7;
         float speed = 0.5;
         const float cameraDistanceMultiplier = 5;

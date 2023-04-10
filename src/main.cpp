@@ -41,8 +41,6 @@ int main() {
     PlayerManager::getInstance()->dispose();
     UIManager::getInstance()->dispose();
 
-
-
-
     return 0;
+    
 }

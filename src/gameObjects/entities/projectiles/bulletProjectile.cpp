@@ -26,7 +26,7 @@ void Bullet::update(){
     if (spawnTimer > 0)spawnTimer--;
 
     // wall collisions
-    if (spawnTimer == 0 && (pos.x + size.x > WORLD::worldWidth || pos.x < -WORLD::worldWidth + 64.0f || pos.y < -WORLD::worldHeight - size.y + 64 || pos.y > WORLD::worldHeight))
+    if (spawnTimer <= 0 && (pos.x + size.x > WORLD::worldWidth || pos.x < -WORLD::worldWidth + 64.0f || pos.y < -WORLD::worldHeight - size.y + 64 || pos.y > WORLD::worldHeight))
         destroy();
     
 }

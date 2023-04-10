@@ -2,6 +2,13 @@
 #include "GameStateManager.h"
 
 void Game::init(){
+    
+    CameraObject::getInstance()->teleportCamera({0,0});
+    World::getInstance()->reset();
+    GameObjectManager::getInstance()->clear();
+    PlayerManager::getInstance()->removePlayer();
+    PlayerManager::getInstance()->reset();
+
     GameObjectManager::getInstance()->addGameObject(new Player({0,200}));
     PlayerManager::getInstance()->reset();
 }
@@ -19,9 +26,5 @@ void Game::update(){
 }
 
 void Game::clear(){
-    CameraObject::getInstance()->teleportCamera({0,0});
-    World::getInstance()->reset();
-    PlayerManager::getInstance()->reset();
-    GameObjectManager::getInstance()->clear();
-    PlayerManager::getInstance()->removePlayer();
+    
 }

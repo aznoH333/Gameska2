@@ -15,8 +15,8 @@ Player::Player(Vector2 pos) : GameObject(pos, {28,46}, ObjectIdentifier::PlayerF
     
     
     // add initial drone
-    //drones.push_back(new Gun_drone());
-    drones.push_back(new Rocket_drone());
+    drones.push_back(new Gun_drone());
+    //drones.push_back(new Rocket_drone());
     //drones.push_back(new Laser_drone());
     
     
@@ -209,6 +209,12 @@ void Player::addDrone(Drone_type drone_type){
             break;
         case type_laser:
             drone = new Laser_drone();
+            break;
+        case type_rocket:
+            drone = new Rocket_drone();
+            break;
+        case type_sniper:
+            drone = new Sniper_drone();
             break;
     }
     

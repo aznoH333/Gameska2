@@ -65,11 +65,10 @@ void PlayerManager::dispose(){
 
 void PlayerManager::reset(){
     upgradeCount = 0;
-    nextUpgradeCount = 5;
+    nextUpgradeCount = 15;
     killCounter = 0;
     drone_count = 1;
-    //unselected_upgrade_count = 0;
-    generate_upgrades();
+    unselected_upgrade_count = 0;
 }
 
 void PlayerManager::confirmKill(Vector2 pos){
@@ -79,7 +78,7 @@ void PlayerManager::confirmKill(Vector2 pos){
         killCounter = 0;
         upgradeCount++;
         // next upgrade count calculation
-        nextUpgradeCount = upgradeCount * 10 + 5;
+        nextUpgradeCount = upgradeCount * 15 + 5;
         // spawn upgrade
         GameObjectManager::getInstance()->addGameObject(new UpgradePickup(pos));
         
@@ -138,9 +137,9 @@ void PlayerManager::touchedUpgradeBox(){
 void PlayerManager::handle_upgrade_selection(){
     if (unselected_upgrade_count > 0){
 
-        handle_upgrade_action(KEY_KP_1, 0);
-        handle_upgrade_action(KEY_KP_2, 1);
-        handle_upgrade_action(KEY_KP_3, 2);
+        handle_upgrade_action(KEY_ONE, 0);
+        handle_upgrade_action(KEY_TWO, 1);
+        handle_upgrade_action(KEY_THREE, 2);
 
     }
 }

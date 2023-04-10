@@ -46,7 +46,7 @@ class PlayerManager{
         
         // weapon progression stuff
         int upgradeCount = 0;
-        int nextUpgradeCount = 5;
+        int nextUpgradeCount = 15;
         int killCounter = 0;
         int unselected_upgrade_count = 0;
         int drone_count = 1;
@@ -64,7 +64,7 @@ class PlayerManager{
         const float drone_icon_offset = 32;
         const float upgrade_icon_offset = 0;
         
-        const float selection_x = 496;
+        const float selection_x = 516;
         float selection_y = selection_hidden;
 
 

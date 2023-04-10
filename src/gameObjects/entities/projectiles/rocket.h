@@ -20,9 +20,11 @@ class Rocket : public GameObject{
 
         float rotation = 270;
         const float rotation_speed = 10.0f;
+        int explosion_timer = 2;
 
         void explosion();
         void seek_target();
+        void explode();
     
     public:
         Rocket(Vector2 pos, float damage, float speed);

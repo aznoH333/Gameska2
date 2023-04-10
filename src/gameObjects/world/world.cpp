@@ -31,24 +31,50 @@ void World::loadEvents(){
     events = {};
 
     // set world events
-    events.push({1, {40, 40, 40}, 4, 360, 1, 1});
-    /*
-    events.push({7, {40, 65, 40}, 10, 80, 1, 1});
-    events.push({30, {40, 100, 40}, 15, 45, 1, 2});
-    events.push({45, {40, 30, 80}, 20, 60, 1, 2});
     
-    // huge enemy wave
-    events.push({60, {100, 30, 40}, 40, 10, 1, 1}); 
-    events.push({65, {60, 40, 40}, 20, 80, 1, 2});
-    events.push({90, {60, 60, 80}, 20, 40, 1, 2});
+    // easy intro
+    events.push({1, {40, 40, 40}, 4, 360, 0.5f, 1});
+    events.push({20, {65, 40, 40}, 7, 120, 0.6f, 1});
+    events.push({35, {75, 40, 40}, 7, 120, 0.6f, 2});
+    events.push({50, {65, 50, 50}, 15, 90, 0.7f, 1});
+
+
+    // first big wave
+    events.push({70, {100, 20, 20}, 20, 20, 1.0f, 1});
+    events.push({75, {20, 20, 20}, 10, 90, 1.0f, 1});
+
+
+    // blue time
+    events.push({90, {40, 40, 60}, 20, 80, 1.0f, 1});
+    events.push({100, {40, 40, 80}, 25, 80, 1.0f, 2});
+    events.push({130, {40, 40, 90}, 25, 60, 1.0f, 2});
+
+    // big blue wave
+    events.push({160, {50, 50, 120}, 35, 10, 1.0f, 2});
+    events.push({165, {50, 50, 60}, 20, 60, 1.1f, 1});
+
+
+    // teal time
+    events.push({180, {40, 60, 60}, 20, 60, 1.1f, 2});
+    events.push({200, {40, 80, 80}, 25, 60, 1.2f, 2});
+    events.push({230, {40, 90, 90}, 25, 40, 1.3f, 2});
+
+
+    // purple time - endurance
+    events.push({260, {60, 40, 60}, 30, 50, 1.3f, 2});
+    events.push({280, {60, 40, 80}, 30, 50, 1.5f, 2});
+    events.push({320, {60, 40, 90}, 35, 30, 1.3f, 2});
+
+
+
+
+
+
+
+
     
-    // stronger enemies
-    events.push({115, {80,20 , 20}, 30, 40, 1.2f, 1});
-    events.push({140, {255,20 , 20}, 30, 40, 1.2f, 2});
+
     
-    // skull emoji
-    events.push({180, {0,0 , 0}, 30, 10, 6, 2});
-    */
 }
 
 void World::update(){

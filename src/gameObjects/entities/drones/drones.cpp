@@ -6,14 +6,14 @@
 #include "../animationObject/animationObject.h"
 #include "raylib.h"
 
-Gun_drone::Gun_drone() : Drone(type_gun, "Amogus_1", 60, 20, 3, true, 550){}
+Gun_drone::Gun_drone() : Drone(type_gun, "Amogus_1", 60, 12, 1, true, 450){}
 
 void Gun_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
     if (target != nullptr){
         GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
         GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos()) + (GetRandomValue(-2, 2) * DEG2RAD),
-        get_damage() * level,
+        get_damage(),
         26.0f,
         projectile_bullet
         ));
@@ -61,7 +61,7 @@ void Shotgun_drone::fire(Vector2 pos){
 }
 
 // machine gun
-Machinegun_drone::Machinegun_drone(): Drone(type_machinegun, "Amogus_6", 20, 10, 2, true, 500){}
+Machinegun_drone::Machinegun_drone(): Drone(type_machinegun, "Amogus_6", 15, 7, 2, true, 400){}
 
 void Machinegun_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
@@ -69,7 +69,7 @@ void Machinegun_drone::fire(Vector2 pos){
         
         for (int i = 0; i < level; i++){
             GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
-            GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos()) + (GetRandomValue(-2, 2) * DEG2RAD),
+            GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos()) + (GetRandomValue(-7, 7) * DEG2RAD),
             get_damage(),
             28.0f,
             projectile_bullet
@@ -108,12 +108,32 @@ void Laser_drone::fire(Vector2 pos){
 
 // rocket drone
 
-Rocket_drone::Rocket_drone(): Drone(type_rocket, "Amogus_5", 90, 50, 3, false, 700){}
+Rocket_drone::Rocket_drone(): Drone(type_rocket, "Amogus_5", 120, 30, 3, false, 700){}
 
 void Rocket_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
 
     if (target != nullptr){
         GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage(), 10 * level));
+    }
+}
+
+
+// sniper drone
+
+Sniper_drone::Sniper_drone(): Drone(type_sniper, "Amogus_3", 120, 45, 3, false, 700){
+
+}
+
+void Sniper_drone::fire(Vector2 pos){
+    GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
+
+    if (target != nullptr){
+        GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
+        GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos()),
+        get_damage() * level,
+        35.0f * level,
+        projectile_laser
+        ));
     }
 }
