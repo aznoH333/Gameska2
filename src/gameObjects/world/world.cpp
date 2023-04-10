@@ -32,6 +32,7 @@ void World::loadEvents(){
 
     // set world events
     events.push({1, {40, 40, 40}, 4, 360, 1, 1});
+    /*
     events.push({7, {40, 65, 40}, 10, 80, 1, 1});
     events.push({30, {40, 100, 40}, 15, 45, 1, 2});
     events.push({45, {40, 30, 80}, 20, 60, 1, 2});
@@ -47,6 +48,7 @@ void World::loadEvents(){
     
     // skull emoji
     events.push({180, {0,0 , 0}, 30, 10, 6, 2});
+    */
 }
 
 void World::update(){

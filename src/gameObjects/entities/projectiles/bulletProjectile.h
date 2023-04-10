@@ -17,7 +17,7 @@ class Bullet : public GameObject{
         float rotation;
         float damage;
         float speed;
-        int spawnTimer = 30;
+        int spawnTimer = 5;
         projectile_look look;
     
     public:

@@ -2,6 +2,7 @@
 #include "drone.h"
 #include "../../GameObjectManager.h"
 #include "../projectiles/bulletProjectile.h"
+#include "../projectiles/rocket.h"
 #include "../animationObject/animationObject.h"
 #include "raylib.h"
 
@@ -88,11 +89,12 @@ void Machinegun_drone::fire(Vector2 pos){
     }    
 }
 
+// laser drone 
 
 Laser_drone::Laser_drone(): Drone(type_laser, "Amogus_2", 60, 20, 2, false, 500){}
 
 void Laser_drone::fire(Vector2 pos){
-    int adder = 45;
+    int adder = 45 / level;
     for (int i = 0; i < 360; i += adder){
         GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
             i * DEG2RAD,
@@ -100,5 +102,18 @@ void Laser_drone::fire(Vector2 pos){
             32.0f,
             projectile_laser
             ));
+    }
+}
+
+
+// rocket drone
+
+Rocket_drone::Rocket_drone(): Drone(type_rocket, "Amogus_5", 90, 50, 3, false, 700){}
+
+void Rocket_drone::fire(Vector2 pos){
+    GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
+
+    if (target != nullptr){
+        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage(), 10 * level));
     }
 }
