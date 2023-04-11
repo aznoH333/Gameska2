@@ -116,7 +116,7 @@ void Rocket_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
 
     if (target != nullptr){
-        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() * ((level-1) * 0.5), 10 * ((level - 1) * 0.5)));
+        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() * (level), 10 * (level)));
     }
 }
 
