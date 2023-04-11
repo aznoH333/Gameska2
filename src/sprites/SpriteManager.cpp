@@ -72,10 +72,14 @@ SpriteManager::SpriteManager(){
 }
 
 void SpriteManager::initCamera(){
+    
     // camera 
     camera_object.target = {0,0};
     camera_object.offset = {0,0};
-    SetWindowSize(1280, 720);
+    //SetWindowSize(1280, 720);
+    std::cout << GetScreenWidth() << std::endl;
+    std::cout << GetMonitorWidth(GetCurrentMonitor()) << std::endl;
+
     camera_object.zoom = GetMonitorWidth(GetCurrentMonitor()) / (float) GetScreenWidth();
     camera_object.rotation = 0;
 }
