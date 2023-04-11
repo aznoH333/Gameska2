@@ -16,7 +16,7 @@ int main() {
     raylib::Window w(screenWidth, screenHeight, "Gameska");
     
 
-    SetWindowSize(GetMonitorWidth(GetCurrentMonitor()), GetMonitorWidth(GetCurrentMonitor()));
+    //SetWindowSize(GetMonitorWidth(GetCurrentMonitor()), GetMonitorWidth(GetCurrentMonitor()));
     ToggleFullscreen();
     
     Image window_icon = LoadImage("assets/ui/menu_select.png");
