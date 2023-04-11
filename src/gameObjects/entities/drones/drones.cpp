@@ -110,7 +110,7 @@ void Laser_drone::fire(Vector2 pos){
 
 // rocket drone
 
-Rocket_drone::Rocket_drone(): Drone(type_rocket, "Amogus_5", 120, 30, 3, false, 700){}
+Rocket_drone::Rocket_drone(): Drone(type_rocket, "Amogus_5", 240, 30, 3, false, 700){}
 
 void Rocket_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
