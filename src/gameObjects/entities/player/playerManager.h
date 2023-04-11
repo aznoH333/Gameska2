@@ -46,7 +46,7 @@ class PlayerManager{
         
         // weapon progression stuff
         int upgradeCount = 0;
-        int nextUpgradeCount = 15;
+        int nextUpgradeCount = 5;
         int killCounter = 0;
         int unselected_upgrade_count = 0;
         int drone_count = 1;

@@ -65,7 +65,7 @@ void PlayerManager::dispose(){
 
 void PlayerManager::reset(){
     upgradeCount = 0;
-    nextUpgradeCount = 15;
+    nextUpgradeCount = 5;
     killCounter = 0;
     drone_count = 1;
     unselected_upgrade_count = 0;
@@ -78,7 +78,7 @@ void PlayerManager::confirmKill(Vector2 pos){
         killCounter = 0;
         upgradeCount++;
         // next upgrade count calculation
-        nextUpgradeCount = upgradeCount * 15 + 5;
+        nextUpgradeCount = upgradeCount * 10 + 5;
         // spawn upgrade
         GameObjectManager::getInstance()->addGameObject(new UpgradePickup(pos));
         
@@ -155,7 +155,7 @@ void PlayerManager::generate_upgrades(){
         
         if (i >= drone_count){
             // add drone action
-            upgrades.push_back({action_add_drone, i, static_cast<Drone_type>(GetRandomValue(1, 6))}); // jdu se hodit ze schodu
+            upgrades.push_back({action_add_drone, i, static_cast<Drone_type>(GetRandomValue(2, 6))}); // jdu se hodit ze schodu
         
         }else if (current_drone != nullptr && GetRandomValue(0, 2) >= 1 && current_drone->can_be_upgraded()){
             
@@ -165,7 +165,7 @@ void PlayerManager::generate_upgrades(){
         } else {
             
             // replace drone
-            upgrades.push_back({action_replace, i, static_cast<Drone_type>(GetRandomValue(1, 6))}); // TODO randomize type selection
+            upgrades.push_back({action_replace, i, static_cast<Drone_type>(GetRandomValue(2, 6))}); // TODO randomize type selection
             
 
         }

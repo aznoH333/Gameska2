@@ -6,7 +6,7 @@
 #include "../animationObject/animationObject.h"
 #include "raylib.h"
 
-Gun_drone::Gun_drone() : Drone(type_gun, "Amogus_1", 60, 12, 1, true, 450){}
+Gun_drone::Gun_drone() : Drone(type_gun, "Amogus_1", 60, 15, 1, true, 450){}
 
 void Gun_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
@@ -46,8 +46,10 @@ void Shotgun_drone::fire(Vector2 pos){
             projectile_bullet
             ));
 
-            SpriteManager::getInstance()->addScreenShake(getScreenSHake());
         }
+
+        SpriteManager::getInstance()->addScreenShake(getScreenSHake());
+
 
         float rotation = GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos());
 
@@ -114,7 +116,7 @@ void Rocket_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
 
     if (target != nullptr){
-        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage(), 10 * level));
+        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() * ((level-1) * 0.5), 10 * ((level - 1) * 0.5)));
     }
 }
 
