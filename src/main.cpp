@@ -13,7 +13,7 @@ int main() {
 
     
 
-    raylib::Window w(screenWidth, screenHeight, "Gameska");
+    raylib::Window w(GetMonitorWidth(0), GetMonitorHeight(0), "Gameska");
     
 
     //SetWindowSize(GetMonitorWidth(GetCurrentMonitor()), GetMonitorWidth(GetCurrentMonitor()));
