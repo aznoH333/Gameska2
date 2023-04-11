@@ -226,8 +226,13 @@ void SpriteManager::addScreenShake(float ammount){
 
 void SpriteManager::drawText(std::string text, float x, float y){
     
-    texts.push_back(TextData{text, x, y});
+    texts.push_back(TextData{text, x, y, 1, true});
     
+}
+
+void SpriteManager::drawText(std::string text, float x, float y, float scale, bool is_absolute){
+    
+    texts.push_back(TextData{text, x, y, scale, is_absolute});
     
 }
 
@@ -246,8 +251,13 @@ void SpriteManager::renderText(){
         secondary.g *= currentColorFade;
         secondary.b *= currentColorFade;
 
-        DrawText(text.text.c_str(), text.x + shadow_offset, text.y + shadow_offset, fontsize, secondary);
-        DrawText(text.text.c_str(), text.x, text.y, fontsize, primary);
+        if (!text.is_absolute){
+            text.x -= camerapos.x + shakeCameraAdder.x;
+            text.y -= camerapos.y + shakeCameraAdder.y;
+        }
+
+        DrawText(text.text.c_str(), text.x + (shadow_offset * text.scale), text.y + (shadow_offset * text.scale), fontsize * text.scale, secondary);
+        DrawText(text.text.c_str(), text.x, text.y, fontsize * text.scale, primary);
     }
 
     texts.clear();

@@ -204,6 +204,8 @@ void PlayerManager::display_upgrade_selection(){
         for (int i = 0; i < upgrades.size(); i++){
             Upgrade upgrade = upgrades[i];
 
+            // draw number
+            SpriteManager::getInstance()->drawText(std::to_string(i+1), selection_x + ((i-1) * selection_gap), selection_y - 64, 0.3f, true);
 
             // draw background box
             SpriteManager::getInstance()->drawTexture({"drone_upgrade_icons_1", 
@@ -227,6 +229,11 @@ void PlayerManager::display_upgrade_selection(){
         }
     }
     
+}
+
+
+bool PlayerManager::is_upgrade_selection_shown(){
+    return selection_y > selection_hidden;
 }
 
 

@@ -88,6 +88,8 @@ class PlayerManager{
         void touchedUpgradeBox();
         void reset();
         void confirmKill(Vector2 pos);
+
+        bool is_upgrade_selection_shown();
 };
 
 

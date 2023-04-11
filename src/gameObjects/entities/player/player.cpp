@@ -157,7 +157,9 @@ void Player::droneUpdate(){
 
         // drawing
         spr->drawTexture({d->getSprite(), dronePos, 2 * lastDroneScale, rotation, WHITE, d->getFlipSprite(), layer_projectiles});
-
+        // draw numbers
+        if (PlayerManager::getInstance()->is_upgrade_selection_shown())
+            spr->drawText(std::to_string(i + 1), dronePos.x, dronePos.y, 0.1f, false);
 
     }
 

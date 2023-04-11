@@ -26,6 +26,8 @@ struct TextData{
     std::string text;
     float x;
     float y;
+    float scale;
+    bool is_absolute;
 };
 
 
@@ -96,6 +98,8 @@ class SpriteManager{
         void setColorFade(float value);
 
         void drawText(std::string text, float x, float y);
+        void drawText(std::string text, float x, float y, float scale, bool is_absolute);
+
         void renderText();
 
 
