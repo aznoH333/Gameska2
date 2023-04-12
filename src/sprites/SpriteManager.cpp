@@ -225,7 +225,10 @@ void SpriteManager::handleScreenShake(){
 }
 
 void SpriteManager::addScreenShake(float ammount){
+    
     screenShakeAmmount += ammount;
+
+    if (screenShakeAmmount > screen_shake_max) screenShakeAmmount = screen_shake_max;
 }
 
 

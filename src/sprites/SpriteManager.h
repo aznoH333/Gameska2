@@ -60,6 +60,7 @@ class SpriteManager{
 
         // sreenshake stuff
         float screenShakeAmmount = 0;
+        const float screen_shake_max = 30;
         const float screenShakeFallof = 3;
         int screenShakeTimer = 0;
         
