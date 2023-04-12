@@ -42,6 +42,11 @@ SpriteManager::SpriteManager(){
     loadTexture("assets/entities/fireFX/FireBallExplosion_1.png");
     loadTextures("assets/entities/fireFX/Muzzle_flash_", ".png", 1, 8);
     loadTextures("assets/entities/gore/Gore_", ".png", 1, 10);
+    loadTextures("assets/entities/gore/blood_", ".png", 1, 8);
+    loadTextures("assets/entities/gore/blood_big_", ".png", 1, 3);
+
+    loadTextures("assets/entities/gore/giblet_", ".png", 1, 6);
+    
     loadTextures("assets/entities/fireFX/explosion_",".png", 1, 9);
     loadTextures("assets/entities/fireFX/smoke_",".png", 1, 3);
 

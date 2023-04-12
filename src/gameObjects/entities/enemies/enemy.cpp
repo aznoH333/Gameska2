@@ -75,9 +75,13 @@ void Enemy::onDestroy(){
 void Enemy::onDamage(int damage, GameObject* damageDealer, float direction){
     
     if (health <= 0) destroy();
+    
+    handle_gore(damage);
+    
+    
     knockBackDirection = direction;
-    knockBackTimer = damage * knockBackStunMultiplier;
-    knockBackSpeed = damage * knockBackMultiplier;
+    knockBackTimer = std::min(damage * knockBackStunMultiplier,max_knockback_speed);
+    knockBackSpeed = std::min(damage * knockBackMultiplier, max_knockback_speed);
     speed = 0;
 }
 
@@ -139,5 +143,23 @@ void Enemy::draw(){
 
         spr->drawTexture({"Enemy_" + std::to_string(animationIndex), {pos.x, pos.y - 4}, 2, 0, WHITE, flipSprite, layer_enemy});
 
+    }
+}
+
+void Enemy::handle_gore(int damage){
+    
+    // spawn blood
+    for (int i = std::min(damage / 5, 10); i > 0; i--){
+        GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_blood));
+    }
+    // spawn giblets
+    if (health <= 0){
+        for (int i = GetRandomValue(1, 4); i > 0; i--){
+            GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_giblet));
+        }
+        // spawn big blood
+        if (GetRandomValue(0, 1) > 0){
+            GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_blood_big));
+        }
     }
 }

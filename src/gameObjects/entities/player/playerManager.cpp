@@ -205,7 +205,7 @@ void PlayerManager::display_upgrade_selection(){
             Upgrade upgrade = upgrades[i];
 
             // draw number
-            SpriteManager::getInstance()->drawText(std::to_string(i+1), selection_x + ((i-1) * selection_gap), selection_y - 64, 0.3f, true);
+            SpriteManager::getInstance()->drawText(std::to_string(i+1), selection_x + (i * selection_gap) - 90, selection_y - 90, 0.3f, true);
 
             // draw background box
             SpriteManager::getInstance()->drawTexture({"drone_upgrade_icons_1", 

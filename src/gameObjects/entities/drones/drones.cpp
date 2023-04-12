@@ -96,8 +96,8 @@ void Machinegun_drone::fire(Vector2 pos){
 Laser_drone::Laser_drone(): Drone(type_laser, "Amogus_2", 60, 20, 2, false, 500){}
 
 void Laser_drone::fire(Vector2 pos){
-    int adder = 45 / level;
-    for (int i = 0; i < 360; i += adder){
+    float adder = 45.0f / level;
+    for (float i = 0; i < 359; i += adder){
         GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
             i * DEG2RAD,
             get_damage(),

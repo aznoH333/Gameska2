@@ -5,6 +5,7 @@
 #include "../../../sprites/SpriteManager.h"
 #include "raylib.h"
 #include "../player/playerManager.h"
+#include "../animationObject/blood.h"
 
 class Enemy : public GameObject{
     protected:
@@ -25,6 +26,7 @@ class Enemy : public GameObject{
         const float knockBackRecovery = 1.5f;
         float knockBackDirection = 0;
         float knockBackSpeed = 0;
+        const float max_knockback_speed = 30;
 
         // gore
         const int goreOffsetX = -16;
@@ -38,6 +40,7 @@ class Enemy : public GameObject{
         virtual void engageTarget(GameObject* target);
         virtual void draw();
         int knockBackTimer = 0;
+        void handle_gore(int damage);
 
 
 
