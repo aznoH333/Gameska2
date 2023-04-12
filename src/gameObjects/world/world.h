@@ -52,6 +52,10 @@ class World{
         const char colorChangeSpeed = 1;
         const int colorUpdateDelay = 2;
 
+        // timer
+        const float timer_x = 1200;
+        const float timer_y = 16;
+
 
         void updateColor();
         void changeColor(Color color);
@@ -59,6 +63,7 @@ class World{
         void handleWorldEvents();
         void handleEnemySpawning();
         void loadEvents();
+        void display_timer();
 
     public:
         World();

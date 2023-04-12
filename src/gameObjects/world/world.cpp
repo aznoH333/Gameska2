@@ -5,6 +5,7 @@
 #include "../entities/enemies/fireEnemy.h"
 
 #include <cmath>
+#include <string>
 
 
 
@@ -97,7 +98,7 @@ void World::update(){
     if (gameTimer % colorUpdateDelay == 0){
         updateColor();
     }
-
+    display_timer();
     handleWorldEvents();
     handleEnemySpawning();
 
@@ -202,6 +203,10 @@ void World::reset(){
     worldColor = {0, 0, 0 ,255};
     desiredColor = worldColor;
     loadEvents();
+}
+
+void World::display_timer(){
+    SpriteManager::getInstance()->drawText(std::to_string(gameTimer/60), timer_x, timer_y);
 }
 
 World* World::instance = 0;
