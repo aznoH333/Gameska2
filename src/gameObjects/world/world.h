@@ -53,7 +53,7 @@ class World{
         const int colorUpdateDelay = 2;
 
         // timer
-        const float timer_x = 1200;
+        const float timer_x = 1100;
         const float timer_y = 16;
 
 
@@ -69,6 +69,10 @@ class World{
         World();
         static World* getInstance();
         void update();
+
+        int get_time_seconds();
+        int get_time_minutes();
+
         void reset();
         void dispose();        
 };

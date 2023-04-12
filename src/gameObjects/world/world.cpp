@@ -206,7 +206,21 @@ void World::reset(){
 }
 
 void World::display_timer(){
-    SpriteManager::getInstance()->drawText(std::to_string(gameTimer/60), timer_x, timer_y);
+    int time_in_seconds = (gameTimer/60)%60;
+    int time_in_minutes = gameTimer/60/60;
+    std::string clock_adder = " : ";
+    if (time_in_seconds < 10) clock_adder += "0";
+    
+    SpriteManager::getInstance()->drawText(std::to_string(time_in_minutes) + clock_adder + std::to_string(time_in_seconds), timer_x, timer_y);
+}
+
+
+int World::get_time_minutes(){
+    return gameTimer/60/60;
+}
+
+int World::get_time_seconds(){
+    return (gameTimer/60)%60;
 }
 
 World* World::instance = 0;

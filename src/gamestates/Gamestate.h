@@ -31,7 +31,7 @@ class UIManager{
         // menu constants
         const float button_offset = 70;
         const float button_x_pos = 544;
-        const float button_y_pos = 360;
+        const float button_y_pos = 500;
         const float menu_select_icon_offset = -60;
         const float menu_select_icon_offset_y = 48;
         const float menu_select_icon_offset_right = 256;

@@ -4,6 +4,7 @@
 #include "Gamestate.h"
 #include "../sprites/SpriteManager.h"
 #include "GameStateManager.h"
+#include "raylib.h"
 
 class Intro : public GameState{
     private:
@@ -17,6 +18,13 @@ class Intro : public GameState{
 };
 
 class GameOver : public GameState{
+    private:
+        const Vector2 game_over = {400, 100};
+        const Vector2 survived_text = {450, 200};
+        const Vector2 survived_timer = {580,300};
+
+        std::string survived_time = "";
+
     public:
         void init();
         void update();

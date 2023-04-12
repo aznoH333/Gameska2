@@ -93,7 +93,7 @@ void Machinegun_drone::fire(Vector2 pos){
 
 // laser drone 
 
-Laser_drone::Laser_drone(): Drone(type_laser, "Amogus_2", 60, 20, 2, false, 500){}
+Laser_drone::Laser_drone(): Drone(type_laser, "Amogus_2", 75, 20, 2, false, 500){}
 
 void Laser_drone::fire(Vector2 pos){
     float adder = 45.0f / level;
@@ -116,7 +116,7 @@ void Rocket_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
 
     if (target != nullptr){
-        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() * (level), 10 * (level)));
+        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() + ((level - 1) * 10), 10 + ((level - 1) * 5)));
     }
 }
 
@@ -134,7 +134,7 @@ void Sniper_drone::fire(Vector2 pos){
         GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
         GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos()),
         get_damage() * level,
-        35.0f * level,
+        35.0f + ((level-1) * 5),
         projectile_laser
         ));
     }
