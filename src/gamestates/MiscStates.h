@@ -31,5 +31,12 @@ class GameOver : public GameState{
         void clear();
 };
 
+class Pause_menu : public GameState{
+    public:
+        void init();
+        void update();
+        void clear();
+};
+
 
 #endif

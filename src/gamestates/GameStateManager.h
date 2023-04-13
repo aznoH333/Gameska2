@@ -10,6 +10,7 @@ enum StateName{
     state_game = 1,
     state_game_over = 2,
     state_intro = 3,
+    state_pause = 4,
 };
 
 
@@ -19,6 +20,7 @@ class GameStateManager{
         std::map<StateName, GameState*> states;
         StateName currentState = state_intro;
         bool exit = false;
+        bool call_init = true;
         
         // transition stuff
         float transitionValue = 0;
@@ -31,7 +33,10 @@ class GameStateManager{
         static GameStateManager* getInstance();
         void update();
         void switchState(StateName state);
+        void switch_state_without_init(StateName state);
+        void transitionToState(StateName state, bool call_init);
         void transitionToState(StateName state);
+
         void dispose();
         bool shouldGameEnd();
         void exitGame();

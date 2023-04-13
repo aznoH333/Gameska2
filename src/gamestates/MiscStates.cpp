@@ -47,3 +47,16 @@ void GameOver::clear(){
     UIManager::getInstance()->clear();
     survived_time = "";
 }
+
+void Pause_menu::init(){
+    UIManager::getInstance()->addButton({"Continue", [](){GameStateManager::getInstance()->transitionToState(state_game, false);}});
+    UIManager::getInstance()->addButton({"Exit", [](){GameStateManager::getInstance()->transitionToState(state_main_menu);}});
+}
+
+void Pause_menu::update(){
+    UIManager::getInstance()->update();
+}
+
+void Pause_menu::clear(){
+    UIManager::getInstance()->clear();
+}

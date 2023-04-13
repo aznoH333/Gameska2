@@ -21,7 +21,7 @@ void Game::update(){
     PlayerManager::getInstance()->update();
 
     if (IsKeyPressed(KEY_ESCAPE)){
-        GameStateManager::getInstance()->transitionToState(state_main_menu);
+        GameStateManager::getInstance()->transitionToState(state_pause);
     }
 }
 

@@ -9,6 +9,7 @@ GameStateManager::GameStateManager(){
     states[state_game] = new Game();
     states[state_intro] = new Intro();
     states[state_game_over] = new GameOver();
+    states[state_pause] = new Pause_menu();
 
 
     states[currentState]->init();
@@ -40,14 +41,21 @@ void GameStateManager::update(){
 
 
 void GameStateManager::switchState(StateName state){
+    
     states[currentState]->clear();
     currentState = state;
-    states[currentState]->init();
+    if (call_init)
+        states[currentState]->init();
+}
+
+void GameStateManager::transitionToState(StateName state, bool call_init){
+    nextState = state;
+    this->call_init = call_init;
 }
 
 
 void GameStateManager::transitionToState(StateName state){
-    nextState = state;
+    transitionToState(state, true);
 }
 
 void GameStateManager::dispose(){

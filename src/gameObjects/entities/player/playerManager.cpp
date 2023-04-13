@@ -208,7 +208,7 @@ void PlayerManager::display_upgrade_selection(){
             SpriteManager::getInstance()->drawText(std::to_string(i+1), selection_x + (i * selection_gap) - 90, selection_y - 90, 0.3f, true);
 
             // draw description
-            SpriteManager::getInstance()->drawText(upgrade_descriptions.at(upgrade.action), selection_x + (i * selection_gap) - 90, selection_y - 20, 0.3f, true);
+            SpriteManager::getInstance()->drawText(upgrade_descriptions.at(upgrade.action), selection_x + (i * selection_gap) - 90, selection_y - 20, 0.2f, true);
 
             // draw background box
             SpriteManager::getInstance()->drawTexture({"drone_upgrade_icons_1", 
