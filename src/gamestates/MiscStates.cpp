@@ -45,4 +45,5 @@ void GameOver::update(){
 
 void GameOver::clear(){
     UIManager::getInstance()->clear();
+    survived_time = "";
 }

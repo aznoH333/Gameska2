@@ -80,6 +80,7 @@ void Drone::setFlipSprite(bool flip){
 }
 
 bool Drone::can_be_upgraded(){
+    if (type == type_gun) return false;
     return canUpgradeDamage() || canUpgradeFireRate() || canUpgradeLevel();
 }
 

@@ -68,7 +68,7 @@ void Blood::on_impact(){
     bounce_count--;
 
     if (bounce_count <= 0){
-        if (type == type_blood){
+        if (type == type_blood || type == type_droplet){
             blood_sprite = GetRandomValue(4, 8);
         }else if (type == type_blood_big){
             blood_sprite = GetRandomValue(1, 3);
@@ -82,7 +82,7 @@ void Blood::on_impact(){
     
     if (type == type_giblet){
         for (int i = GetRandomValue(1, 3); i > 0; i--){
-            GameObjectManager::getInstance()->addGameObject(new Blood(pos, type_blood));
+            GameObjectManager::getInstance()->addGameObject(new Blood(pos, type_droplet));
         }
     }
 }

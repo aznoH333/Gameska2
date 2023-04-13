@@ -9,7 +9,7 @@
 
 
 
-enum Upgrade_action{
+enum upgrade_action{
     action_replace = 6,
     action_upgrade_damage = 3,
     action_upgrade_fire_rate = 5,
@@ -18,12 +18,18 @@ enum Upgrade_action{
 };
 
 struct Upgrade{
-    Upgrade_action action;
+    upgrade_action action;
     int action_index;
     Drone_type type;
 };
 
-
+const std::map<upgrade_action, std::string> upgrade_descriptions = {
+    {action_replace, "replace"},
+    {action_upgrade_damage, "damage up"},
+    {action_upgrade_fire_rate, "fire rate up"},
+    {action_upgrade_level, "level up"},
+    {action_add_drone, "new drone"}
+};
 
 
 class PlayerManager{
@@ -75,7 +81,7 @@ class PlayerManager{
         void handleUI();
         void display_upgrade_selection();
         void handle_upgrade_selection();
-        Upgrade_action choose_random_upgrade(Drone* drone);
+        upgrade_action choose_random_upgrade(Drone* drone);
         void handle_upgrade_action(KeyboardKey key, int upgrade_slot);
 
 

@@ -158,7 +158,7 @@ void Enemy::handle_gore(int damage){
             GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_giblet));
         }
         // spawn big blood
-        if (GetRandomValue(0, 1) > 0){
+        if (damage > 25 || GetRandomValue(0, 1) > 0){
             GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_blood_big));
         }
     }
