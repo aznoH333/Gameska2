@@ -44,8 +44,7 @@ void FireEnemy::engageTarget(GameObject* target){
             summoningCooldown = maxSummoningCooldown;
             
 
-
-
+            Sound_manager::get_instance()->play_sound("enemy_fire");
 
             GameObjectManager::getInstance()->addGameObject(new Fireball({pos.x + fireBallOffsetX, pos.y - fireBallOffsetY}, direction, flipSprite, summoningProgress));
         }

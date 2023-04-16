@@ -6,6 +6,8 @@
 #include "raylib.h"
 #include "../player/playerManager.h"
 #include "../animationObject/blood.h"
+#include "../../sound_manager.h"
+#include "../../Settings_Manager.h"
 
 class Enemy : public GameObject{
     protected:

@@ -42,7 +42,7 @@ void Persistent_Data_Manager::load_data_file(){
     
     // load gore
     std::getline(data_file, load_data);
-    data.gore_setting = static_cast<gore_settings>(std::stoi(load_data));
+    data.gore = std::stoi(load_data);
 
     //load score
     std::getline(data_file, load_data);
@@ -60,7 +60,7 @@ void Persistent_Data_Manager::save_data_file(){
     
     data_file.clear();
     data_file << data.screen_shake << std::endl;
-    data_file << data.gore_setting << std::endl;
+    data_file << data.gore << std::endl;
     data_file << data.high_score << std::endl;
     
 

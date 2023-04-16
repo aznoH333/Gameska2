@@ -2,8 +2,9 @@
 #include <cmath>
 #include <string>
 #include "../../GameObjectManager.h"
+#include "raylib.h"
 
-Blood::Blood(Vector2 pos, gore_type type): GameObject(pos, {16, 16}, Other, 1){
+Blood::Blood(Vector2 pos, gore_type type): GameObject(pos, {0, 0}, Other, 1){
     z = GetRandomValue(1, 25);
     this->type = type;
     direction = GetRandomValue(0, 360) * DEG2RAD;
@@ -66,6 +67,8 @@ void Blood::update(){
 
 void Blood::on_impact(){
     bounce_count--;
+    
+    
 
     if (bounce_count <= 0){
         if (type == type_blood || type == type_droplet){
@@ -77,8 +80,11 @@ void Blood::on_impact(){
         is_airborne = false;
 
     }
-    else
+    else{
         z_movement *= -1;
+        if (GetRandomValue(0, 10) > 7)
+            Sound_manager::get_instance()->play_sound("blood_splat");
+    }
     
     if (type == type_giblet){
         for (int i = GetRandomValue(1, 3); i > 0; i--){

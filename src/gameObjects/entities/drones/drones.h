@@ -4,6 +4,8 @@
 #include "drone.h"
 #include "raylib.h"
 #include "../../../sprites/SpriteManager.h"
+#include "../../sound_manager.h"
+
 
 class Gun_drone : public Drone{
     public:

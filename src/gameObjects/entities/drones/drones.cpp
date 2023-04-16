@@ -17,6 +17,9 @@ void Gun_drone::fire(Vector2 pos){
         26.0f,
         projectile_bullet
         ));
+
+        Sound_manager::get_instance()->play_sound("gun");
+
         
 
         SpriteManager::getInstance()->addScreenShake(getScreenSHake());
@@ -38,8 +41,13 @@ Shotgun_drone::Shotgun_drone() : Drone(type_shotgun, "Amogus_4", 90, 10, 3, true
 
 void Shotgun_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
+    
+
+    
     if (target != nullptr){
         for (int i = 0; i < 3 + level; i++){
+            Sound_manager::get_instance()->play_sound("shotgun");
+
             GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
             GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos()) + (GetRandomValue(-5, 5) * DEG2RAD),
             get_damage(),
@@ -71,7 +79,10 @@ void Machinegun_drone::fire(Vector2 pos){
     if (target != nullptr){
         
         
-        SpriteManager::getInstance()->addScreenShake(getScreenSHake());
+        Sound_manager::get_instance()->play_sound("gun", 0.5f);
+
+
+        SpriteManager::getInstance()->addScreenShake(std::min(getScreenSHake(), 10.0f));
         
         for (int i = 0; i < level; i++){
             GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
@@ -100,6 +111,8 @@ Laser_drone::Laser_drone(): Drone(type_laser, "Amogus_2", 75, 20, 2, false, 500)
 
 void Laser_drone::fire(Vector2 pos){
     float adder = 45.0f / level;
+    Sound_manager::get_instance()->play_sound("laser", 0.7f);
+    
     for (float i = 0; i < 359; i += adder){
         GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
             i * DEG2RAD,
@@ -119,6 +132,8 @@ void Rocket_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
 
     if (target != nullptr){
+        Sound_manager::get_instance()->play_sound("rocket");
+        
         GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() + ((level - 1) * 10), 10 + ((level - 1) * 5)));
     }
 }
@@ -126,19 +141,26 @@ void Rocket_drone::fire(Vector2 pos){
 
 // sniper drone
 
-Sniper_drone::Sniper_drone(): Drone(type_sniper, "Amogus_3", 120, 45, 3, false, 700){
+Sniper_drone::Sniper_drone(): Drone(type_sniper, "Amogus_3", 120, 10, 3, false, 700){
 
 }
 
 void Sniper_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
+    Sound_manager::get_instance()->play_sound("laser");
 
     if (target != nullptr){
-        GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
-        GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos()),
-        get_damage() * level,
-        35.0f + ((level-1) * 5),
-        projectile_laser
+        
+        float rotation = GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos());
+        
+        for (int i = 10 + (level * 5); i > 0; i -= 5){
+            GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
+            rotation,
+            get_damage(),
+            20.0f + i,
+            projectile_laser
         ));
+        }
+        
     }
 }

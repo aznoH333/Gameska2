@@ -2,6 +2,7 @@
 #define FIRE_ENEMY
 
 #include "enemy.h"
+#
 
 class FireEnemy : public Enemy{
     

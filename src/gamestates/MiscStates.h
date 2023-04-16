@@ -5,6 +5,7 @@
 #include "../sprites/SpriteManager.h"
 #include "GameStateManager.h"
 #include "raylib.h"
+#include "../gameObjects/Settings_Manager.h"
 
 class Intro : public GameState{
     private:
@@ -17,7 +18,7 @@ class Intro : public GameState{
         void clear();
 };
 
-class GameOver : public GameState{
+class Game_Over : public GameState{
     private:
         const Vector2 game_over = {400, 100};
         const Vector2 survived_text = {450, 200};
@@ -31,7 +32,19 @@ class GameOver : public GameState{
         void clear();
 };
 
-class Pause_menu : public GameState{
+class Pause_Menu : public GameState{
+    public:
+        void init();
+        void update();
+        void clear();
+};
+
+
+class Options_Menu : public GameState{
+    private:
+        const float backdrop_speed = 0.2f;
+        float backdrop_offset = 0;
+
     public:
         void init();
         void update();

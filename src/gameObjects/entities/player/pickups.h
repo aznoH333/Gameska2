@@ -4,6 +4,8 @@
 #include "../../GameObject.h"
 #include "raylib.h"
 #include "../../../sprites/SpriteManager.h"
+#include "../../sound_manager.h"
+
 
 
 class UpgradePickup : public GameObject{

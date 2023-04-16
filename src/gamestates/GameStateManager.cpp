@@ -8,8 +8,9 @@ GameStateManager::GameStateManager(){
     states[state_main_menu] = new MainMenu();
     states[state_game] = new Game();
     states[state_intro] = new Intro();
-    states[state_game_over] = new GameOver();
-    states[state_pause] = new Pause_menu();
+    states[state_game_over] = new Game_Over();
+    states[state_pause] = new Pause_Menu();
+    states[state_options] = new Options_Menu();
 
 
     states[currentState]->init();

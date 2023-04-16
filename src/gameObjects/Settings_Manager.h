@@ -7,14 +7,10 @@
 
 
 
-enum gore_settings{
-    normal = 0,
-    performance = 1,
-    off = 3,
-};
+
 
 struct Persistent_Data{
-    gore_settings gore_setting = normal;
+    bool gore = true;
     bool screen_shake = true;
     int high_score = 0;
 };

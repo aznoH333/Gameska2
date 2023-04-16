@@ -3,7 +3,7 @@
 
 #include "../../GameObject.h"
 #include "../../../sprites/SpriteManager.h"
-#include "../../../sprites/SpriteManager.h"
+#include "../../sound_manager.h"
 
 
 enum gore_type{

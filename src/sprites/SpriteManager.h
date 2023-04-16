@@ -8,6 +8,7 @@
 #include "raylib.h"
 #include <vector>
 #include <math.h>
+#include "../gameObjects/Settings_Manager.h"
 
 
 

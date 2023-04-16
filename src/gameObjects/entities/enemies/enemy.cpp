@@ -1,6 +1,5 @@
 #include "enemy.h"
 #include "../../GameObjectManager.h"
-#include "../../sound_manager.h"
 #include <cmath>
 #include <string>
 #include "../../world/world.h"
@@ -148,21 +147,30 @@ void Enemy::draw(){
 }
 
 void Enemy::handle_gore(int damage){
+    if (Persistent_Data_Manager::get_instance()->get_data()->gore){
+        // spawn blood
+        for (int i = std::min(damage / 5, 10); i > 0; i--){
+            GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_blood));
+        }
+
+
+
+        // spawn giblets
+        if (health <= 0){
+            Sound_manager::get_instance()->play_sound("enemy_death");
+            
+            for (int i = GetRandomValue(1, 4); i > 0; i--){
+                GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_giblet));
+            }
+            // spawn big blood
+            if (damage > 25 || GetRandomValue(0, 1) > 0){
+                GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_blood_big));
+            }
+        }else{
+            // play hurt sound
+            Sound_manager::get_instance()->play_sound("enemy_hit");
+
+        }
+    }
     
-    // spawn blood
-    for (int i = std::min(damage / 5, 10); i > 0; i--){
-        GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_blood));
-    }
-    // spawn giblets
-    if (health <= 0){
-        Sound_manager::get_instance()->play_sound("Roztylska_3");
-        
-        for (int i = GetRandomValue(1, 4); i > 0; i--){
-            GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_giblet));
-        }
-        // spawn big blood
-        if (damage > 25 || GetRandomValue(0, 1) > 0){
-            GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_blood_big));
-        }
-    }
 }

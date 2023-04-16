@@ -59,6 +59,7 @@ SpriteManager::SpriteManager(){
     loadTexture("assets/ui/Empty_Heart.png");
     loadTexture("assets/ui/menu_select.png");
     loadTexture("assets/ui/menu_backdrop.png");
+    loadTextures("assets/ui/menu_indicator_", ".png", 1, 2);
     // drone upgrade icons
     loadTextures("assets/ui/drone_upgrade_icons_", ".png", 1, 6);
     
@@ -226,9 +227,12 @@ void SpriteManager::handleScreenShake(){
 
 void SpriteManager::addScreenShake(float ammount){
     
-    screenShakeAmmount += ammount;
+    if (Persistent_Data_Manager::get_instance()->get_data()->screen_shake){
+        screenShakeAmmount += std::max(ammount, 5.0f);
 
-    if (screenShakeAmmount > screen_shake_max) screenShakeAmmount = screen_shake_max;
+        if (screenShakeAmmount > screen_shake_max) screenShakeAmmount = screen_shake_max;
+    }
+    
 }
 
 

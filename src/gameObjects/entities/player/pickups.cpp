@@ -4,7 +4,9 @@
 
 
 
-UpgradePickup::UpgradePickup(Vector2 pos) : GameObject(pos, {64,64}, ObjectIdentifier::Other, 1){}
+UpgradePickup::UpgradePickup(Vector2 pos) : GameObject(pos, {64,64}, ObjectIdentifier::Other, 1){
+    
+}
 
 void UpgradePickup::update(){
     
@@ -44,5 +46,6 @@ void UpgradePickup::onCollide(GameObject *other){
     if (other->getObjectIdentifier() == ObjectIdentifier::PlayerFlag){
         destroy();
         PlayerManager::getInstance()->touchedUpgradeBox();
+        Sound_manager::get_instance()->play_sound("pickup");
     }
 }

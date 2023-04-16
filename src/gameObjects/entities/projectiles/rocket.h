@@ -5,6 +5,8 @@
 #include "raylib.h"
 #include "../../../sprites/SpriteManager.h"
 #include "../../world/world.h"
+#include "../../sound_manager.h"
+
 
 class Rocket : public GameObject{
     

@@ -79,6 +79,7 @@ void Rocket::onCollide(GameObject *other){
 }
 
 void Rocket::explode(){
+    Sound_manager::get_instance()->play_sound("explosion");
     SpriteManager::getInstance()->addScreenShake(25);
     is_exploding = true;
     GameObjectManager::getInstance()->addGameObject(new AnimationObject({pos.x - 64, pos.y - 64}, "explosion_", 1, 9, 2, false, GetRandomValue(0, 360)));

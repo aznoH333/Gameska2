@@ -1,4 +1,5 @@
 #include "sound_manager.h"
+#include "raylib.h"
 
 #include <iostream>
 
@@ -11,8 +12,25 @@ Sound_manager* Sound_manager::instance = 0;
 
 Sound_manager::Sound_manager(){
     // load sounds
-    load_sound("assets/sounds/Roztylska_3.wav");
-    load_sound("assets/sounds/sam_3.wav");
+    load_sound("assets/sounds/intro_sound.wav");
+    load_sound("assets/sounds/click.ogg");
+    load_sound("assets/sounds/gun.ogg");
+    load_sound("assets/sounds/explosion.ogg");
+    load_sound("assets/sounds/gun.ogg");
+    load_sound("assets/sounds/enemy_hit.ogg");
+    load_sound("assets/sounds/enemy_death.ogg");
+    load_sound("assets/sounds/enemy_fire.ogg");
+    load_sound("assets/sounds/laser.ogg");
+    load_sound("assets/sounds/pickup.ogg");
+    load_sound("assets/sounds/rocket.ogg");
+    load_sound("assets/sounds/shotgun.ogg");
+    load_sound("assets/sounds/blood_splat.ogg");
+
+
+
+
+
+
 
 }
 
@@ -25,6 +43,12 @@ void Sound_manager::load_sound(std::string path){
 }
 
 void Sound_manager::play_sound(std::string name){
+    play_sound(name, 1);
+}
+
+void Sound_manager::play_sound(std::string name, float volume){
+    SetSoundVolume(sound_map[name], volume);
+    SetSoundPitch(sound_map[name], 1 + (GetRandomValue(-max_pitch_randomization, max_pitch_randomization) / 100.0f));
     PlaySound(sound_map[name]);
 }
 

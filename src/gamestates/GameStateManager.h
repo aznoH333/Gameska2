@@ -11,6 +11,7 @@ enum StateName{
     state_game_over = 2,
     state_intro = 3,
     state_pause = 4,
+    state_options = 5,
 };
 
 

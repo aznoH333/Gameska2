@@ -27,17 +27,22 @@ void GameObjectManager::update(){
     // check for collisions
     for (GameObject* g : objects){
         for (GameObject* other : objects){
-            Vector2 pos = g->getPos();
-            Vector2 size = g->getSize();
-            Vector2 otherPos = other->getPos();
-            Vector2 otherSize = other->getSize();
             
-            if (g != other &&
-            pos.x + size.x > otherPos.x &&
-            pos.x < otherPos.x + otherSize.x &&
-            pos.y + size.y > otherPos.y &&
-            pos.y < otherPos.y + otherSize.y)
+            if (g->getSize().x > 0 && other->getSize().x > 0){
+                Vector2 pos = g->getPos();
+                Vector2 size = g->getSize();
+                Vector2 otherPos = other->getPos();
+                Vector2 otherSize = other->getSize();
+                
+                if (g != other &&
+                pos.x + size.x > otherPos.x &&
+                pos.x < otherPos.x + otherSize.x &&
+                pos.y + size.y > otherPos.y &&
+                pos.y < otherPos.y + otherSize.y)
                 g->onCollide(other);
+            }
+            
+            
         }
     }
 
