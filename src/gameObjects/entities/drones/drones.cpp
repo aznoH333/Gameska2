@@ -70,6 +70,9 @@ void Machinegun_drone::fire(Vector2 pos){
     GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
     if (target != nullptr){
         
+        
+        SpriteManager::getInstance()->addScreenShake(getScreenSHake());
+        
         for (int i = 0; i < level; i++){
             GameObjectManager::getInstance()->addGameObject(new Bullet(pos,
             GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos()) + (GetRandomValue(-7, 7) * DEG2RAD),
@@ -79,7 +82,6 @@ void Machinegun_drone::fire(Vector2 pos){
             ));
             
 
-            SpriteManager::getInstance()->addScreenShake(getScreenSHake());
 
             float rotation = GameObjectManager::getInstance()->getRotationTowarsObject(pos, target->getPos());
 

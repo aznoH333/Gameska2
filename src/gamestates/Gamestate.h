@@ -35,6 +35,14 @@ class UIManager{
         const float menu_select_icon_offset = -60;
         const float menu_select_icon_offset_y = 48;
         const float menu_select_icon_offset_right = 256;
+
+        // menu item scaling
+        int currently_scaled_item = 0;
+        float current_item_scale = 0;
+
+        const float item_scale_speed = 0.3f;
+        const float max_item_scale_bonus = 0.3f;
+
     public:
         static UIManager* getInstance();
         void update();

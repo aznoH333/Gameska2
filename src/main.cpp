@@ -3,6 +3,8 @@
 #include "raylib.h"
 #include "gamestates/GameStateManager.h"
 #include "sprites/SpriteManager.h"
+#include "gameObjects/sound_manager.h"
+#include "gameObjects/Settings_Manager.h"
 
 int main() {
     
@@ -14,10 +16,11 @@ int main() {
     
 
     raylib::Window w(GetMonitorWidth(0), GetMonitorHeight(0), "Gameska");
-    
+    Persistent_Data_Manager::get_instance()->init();
 
     //SetWindowSize(GetMonitorWidth(GetCurrentMonitor()), GetMonitorWidth(GetCurrentMonitor()));
     ToggleFullscreen();
+    InitAudioDevice();
     
     Image window_icon = LoadImage("assets/ui/menu_select.png");
     SetWindowIcon(window_icon);
@@ -38,13 +41,16 @@ int main() {
     }
     
     gameStateManager->dispose();
-    
+    Persistent_Data_Manager::get_instance()->dispose();
     World::getInstance()->dispose();
     GameObjectManager::getInstance()->dispose();
     SpriteManager::getInstance()->dispose();
     CameraObject::getInstance()->dispose();
     PlayerManager::getInstance()->dispose();
     UIManager::getInstance()->dispose();
+    Sound_manager::get_instance()->dispose();
+    CloseAudioDevice();
+
 
     return 0;
     

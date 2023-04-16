@@ -1,5 +1,6 @@
 #include "enemy.h"
 #include "../../GameObjectManager.h"
+#include "../../sound_manager.h"
 #include <cmath>
 #include <string>
 #include "../../world/world.h"
@@ -154,6 +155,8 @@ void Enemy::handle_gore(int damage){
     }
     // spawn giblets
     if (health <= 0){
+        Sound_manager::get_instance()->play_sound("Roztylska_3");
+        
         for (int i = GetRandomValue(1, 4); i > 0; i--){
             GameObjectManager::getInstance()->addGameObject(new Blood({pos.x + GetRandomValue(0, size.x), pos.y + size.y}, type_giblet));
         }

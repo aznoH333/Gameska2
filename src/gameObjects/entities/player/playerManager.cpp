@@ -179,7 +179,7 @@ upgrade_action PlayerManager::choose_random_upgrade(Drone* drone){
     std::vector<upgrade_action> temp;
 
     if (drone->canUpgradeDamage())      temp.push_back(action_upgrade_damage);
-    if (drone->canUpgradeFireRate())    temp.push_back(action_upgrade_fire_rate);
+    if (drone->canUpgradeFireRate())    temp.push_back(action_upgrade_fire_rate); // TODO fix infinite scaling
     if (drone->canUpgradeLevel())       temp.push_back(action_upgrade_level);
 
     return temp[GetRandomValue(0, temp.size()-1)];
