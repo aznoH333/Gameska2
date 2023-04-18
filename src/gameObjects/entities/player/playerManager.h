@@ -44,7 +44,7 @@ class PlayerManager{
         const float healthOffsetY = 8;
 
         // other hud stuff
-        Vector2 hudPosition = {768,hudClosed};
+        Vector2 hudPosition = {640 + (hudWidth / 2),hudClosed};
         float desiredHudY = hudOpen;
         const float hudSpeed = 0.5f;
         Player* playerObject = nullptr;
@@ -70,7 +70,7 @@ class PlayerManager{
         const float drone_icon_offset = 32;
         const float upgrade_icon_offset = 0;
         
-        const float selection_x = 516;
+        const float selection_x = 578;
         float selection_y = selection_hidden;
 
 

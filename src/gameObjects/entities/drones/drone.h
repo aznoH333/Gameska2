@@ -25,17 +25,17 @@ class Drone{
         int maxLevel;
         
         // upgrades
-        float firerate_upgrade = 1;
-        float damage_upgrade = 1;
+        int fire_rate_level = 1;
+        int damage_level = 1;
 
         //values
         float coolDown = 0;
 
         // constants
-        const float damageUpgradeBonus = 0.6f;
+        const float damageUpgradeBonus = 0.5f;
         const float fireRateUpgradeBonus = 0.2f;//0.07f;
-        const float maxDamageBonus = 3;
-        const float maxFireRateBonus = 0.5f;
+        const int max_damage_level = 5;
+        const int max_fire_rate_level = 5;
         const float screenShakeMultiplier = 0.5f;
 
     
@@ -74,6 +74,10 @@ class Drone{
         bool can_be_upgraded();
 
         float getRange();
+
+        int get_damage_level();
+        int get_fire_rate_level();
+        int get_level();
 };
 
 

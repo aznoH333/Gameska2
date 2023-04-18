@@ -18,6 +18,9 @@ SpriteManager::SpriteManager(){
     // enemies
     loadTextures("assets/entities/basic_enemy/Enemy_", ".png", 1, 9);
     loadTextures("assets/entities/fire_enemy/Fire_Enemy_", ".png", 1, 9);
+    loadTextures("assets/entities/fire_enemy_big/fire_enemy_big_", ".png", 1, 9);
+    loadTextures("assets/entities/armored_enemy/armored_enemy_", ".png", 1, 9);
+
 
 
     loadTextures("assets/entities/drones/Amogus_", ".png",1, 6);
@@ -62,6 +65,8 @@ SpriteManager::SpriteManager(){
     loadTextures("assets/ui/menu_indicator_", ".png", 1, 2);
     // drone upgrade icons
     loadTextures("assets/ui/drone_upgrade_icons_", ".png", 1, 6);
+    loadTextures("assets/ui/drone_upgrade_indicator_", ".png", 1, 3);
+
     
 
 

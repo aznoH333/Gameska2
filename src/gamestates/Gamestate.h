@@ -51,7 +51,8 @@ class UIManager{
         const float select_icon_offset_y = 48;
         const float select_icon_speed = 0.3f;
         const float select_icon_horizontal_speed = 10;
-        const float select_icon_additional_offset = 200;
+        const float select_icon_right_offset = 56;
+        const float select_icon_additional_offset = 90;
         float select_icon_pos = 0; // value between 0 and buttos.size()
 
 

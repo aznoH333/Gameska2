@@ -3,6 +3,10 @@
 #include "raylib.h"
 #include "../entities/enemies/enemy.h"
 #include "../entities/enemies/fireEnemy.h"
+#include "../entities/enemies/Fire_Enemy_Big.h"
+#include "../entities/enemies/armored_enemy.h"
+
+
 
 #include <cmath>
 #include <string>
@@ -36,7 +40,7 @@ void World::loadEvents(){
     // easy intro
     events.push({1, {40, 40, 40}, 4, 360, 0.5f, 1});
     events.push({20, {65, 40, 40}, 7, 120, 0.6f, 1});
-    events.push({35, {75, 40, 40}, 7, 120, 0.6f, 2});
+    events.push({35, {75, 40, 40}, 7, 120, 0.6f, 1});
     events.push({50, {65, 50, 50}, 15, 90, 0.7f, 1});
 
 
@@ -66,16 +70,31 @@ void World::loadEvents(){
     events.push({280, {60, 40, 80}, 30, 50, 1.5f, 2});
     events.push({320, {60, 40, 90}, 35, 30, 1.3f, 2});
 
+    // tier 3 introduction
+    events.push({350, {60, 60, 60}, 20, 60, 1.3, 2});
+    events.push({360, {60, 60, 70}, 20, 60, 1.4, 3});
+    events.push({380, {50, 50, 100}, 30, 60, 1.4, 3});
+
+    events.push({390, {50, 50, 50}, 20, 80, 1.4, 3});
+    events.push({400, {120, 100, 100}, 30, 30, 1.4, 3});
+    events.push({410, {80, 60, 60}, 30, 30, 1.5, 2});
 
 
+    events.push({440, {70, 90, 90}, 20, 60, 1.5f, 3});
+    events.push({460, {70, 110, 110}, 25, 60, 1.5f, 3});
+    events.push({480, {70, 120, 120}, 25, 40, 1.6f, 3});
+
+    events.push({500, {60, 100, 60}, 30, 50, 1.6f, 4});
+    events.push({530, {60, 100, 80}, 30, 50, 2, 4});
+    events.push({560, {60, 100, 90}, 35, 30, 1.6f, 4});
+   
+    events.push({590, {20, 20, 20}, 20, 80, 1.6f, 1});
+    events.push({600, {100, 20, 20}, 60, 10, 2.0f, 1});
+    events.push({605, {100, 20, 20}, 10, 100, 2.0f, 1});
+
+    events.push({630, {100, 80, 20}, 35, 30, 2.0f, 4});
 
 
-
-
-
-    
-
-    
 }
 
 void World::update(){
@@ -184,6 +203,12 @@ void World::handleEnemySpawning(){
                 break;
             case 2:
                 enemy = new FireEnemy({tempX, tempY}, healthMultiplier);
+                break;
+            case 3:
+                enemy = new Fire_Enemy_Big({tempX, tempY}, healthMultiplier);
+                break;
+            case 4:
+                enemy = new Armored_Enemy({tempX, tempY}, healthMultiplier);
                 break;
         
         }

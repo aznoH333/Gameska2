@@ -24,7 +24,7 @@ void UIManager::update(){
 void UIManager::draw_button(int button_index){
     
     float button_scale = currently_scaled_item == button_index ? 1 + (current_item_scale * max_item_scale_bonus) : 1;
-    float button_x = button_x_pos - buttons[button_index].text.length() * 15 * button_scale;
+    float button_x = button_x_pos - buttons[button_index].text.length() * 16 * button_scale;
     float button_y = button_y_pos + (button_offset * button_index) - ((button_scale - 1) * 30);
 
 
@@ -85,8 +85,8 @@ void UIManager::handle_item_scaling(){
 
 void UIManager::draw_menu_selector(){
     // drawing
-    SpriteManager::getInstance()->drawTexture(RenderData{"menu_select", {button_x_pos + select_icon_offset, button_y_pos + (button_offset * select_icon_pos) + select_icon_offset_y}, 4, 0, WHITE, false, layer_priority, true});
-    SpriteManager::getInstance()->drawTexture(RenderData{"menu_select", {button_x_pos - (select_icon_offset - 96), button_y_pos + (button_offset * select_icon_pos) + select_icon_offset_y}, 4, 0, WHITE, false, layer_priority, true});
+    SpriteManager::getInstance()->drawTexture(RenderData{"menu_select", {button_x_pos + select_icon_offset + 32, button_y_pos + (button_offset * select_icon_pos) + select_icon_offset_y}, 4, 0, WHITE, false, layer_priority, true});
+    SpriteManager::getInstance()->drawTexture(RenderData{"menu_select", {button_x_pos - select_icon_offset + 32, button_y_pos + (button_offset * select_icon_pos) + select_icon_offset_y}, 4, 0, WHITE, false, layer_priority, true});
 
 
     // movement
@@ -99,7 +99,7 @@ void UIManager::draw_menu_selector(){
     }
 
     // change offset
-    desired_select_icon_offset = (buttons[currently_selected_button].text.length() * 15) + select_icon_additional_offset;
+    desired_select_icon_offset = (buttons[currently_selected_button].text.length() * 30) + select_icon_additional_offset;
 
     if (select_icon_offset < desired_select_icon_offset){
         select_icon_offset += select_icon_horizontal_speed;

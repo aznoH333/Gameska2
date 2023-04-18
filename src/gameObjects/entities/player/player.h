@@ -58,6 +58,11 @@ class Player : public GameObject{
         int deathFrameTimer = deathFrameLength;
 
         
+        // drone info constants
+        const float drone_info_block_width = 4;
+        const float drone_info_block_height = 6;
+        const float drone_height = 32;
+
 
         std::vector<Drone*> drones;
 
@@ -69,7 +74,8 @@ class Player : public GameObject{
         float getDroneRotation(Drone* drone, Vector2 pos);
         void life();
         void death();
-    
+        void display_drone_info(int drone_index, Vector2 drone_pos);
+
     public:
         Player(Vector2 pos);
 

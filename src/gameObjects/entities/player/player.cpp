@@ -159,8 +159,7 @@ void Player::droneUpdate(){
         spr->drawTexture({d->getSprite(), dronePos, 2 * lastDroneScale, rotation, WHITE, d->getFlipSprite(), layer_projectiles});
         // draw numbers
         if (PlayerManager::getInstance()->is_upgrade_selection_shown())
-            spr->drawText(std::to_string(i + 1), dronePos.x, dronePos.y, 0.1f, false);
-
+            display_drone_info(i, dronePos);
     }
 
     // drone scaling animation
@@ -194,6 +193,38 @@ void Player::takeDamage(int damage, GameObject *damageDealer, float direction){
         onDamage(damage, damageDealer, direction);
     }
 }
+
+
+void Player::display_drone_info(int drone_index, Vector2 drone_pos){
+
+    // draw number
+    spr->drawText(std::to_string(drone_index + 1), drone_pos.x, drone_pos.y, 0.1f, false);
+
+
+    // draw indicators
+    
+    // fire rate
+    for (int i = 1; i < drones[drone_index]->get_fire_rate_level(); i++){
+        spr->drawTexture({"drone_upgrade_indicator_1", 
+        {drone_pos.x + ((i - 1) * drone_info_block_width), drone_pos.y + drone_height},
+        2, 0, WHITE, false, layer_priority, false});
+    }
+
+    // damage
+    for (int i = 1; i < drones[drone_index]->get_damage_level(); i++){
+        spr->drawTexture({"drone_upgrade_indicator_2", 
+        {drone_pos.x + ((i - 1) * drone_info_block_width), drone_pos.y + drone_height - drone_info_block_height},
+        2, 0, WHITE, false, layer_priority, false});
+    }
+
+    // level
+    for (int i = 1; i < drones[drone_index]->get_level(); i++){
+        spr->drawTexture({"drone_upgrade_indicator_3", 
+        {drone_pos.x + ((i - 1) * drone_info_block_width), drone_pos.y + drone_height - (drone_info_block_height * 2)},
+        2, 0, WHITE, false, layer_priority, false});
+    }
+}
+
 
 void Player::addDrone(Drone_type drone_type){
     Drone* drone;
