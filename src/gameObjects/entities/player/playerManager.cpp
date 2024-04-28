@@ -89,7 +89,7 @@ void PlayerManager::confirmKill(Vector2 pos){
         GameObjectManager::getInstance()->addGameObject(new UpgradePickup(pos));
         
     }
-    if (GetRandomValue(0, 60) == 0){
+    if (GetRandomValue(0, 200) == 0){
         GameObjectManager::getInstance()->addGameObject(new LifePickup(pos));
     }
 }
