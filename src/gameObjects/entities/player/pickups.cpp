@@ -49,3 +49,49 @@ void UpgradePickup::onCollide(GameObject *other){
         Sound_manager::get_instance()->play_sound("pickup");
     }
 }
+
+LifePickup::LifePickup(Vector2 pos) : GameObject(pos, {64,64}, ObjectIdentifier::Other, 1){
+    
+}
+
+void LifePickup::update(){
+    
+    SpriteManager::getInstance()->drawTexture({"haert", {pos.x, pos.y - z}, 2 * scaleModifier, 0, WHITE, false, layer_pickups + zIndex});
+    // get sign
+    if (!isAirborne && timer % 20 > 5){
+        SpriteManager::getInstance()->drawTexture({"Grab_text", {pos.x - 6, pos.y - sign_offset}, 2, 0, WHITE, false, layer_priority});
+    }
+
+
+    // gravity stuff
+    if (isAirborne){
+        zVelocity -= zGravity;
+        
+        if (z + zVelocity < 0){
+            z = 0;
+            isAirborne = false;
+            zIndex = 0;
+        }else {
+            z += zVelocity;
+        }   
+    }
+
+    if (scaleModifier < 1){
+        scaleModifier += scaleModifierIncreaseSpeed;
+
+        if (scaleModifier >= 1){
+            scaleModifier = 1;
+        }
+    }
+
+    timer++;
+}
+
+
+void LifePickup::onCollide(GameObject *other){
+    if (other->getObjectIdentifier() == ObjectIdentifier::PlayerFlag){
+        destroy();
+        PlayerManager::getInstance()->heal();
+        Sound_manager::get_instance()->play_sound("pickup");
+    }
+}

@@ -23,7 +23,7 @@ SpriteManager::SpriteManager(){
 
 
 
-    loadTextures("assets/entities/drones/Amogus_", ".png",1, 6);
+    loadTextures("assets/entities/drones/Amogus_", ".png",1, 7);
 
     loadTexture("assets/tiles/floor_tile.png");
     loadTexture("assets/tiles/brick_wall.png");
@@ -39,6 +39,8 @@ SpriteManager::SpriteManager(){
     // pick ups
     loadTexture("assets/entities/upgrade/Upgrade_box.png");
     loadTexture("assets/entities/upgrade/Grab_text.png");
+    loadTexture("assets/entities/upgrade/haert.png");
+
 
 
     // fx

@@ -51,3 +51,7 @@ int GameObject::getHealth(){
 void GameObject::setPos(Vector2 pos){
     this->pos = pos;
 }
+
+void GameObject::setHealth(int health){
+    this->health = health;
+}

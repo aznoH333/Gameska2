@@ -29,7 +29,7 @@ class Rocket : public GameObject{
         void explode();
     
     public:
-        Rocket(Vector2 pos, float damage, float speed);
+        Rocket(Vector2 pos, float damage, float speed, float startingRotation);
 
         void update();
         void onCollide(GameObject* other);

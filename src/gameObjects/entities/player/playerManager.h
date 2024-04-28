@@ -94,6 +94,7 @@ class PlayerManager{
         void touchedUpgradeBox();
         void reset();
         void confirmKill(Vector2 pos);
+        void heal();
 
         bool is_upgrade_selection_shown();
 };

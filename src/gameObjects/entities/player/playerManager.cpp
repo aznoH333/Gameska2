@@ -57,6 +57,12 @@ void PlayerManager::removePlayer(){
     playerObject = nullptr;
 }
 
+void PlayerManager::heal(){
+    if (playerObject != nullptr && playerObject->getHealth() < maxPlayerHP){
+        playerObject->setHealth(playerObject->getHealth() + 1);
+    }
+}
+
 
 
 void PlayerManager::dispose(){
@@ -83,7 +89,9 @@ void PlayerManager::confirmKill(Vector2 pos){
         GameObjectManager::getInstance()->addGameObject(new UpgradePickup(pos));
         
     }
-    // TODO spawn hearts
+    if (GetRandomValue(0, 20) == 0){
+        GameObjectManager::getInstance()->addGameObject(new LifePickup(pos));
+    }
 }
 
 
@@ -152,10 +160,15 @@ void PlayerManager::generate_upgrades(){
     for (int i = 0; i < 3; i++){
         
         Drone* current_drone = drones[i];
-        
+        int droneRng = GetRandomValue(2, 6);
+        if (GetRandomValue(0, 20) == 0){
+            droneRng = 7;
+        }
         if (i >= drone_count){
             // add drone action
-            upgrades.push_back({action_add_drone, i, static_cast<Drone_type>(GetRandomValue(2, 6))}); // jdu se hodit ze schodu
+            
+            
+            upgrades.push_back({action_add_drone, i, static_cast<Drone_type>(droneRng)}); // jdu se hodit ze schodu
         
         }else if (current_drone != nullptr && GetRandomValue(0, 2) >= 1 && current_drone->can_be_upgraded()){
             
@@ -165,7 +178,7 @@ void PlayerManager::generate_upgrades(){
         } else {
             
             // replace drone
-            upgrades.push_back({action_replace, i, static_cast<Drone_type>(GetRandomValue(2, 6))}); // TODO randomize type selection
+            upgrades.push_back({action_replace, i, static_cast<Drone_type>(droneRng)}); // TODO randomize type selection
             
 
         }

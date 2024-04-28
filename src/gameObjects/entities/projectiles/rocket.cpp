@@ -2,9 +2,10 @@
 #include "raylib.h"
 #include "../animationObject/animationObject.h"
 
-Rocket::Rocket(Vector2 pos, float damage, float speed) : GameObject(pos, {16,16}, ObjectIdentifier::PlayerProjectileFlag, 1){
+Rocket::Rocket(Vector2 pos, float damage, float speed, float startingRotation) : GameObject(pos, {16,16}, ObjectIdentifier::PlayerProjectileFlag, 1){
     this->damage = damage;
     this->speed = speed;
+    this->rotation = startingRotation;
 }
 
 void Rocket::update(){

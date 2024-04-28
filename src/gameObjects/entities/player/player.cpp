@@ -249,6 +249,9 @@ void Player::addDrone(Drone_type drone_type){
         case type_sniper:
             drone = new Sniper_drone();
             break;
+        case type_destroyer:
+            drone = new Destroyer_drone();
+            break;
     }
     
     drones.push_back(drone);

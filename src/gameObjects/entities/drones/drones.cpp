@@ -134,7 +134,7 @@ void Rocket_drone::fire(Vector2 pos){
     if (target != nullptr){
         Sound_manager::get_instance()->play_sound("rocket");
         
-        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() + ((level - 1) * 10), 10 + ((level - 1) * 5)));
+        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() + ((level - 1) * 10), 10 + ((level - 1) * 5), 270));
     }
 }
 
@@ -162,5 +162,23 @@ void Sniper_drone::fire(Vector2 pos){
         ));
         }
         
+    }
+}
+
+Destroyer_drone::Destroyer_drone (): Drone(type_sniper, "Amogus_7", 240, 30, 2, false, 700){
+
+}
+
+void Destroyer_drone::fire(Vector2 pos){
+    GameObject* target = GameObjectManager::getInstance()->findClosestEntityWithTag(ObjectIdentifier::EnemyFlag, range, pos);
+
+    if (target != nullptr){
+        Sound_manager::get_instance()->play_sound("rocket");
+        
+
+        for(int i = 0; i < level * 3; i++){
+        GameObjectManager::getInstance()->addGameObject(new Rocket(pos, get_damage() + ((level - 1) * 10), 10 + ((level - 1) * 5), GetRandomValue(0, 360)));
+
+        }
     }
 }

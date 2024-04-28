@@ -45,6 +45,7 @@ class GameObject{
         ObjectIdentifier getObjectIdentifier();
         virtual void takeDamage(int damage, GameObject* damageDealer, float direction);
         int getHealth();
+        void setHealth(int health);
 
 };
 
